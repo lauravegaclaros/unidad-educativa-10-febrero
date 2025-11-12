@@ -144,7 +144,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.3); /* Overlay oscuro sutil para mejor legibilidad */
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
 
@@ -454,7 +454,7 @@
             color: rgba(255,255,255,0.9);
         }
 
-        /* SLIDER SECTION */
+        /* SLIDER SECTION MEJORADO */
         .slider-section {
             background: var(--light-bg);
             padding: 4rem 0;
@@ -482,7 +482,7 @@
 
         .slides {
             display: flex;
-            transition: transform 0.5s ease-in-out;
+            transition: transform 0.8s ease-in-out; /* Más lento y suave */
         }
 
         .slide {
@@ -505,8 +505,6 @@
             background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
             color: white;
             padding: 2rem;
-            transform: translateY(0);
-            transition: transform 0.3s;
         }
 
         .slide-content h3 {
@@ -846,12 +844,12 @@
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN SLIDER -->
+        <!-- SECCIÓN SLIDER CORREGIDA Y MEJORADA -->
         <section class="slider-section">
             <div class="slider-container">
                 <h2 class="slider-title">Eventos y Actividades</h2>
                 <div class="slider">
-                    < class="slides">
+                    <div class="slides">
                         <div class="slide">
                             <img src="Imagenes/eventos-academicos.jpeg" alt="Eventos Académicos">
                             <div class="slide-content">
@@ -880,6 +878,20 @@
                                 <p>Participación en competencias deportivas y académicas</p>
                             </div>
                         </div>
+                        <div class="slide">
+                            <img src="Imagenes/actividades-deportivas.jpg" alt="Actividades Deportivas">
+                            <div class="slide-content">
+                                <h3>Actividades Deportivas</h3>
+                                <p>Competencias y entrenamientos deportivos</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="Imagenes/ceremonias-escolares.jpg" alt="Ceremonias Escolares">
+                            <div class="slide-content">
+                                <h3>Ceremonias Escolares</h3>
+                                <p>Actos cívicos y ceremonias importantes</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="slider-nav">
                         <button class="slider-btn prev">❮</button>
@@ -887,6 +899,8 @@
                     </div>
                     <div class="slider-dots">
                         <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
                         <span class="dot"></span>
                         <span class="dot"></span>
                         <span class="dot"></span>
@@ -1024,7 +1038,7 @@
             }, 3000);
         }
 
-        // SLIDER FUNCTIONALITY
+        // SLIDER FUNCTIONALITY MEJORADO
         const slides = document.querySelector('.slides');
         const slideItems = document.querySelectorAll('.slide');
         const prevBtn = document.querySelector('.prev');
@@ -1033,6 +1047,7 @@
         
         let currentSlide = 0;
         const totalSlides = slideItems.length;
+        let autoSlideInterval;
 
         // Función para mostrar slide específico
         function showSlide(index) {
@@ -1052,26 +1067,47 @@
             });
         }
 
+        // Función para iniciar auto-slide
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 6000); // 6 segundos en lugar de 5
+        }
+
+        // Función para detener auto-slide
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
         // Event listeners para botones
         prevBtn.addEventListener('click', () => {
+            stopAutoSlide();
             showSlide(currentSlide - 1);
+            startAutoSlide();
         });
 
         nextBtn.addEventListener('click', () => {
+            stopAutoSlide();
             showSlide(currentSlide + 1);
+            startAutoSlide();
         });
 
         // Event listeners para dots
         dots.forEach((dot, i) => {
             dot.addEventListener('click', () => {
+                stopAutoSlide();
                 showSlide(i);
+                startAutoSlide();
             });
         });
 
-        // Auto-slide cada 5 segundos
-        setInterval(() => {
-            showSlide(currentSlide + 1);
-        }, 5000);
+        // Pausar auto-slide cuando el mouse está sobre el slider
+        const slider = document.querySelector('.slider');
+        slider.addEventListener('mouseenter', stopAutoSlide);
+        slider.addEventListener('mouseleave', startAutoSlide);
+
+        // Iniciar auto-slide
+        startAutoSlide();
 
         // Para la galería (cuando se agreguen imágenes reales)
         const modal = document.getElementById('imageModal');
