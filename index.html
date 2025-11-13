@@ -46,7 +46,7 @@
 
         /* CABECERA */
         header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #dc143c 100%);
+            background: linear-gradient(rgba(196, 30, 58, 0.9), rgba(196, 30, 58, 0.9)), url('Imagenes/frontis-escuela.jpg') center/cover;
             color: white;
             padding: 1rem 0;
             position: fixed;
@@ -125,7 +125,7 @@
 
         /* HERO SECTION */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #dc143c 100%);
+            background: url('Imagenes/frontis-escuela.jpg') center/cover;
             color: white;
             padding: 160px 2rem 100px;
             text-align: center;
@@ -419,34 +419,62 @@
             background: var(--primary-color);
         }
 
-        /* VIDEOS SECTION */
-        #videos-escuela {
-            background: var(--light-bg);
-        }
-
-        #imagenes-escuela {
+        /* GALERÍA SECTION */
+        #galeria {
             background: white;
         }
 
-        .upload-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: var(--light-bg);
-            border: 2px dashed #dc143c;
-            border-radius: 10px;
-            min-height: 250px;
-            color: #666;
-            width: 100%;
-            height: 100%;
+        .galeria-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
-        .upload-placeholder svg {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 1rem;
-            color: #dc143c;
+        .galeria-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.03);
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .galeria-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .galeria-item:hover .galeria-overlay {
+            transform: translateY(0);
+        }
+
+        .galeria-overlay h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .galeria-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         /* CONTACTOS SECTION */
@@ -479,6 +507,37 @@
         .contacto-item p {
             color: #666;
             margin-bottom: 0.5rem;
+        }
+
+        .whatsapp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #25D366;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .facebook-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1877F2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .mapa-container {
+            margin-top: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .mapa-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
         }
 
         /* BOTÓN ADMIN */
@@ -578,6 +637,10 @@
             .slide img {
                 height: 300px;
             }
+
+            .galeria-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
         }
 
         @media (max-width: 480px) {
@@ -601,8 +664,7 @@
                 <li><a href="#inicio" class="active">Inicio</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#imagenes-escuela">Imágenes</a></li>
-                <li><a href="#videos-escuela">Videos</a></li>
+                <li><a href="#galeria">Galería</a></li>
                 <li><a href="#contactos">Contactos</a></li>
             </ul>
         </nav>
@@ -615,8 +677,7 @@
                 <p>Con estudio, esfuerzo y esmero... Adelante 10 de Febrero</p>
                 <div class="hero-buttons">
                     <a href="#nosotros" class="btn-hero">Conócenos</a>
-                    <a href="#imagenes-escuela" class="btn-hero primary">Ver Imágenes</a>
-                    <a href="#videos-escuela" class="btn-hero primary">Ver Videos</a>
+                    <a href="#galeria" class="btn-hero primary">Ver Galería</a>
                 </div>
             </div>
         </section>
@@ -731,49 +792,11 @@
             </div>
         </section>
 
-        <!-- IMÁGENES SECTION -->
-        <section id="imagenes-escuela" style="padding: 4rem 2rem; background: white;">
-            <div style="max-width: 1200px; margin: 0 auto;">
-                <h2 style="text-align: center; color: #c41e3a; margin-bottom: 1rem;">🖼️ Imágenes por Año Académico</h2>
-                
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <label for="filtro-anio-imagenes" style="margin-right: 1rem; font-weight: bold;">Filtrar por año:</label>
-                    <select id="filtro-anio-imagenes" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
-                        <option value="todos">Todos los años</option>
-                    </select>
-                </div>
-                
-                <div id="contenedor-imagenes" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                </div>
-                
-                <div id="sin-imagenes" style="text-align: center; padding: 3rem; color: #666;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
-                    <h3 style="color: #c41e3a; margin-bottom: 1rem;">Aún no hay imágenes</h3>
-                    <p>Próximamente se agregarán imágenes de las actividades escolares</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- VIDEOS SECTION -->
-        <section id="videos-escuela" style="padding: 4rem 2rem; background: #f8f9fa;">
-            <div style="max-width: 1200px; margin: 0 auto;">
-                <h2 style="text-align: center; color: #c41e3a; margin-bottom: 1rem;">🎥 Videos por Año Académico</h2>
-                
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <label for="filtro-anio-visitante" style="margin-right: 1rem; font-weight: bold;">Filtrar por año:</label>
-                    <select id="filtro-anio-visitante" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
-                        <option value="todos">Todos los años</option>
-                    </select>
-                </div>
-                
-                <div id="contenedor-videos" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
-                </div>
-                
-                <div id="sin-videos" style="text-align: center; padding: 3rem; color: #666;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">🎥</div>
-                    <h3 style="color: #c41e3a; margin-bottom: 1rem;">Aún no hay videos</h3>
-                    <p>Próximamente se agregarán videos de las actividades escolares</p>
-                </div>
+        <!-- GALERÍA SECTION -->
+        <section id="galeria">
+            <h2>Galería de Imágenes</h2>
+            <div class="galeria-container">
+                <!-- Las imágenes se cargarán dinámicamente aquí -->
             </div>
         </section>
 
@@ -799,9 +822,28 @@
                 </div>
                 <div class="contacto-item">
                     <h3>💬 WhatsApp</h3>
-                    <p>+591 71234567</p>
+                    <a href="https://wa.me/59171234567" class="whatsapp-link" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.187-3.55-8.418"/>
+                        </svg>
+                        +591 71234567
+                    </a>
                     <p>Horario: 8:00 - 16:00</p>
                 </div>
+                <div class="contacto-item">
+                    <h3>📱 Facebook</h3>
+                    <a href="https://facebook.com/unidadeducativa10defebrero" class="facebook-link" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        Unidad Educativa 10 de Febrero
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mapa-container">
+                <h3 style="text-align: center; margin-bottom: 1rem; color: var(--primary-color);">Ubicación</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.454292553921!2d-66.1651236846903!3d-17.39290478807437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e373e0d9e4ab27%3A0xa2719a6c5c7d5b5c!2sLa%20Paz%2C%20Bolivia!5e0!3m2!1ses!2ses!4v1641234567890!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </section>
     </main>
@@ -838,9 +880,8 @@
         <!-- PESTAÑAS -->
         <div style="display: flex; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #ddd; flex-wrap: wrap;">
             <button class="tab-btn active" onclick="mostrarPestana('textos')">📝 Textos</button>
-            <button class="tab-btn" onclick="mostrarPestana('imagenes')">🖼️ Imágenes</button>
-            <button class="tab-btn" onclick="mostrarPestana('videos')">🎥 Videos</button>
-            <button class="tab-btn" onclick="mostrarPestana('historial')">📊 Historial</button>
+            <button class="tab-btn" onclick="mostrarPestana('slider')">🖼️ Slider</button>
+            <button class="tab-btn" onclick="mostrarPestana('galeria')">🖼️ Galería</button>
             <button class="tab-btn" onclick="mostrarPestana('respaldo')">💾 Respaldo</button>
         </div>
 
@@ -860,6 +901,7 @@
                     <input type="text" id="edit-telefono" placeholder="Teléfono" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                     <input type="text" id="edit-email" placeholder="Email" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                     <input type="text" id="edit-whatsapp" placeholder="WhatsApp" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" id="edit-facebook" placeholder="Enlace Facebook" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                 </div>
             </div>
 
@@ -870,144 +912,73 @@
             </div>
         </div>
 
-        <!-- PESTAÑA IMÁGENES -->
-        <div id="pestana-imagenes" class="pestana" style="display: none;">
+        <!-- PESTAÑA SLIDER -->
+        <div id="pestana-slider" class="pestana" style="display: none;">
             <div style="background: #e8f5e8; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-                <h4>🖼️ Gestión de Imágenes por Categoría y Año</h4>
+                <h4>🖼️ Gestión del Slider Principal</h4>
                 <p style="font-size: 0.9rem; margin: 0.5rem 0;">
-                    Organice las imágenes por categoría y año académico. Formatos: JPG, PNG (Máx. 2MB)
+                    Administre las imágenes del slider principal de la página. Formatos: JPG, PNG (Máx. 2MB)
                 </p>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div>
-                    <h5>Subir Nueva Imagen</h5>
+                    <h5>Agregar Nueva Imagen al Slider</h5>
                     
-                    <select id="anio-imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                        <option value="">Seleccione el año</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                    </select>
+                    <input type="text" id="titulo-slider" placeholder="Título de la imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <textarea id="descripcion-slider" placeholder="Descripción de la imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 80px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
                     
-                    <select id="select-imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                        <option value="">Seleccione categoría</option>
-                        <option value="eventos">Eventos</option>
-                        <option value="ceremonias">Ceremonias</option>
-                        <option value="cursos">Cursos</option>
-                        <option value="concursos">Concursos</option>
-                        <option value="infraestructura">Infraestructura</option>
-                        <option value="laboratorios">Laboratorios</option>
-                    </select>
+                    <input type="file" id="upload-slider" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                     
-                    <input type="file" id="upload-imagen" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    
-                    <button onclick="subirImagen()" style="background: #28a745; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem;">
-                        📤 Subir Imagen
+                    <button onclick="subirImagenSlider()" style="background: #28a745; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem;">
+                        📤 Agregar al Slider
                     </button>
                     
-                    <div id="preview-imagen" style="margin-top: 1rem; text-align: center; display: none;">
-                        <img id="img-preview" style="max-width: 200px; max-height: 150px; border: 2px solid #ddd; border-radius: 5px;">
+                    <div id="preview-slider" style="margin-top: 1rem; text-align: center; display: none;">
+                        <img id="img-preview-slider" style="max-width: 200px; max-height: 150px; border: 2px solid #ddd; border-radius: 5px;">
                         <p style="font-size: 0.8rem; margin: 0.5rem 0;">Vista previa</p>
                     </div>
                 </div>
                 
                 <div>
-                    <h5>Imágenes por Año</h5>
-                    <div id="selector-anio-imagenes" style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                        <button class="btn-anio active" onclick="filtrarImagenesPorAnio('todos')">Todos</button>
-                    </div>
-                    <div id="galeria-imagenes" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
+                    <h5>Imágenes en el Slider</h5>
+                    <div id="lista-slider" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- PESTAÑA VIDEOS -->
-        <div id="pestana-videos" class="pestana" style="display: none;">
+        <!-- PESTAÑA GALERÍA -->
+        <div id="pestana-galeria" class="pestana" style="display: none;">
             <div style="background: #e3f2fd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-                <h4>🎥 Gestión de Videos por Año</h4>
+                <h4>🖼️ Gestión de la Galería</h4>
                 <p style="font-size: 0.9rem; margin: 0.5rem 0;">
-                    Organice los videos por año académico. Formatos: MP4, WebM (Máx. 10MB)
+                    Administre las imágenes de la galería. Formatos: JPG, PNG (Máx. 2MB)
                 </p>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div>
-                    <h5>Subir Nuevo Video</h5>
+                    <h5>Agregar Nueva Imagen a la Galería</h5>
                     
-                    <select id="anio-video" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                        <option value="">Seleccione el año</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                    </select>
+                    <input type="text" id="titulo-galeria" placeholder="Título de la imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <textarea id="descripcion-galeria" placeholder="Descripción de la imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 80px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
                     
-                    <input type="text" id="titulo-video" placeholder="Título del video" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <textarea id="descripcion-video" placeholder="Descripción del video" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 80px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                    <input type="file" id="upload-galeria" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                     
-                    <input type="file" id="upload-video" accept="video/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    
-                    <button onclick="subirVideo()" style="background: #ff6b6b; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem;">
-                        📤 Subir Video
+                    <button onclick="subirImagenGaleria()" style="background: #ff6b6b; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem;">
+                        📤 Agregar a Galería
                     </button>
                     
-                    <div id="preview-video" style="margin-top: 1rem; text-align: center; display: none;">
-                        <video id="video-preview" controls style="max-width: 100%; max-height: 150px; border: 2px solid #ddd; border-radius: 5px;">
-                            Tu navegador no soporta la reproducción de videos.
-                        </video>
+                    <div id="preview-galeria" style="margin-top: 1rem; text-align: center; display: none;">
+                        <img id="img-preview-galeria" style="max-width: 200px; max-height: 150px; border: 2px solid #ddd; border-radius: 5px;">
                         <p style="font-size: 0.8rem; margin: 0.5rem 0;">Vista previa</p>
                     </div>
                 </div>
                 
                 <div>
-                    <h5>Videos por Año</h5>
-                    <div id="selector-anio-videos" style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                        <button class="btn-anio active" onclick="filtrarVideosPorAnio('todos')">Todos</button>
-                    </div>
-                    <div id="lista-videos" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PESTAÑA HISTORIAL -->
-        <div id="pestana-historial" class="pestana" style="display: none;">
-            <div style="background: #fff3cd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-                <h4>📊 Historial por Años</h4>
-                <p style="font-size: 0.9rem; margin: 0.5rem 0;">
-                    Vea el contenido organizado por año académico
-                </p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                <div>
-                    <h5>🖼️ Imágenes por Año</h5>
-                    <div id="historial-imagenes" style="max-height: 400px; overflow-y: auto;">
-                    </div>
-                </div>
-                
-                <div>
-                    <h5>🎥 Videos por Año</h5>
-                    <div id="historial-videos" style="max-height: 400px; overflow-y: auto;">
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
-                <h5>📈 Estadísticas de Uso</h5>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
-                    <div>
-                        <strong>Total de Imágenes:</strong> <span id="total-imagenes">0</span><br>
-                        <strong>Total de Videos:</strong> <span id="total-videos">0</span><br>
-                        <strong>Espacio Usado:</strong> <span id="espacio-total-historial">0 KB</span>
-                    </div>
-                    <div>
-                        <strong>Años Activos:</strong> <span id="anios-activos">0</span><br>
-                        <strong>Última Actualización:</strong> <span id="ultima-actualizacion">-</span><br>
-                        <strong>Estado:</strong> <span id="estado-almacenamiento" style="color: #4caf50;">● Normal</span>
+                    <h5>Imágenes en la Galería</h5>
+                    <div id="lista-galeria" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
                     </div>
                 </div>
             </div>
@@ -1122,12 +1093,10 @@
             
             if (mostrar) {
                 cargarValoresActuales();
-                cargarGaleriaImagenes();
-                cargarListaVideos();
+                cargarListaSlider();
+                cargarListaGaleria();
                 cargarRespaldos();
                 actualizarIndicadorAlmacenamiento();
-                actualizarSelectoresAnio();
-                actualizarHistorial();
             }
         }
     }
@@ -1157,19 +1126,19 @@
         const textos = localStorage.getItem('config-ue10febrero');
         if (textos) totalBytes += new Blob([textos]).size;
         
-        const imagenes = localStorage.getItem('imagenes-ue10febrero');
-        if (imagenes) {
-            const imgData = JSON.parse(imagenes);
-            Object.values(imgData).forEach(img => {
+        const slider = localStorage.getItem('slider-ue10febrero');
+        if (slider) {
+            const sliderData = JSON.parse(slider);
+            sliderData.forEach(img => {
                 if (img.data) totalBytes += atob(img.data.split(',')[1]).length;
             });
         }
         
-        const videos = localStorage.getItem('videos-ue10febrero');
-        if (videos) {
-            const videosData = JSON.parse(videos);
-            videosData.forEach(video => {
-                totalBytes += atob(video.data.split(',')[1]).length;
+        const galeria = localStorage.getItem('galeria-ue10febrero');
+        if (galeria) {
+            const galeriaData = JSON.parse(galeria);
+            galeriaData.forEach(img => {
+                if (img.data) totalBytes += atob(img.data.split(',')[1]).length;
             });
         }
         
@@ -1184,28 +1153,20 @@
         document.getElementById('porcentaje-almacenamiento').textContent = porcentaje.toFixed(1) + '%';
         document.getElementById('barra-almacenamiento').style.width = porcentaje + '%';
         document.getElementById('espacio-usado').textContent = mbUsados + ' MB';
-        document.getElementById('espacio-total-historial').textContent = mbUsados + ' MB';
         
         const barra = document.getElementById('barra-almacenamiento');
         const alerta = document.getElementById('alerta-almacenamiento');
-        const estado = document.getElementById('estado-almacenamiento');
         
         if (porcentaje < 70) {
             barra.style.background = '#4caf50';
             alerta.style.display = 'none';
-            estado.textContent = '● Normal';
-            estado.style.color = '#4caf50';
         } else if (porcentaje < 90) {
             barra.style.background = '#ff9800';
             alerta.style.display = 'block';
-            estado.textContent = '⚠️ Atención';
-            estado.style.color = '#ff9800';
         } else {
             barra.style.background = '#f44336';
             alerta.style.display = 'block';
             alerta.innerHTML = '❌ ALMACENAMIENTO LLENO. Elimine contenido antiguo.';
-            estado.textContent = '❌ Crítico';
-            estado.style.color = '#f44336';
         }
     }
 
@@ -1224,32 +1185,17 @@
     }
 
     function limpiarAlmacenamiento() {
-        if (confirm('¿Eliminar contenido anterior al año actual para liberar espacio?')) {
-            const anioActual = new Date().getFullYear();
-            let contenidoEliminado = 0;
-            
-            const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
-            Object.keys(imagenes).forEach(key => {
-                if (imagenes[key].anio && imagenes[key].anio < anioActual) {
-                    delete imagenes[key];
-                    contenidoEliminado++;
-                }
-            });
-            localStorage.setItem('imagenes-ue10febrero', JSON.stringify(imagenes));
-            
-            const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
-            const videosActualizados = videos.filter(video => !video.anio || video.anio >= anioActual);
-            contenidoEliminado += (videos.length - videosActualizados.length);
-            localStorage.setItem('videos-ue10febrero', JSON.stringify(videosActualizados));
+        if (confirm('¿Eliminar contenido antiguo para liberar espacio?')) {
+            localStorage.removeItem('slider-ue10febrero');
+            localStorage.removeItem('galeria-ue10febrero');
             
             actualizarIndicadorAlmacenamiento();
-            cargarGaleriaImagenes();
-            cargarListaVideos();
-            actualizarImagenesEnPagina();
-            actualizarVideosEnPagina();
-            actualizarHistorial();
+            cargarListaSlider();
+            cargarListaGaleria();
+            actualizarSliderEnPagina();
+            actualizarGaleriaEnPagina();
             
-            mostrarMensaje(`✅ Se eliminaron ${contenidoEliminado} elementos antiguos.`, 'success');
+            mostrarMensaje('✅ Contenido antiguo eliminado', 'success');
         }
     }
 
@@ -1264,6 +1210,7 @@
         document.getElementById('edit-telefono').value = config.telefono || '';
         document.getElementById('edit-email').value = config.email || '';
         document.getElementById('edit-whatsapp').value = config.whatsapp || '';
+        document.getElementById('edit-facebook').value = config.facebook || '';
         document.getElementById('edit-mision').value = config.mision || '';
         document.getElementById('edit-vision').value = config.vision || '';
     }
@@ -1277,6 +1224,7 @@
             telefono: document.getElementById('edit-telefono').value,
             email: document.getElementById('edit-email').value,
             whatsapp: document.getElementById('edit-whatsapp').value,
+            facebook: document.getElementById('edit-facebook').value,
             mision: document.getElementById('edit-mision').value,
             vision: document.getElementById('edit-vision').value
         };
@@ -1301,7 +1249,22 @@
             contactos[2].querySelectorAll('p')[0].textContent = config.telefono || '+591 4 1234567';
         }
         if (contactos[3]) {
-            contactos[3].querySelectorAll('p')[0].textContent = config.whatsapp || '+591 71234567';
+            const whatsappLink = contactos[3].querySelector('.whatsapp-link');
+            if (whatsappLink) {
+                whatsappLink.href = `https://wa.me/${config.whatsapp?.replace(/\D/g, '') || '59171234567'}`;
+                whatsappLink.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.187-3.55-8.418"/>
+                    </svg>
+                    ${config.whatsapp || '+591 71234567'}
+                `;
+            }
+        }
+        if (contactos[4]) {
+            const facebookLink = contactos[4].querySelector('.facebook-link');
+            if (facebookLink) {
+                facebookLink.href = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
+            }
         }
         
         mostrarMensaje('✅ Cambios aplicados correctamente', 'success');
@@ -1311,8 +1274,8 @@
         alert('👁️ Los cambios se aplicarán inmediatamente al hacer clic en "Aplicar Cambios"');
     }
 
-    // ==================== SISTEMA DE IMÁGENES ====================
-    document.getElementById('upload-imagen')?.addEventListener('change', function(e) {
+    // ==================== SISTEMA DE SLIDER ====================
+    document.getElementById('upload-slider')?.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             if (file.size > 2 * 1024 * 1024) {
@@ -1322,20 +1285,20 @@
             }
             const reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('img-preview').src = e.target.result;
-                document.getElementById('preview-imagen').style.display = 'block';
+                document.getElementById('img-preview-slider').src = e.target.result;
+                document.getElementById('preview-slider').style.display = 'block';
             }
             reader.readAsDataURL(file);
         }
     });
 
-    function subirImagen() {
-        const anio = document.getElementById('anio-imagen').value;
-        const categoria = document.getElementById('select-imagen').value;
-        const archivo = document.getElementById('upload-imagen').files[0];
+    function subirImagenSlider() {
+        const titulo = document.getElementById('titulo-slider').value;
+        const descripcion = document.getElementById('descripcion-slider').value;
+        const archivo = document.getElementById('upload-slider').files[0];
         
-        if (!anio || !categoria || !archivo) {
-            mostrarMensaje('❌ Complete todos los campos y seleccione una imagen', 'error');
+        if (!titulo || !archivo) {
+            mostrarMensaje('❌ Complete título y seleccione una imagen', 'error');
             return;
         }
         
@@ -1343,241 +1306,51 @@
         
         const reader = new FileReader();
         reader.onload = function(e) {
-            const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
-            const claveUnica = `${categoria}_${anio}_${Date.now()}`;
+            const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
             
-            imagenes[claveUnica] = {
+            slider.push({
                 data: e.target.result,
-                anio: anio,
-                categoria: categoria,
-                titulo: `Imagen de ${categoria}`,
-                fechaSubida: new Date().toLocaleString(),
-                nombreOriginal: archivo.name
-            };
+                titulo: titulo,
+                descripcion: descripcion,
+                fechaSubida: new Date().toLocaleString()
+            });
             
-            localStorage.setItem('imagenes-ue10febrero', JSON.stringify(imagenes));
+            localStorage.setItem('slider-ue10febrero', JSON.stringify(slider));
             
-            mostrarMensaje(`✅ Imagen subida para el año ${anio}`, 'success');
-            document.getElementById('upload-imagen').value = '';
-            document.getElementById('preview-imagen').style.display = 'none';
+            mostrarMensaje('✅ Imagen agregada al slider', 'success');
+            document.getElementById('titulo-slider').value = '';
+            document.getElementById('descripcion-slider').value = '';
+            document.getElementById('upload-slider').value = '';
+            document.getElementById('preview-slider').style.display = 'none';
             
             actualizarIndicadorAlmacenamiento();
-            cargarGaleriaImagenes();
-            actualizarImagenesEnPagina();
-            actualizarSelectoresAnio();
-            actualizarHistorial();
+            cargarListaSlider();
+            actualizarSliderEnPagina();
         };
         reader.readAsDataURL(archivo);
     }
 
-    function cargarGaleriaImagenes() {
-        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
-        const galeria = document.getElementById('galeria-imagenes');
+    function cargarListaSlider() {
+        const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
+        const lista = document.getElementById('lista-slider');
         
-        if (Object.keys(imagenes).length === 0) {
-            galeria.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes</p>';
+        if (slider.length === 0) {
+            lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en el slider</p>';
             return;
         }
         
         let html = '';
-        Object.keys(imagenes).forEach(clave => {
-            const img = imagenes[clave];
+        slider.forEach((img, index) => {
             html += `
-                <div class="item-imagen" data-anio="${img.anio}" style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
                     <div style="display: flex; align-items: start; gap: 0.5rem;">
                         <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
                         <div style="flex: 1;">
                             <div style="font-weight: bold; font-size: 0.9rem;">${img.titulo}</div>
-                            <div style="font-size: 0.7rem; color: #666;">Año ${img.anio} - ${img.categoria}</div>
+                            <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
                                 <small style="color: #999;">${img.fechaSubida}</small>
-                                <button onclick="eliminarImagen('${clave}')" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-        galeria.innerHTML = html;
-    }
-
-    function eliminarImagen(clave) {
-        if (confirm('¿Eliminar esta imagen?')) {
-            const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
-            delete imagenes[clave];
-            localStorage.setItem('imagenes-ue10febrero', JSON.stringify(imagenes));
-            cargarGaleriaImagenes();
-            actualizarImagenesEnPagina();
-            actualizarIndicadorAlmacenamiento();
-            actualizarHistorial();
-            mostrarMensaje('✅ Imagen eliminada', 'success');
-        }
-    }
-
-    function filtrarImagenesPorAnio(anio) {
-        document.querySelectorAll('#selector-anio-imagenes .btn-anio').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        event.target.classList.add('active');
-        
-        document.querySelectorAll('.item-imagen').forEach(item => {
-            item.style.display = (anio === 'todos' || item.dataset.anio === anio) ? 'block' : 'none';
-        });
-    }
-
-    function actualizarImagenesEnPagina() {
-        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
-        const contenedor = document.getElementById('contenedor-imagenes');
-        const sinImagenes = document.getElementById('sin-imagenes');
-        
-        if (Object.keys(imagenes).length === 0) {
-            contenedor.innerHTML = '';
-            sinImagenes.style.display = 'block';
-            return;
-        }
-        
-        sinImagenes.style.display = 'none';
-        
-        let html = '';
-        Object.values(imagenes).forEach(img => {
-            html += `
-                <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <div style="position: relative;">
-                        <img src="${img.data}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
-                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.8rem;">
-                            🖼️ ${img.anio}
-                        </div>
-                    </div>
-                    <div style="padding: 1.5rem;">
-                        <h3 style="margin: 0 0 0.5rem 0; color: #c41e3a; font-size: 1.2rem;">${img.titulo}</h3>
-                        <p style="margin: 0; color: #666; font-size: 0.9rem;">Categoría: ${img.categoria}</p>
-                    </div>
-                </div>
-            `;
-        });
-        
-        contenedor.innerHTML = html;
-    }
-
-    function filtrarImagenesVisitante(anio) {
-        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
-        const contenedor = document.getElementById('contenedor-imagenes');
-        const sinImagenes = document.getElementById('sin-imagenes');
-        
-        const imagenesFiltradas = anio === 'todos' ? Object.values(imagenes) : 
-            Object.values(imagenes).filter(img => img.anio == anio);
-        
-        if (imagenesFiltradas.length === 0) {
-            contenedor.innerHTML = '';
-            sinImagenes.innerHTML = `
-                <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
-                <h3 style="color: #c41e3a; margin-bottom: 1rem;">No hay imágenes del año ${anio}</h3>
-            `;
-            sinImagenes.style.display = 'block';
-            return;
-        }
-        
-        sinImagenes.style.display = 'none';
-        let html = '';
-        imagenesFiltradas.forEach(img => {
-            html += `
-                <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <img src="${img.data}" style="width: 100%; height: 200px; object-fit: cover;">
-                    <div style="padding: 1.5rem;">
-                        <h3 style="margin: 0 0 0.5rem 0; color: #c41e3a;">${img.titulo}</h3>
-                        <p style="margin: 0; color: #666;">Categoría: ${img.categoria}</p>
-                        <small style="color: #999;">Año ${img.anio}</small>
-                    </div>
-                </div>
-            `;
-        });
-        contenedor.innerHTML = html;
-    }
-
-    // ==================== SISTEMA DE VIDEOS ====================
-    document.getElementById('upload-video')?.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            if (file.size > 10 * 1024 * 1024) {
-                alert('❌ El video es muy grande. Máximo 10MB.');
-                this.value = '';
-                return;
-            }
-            const url = URL.createObjectURL(file);
-            document.getElementById('video-preview').src = url;
-            document.getElementById('preview-video').style.display = 'block';
-        }
-    });
-
-    function subirVideo() {
-        const anio = document.getElementById('anio-video').value;
-        const titulo = document.getElementById('titulo-video').value;
-        const descripcion = document.getElementById('descripcion-video').value;
-        const archivo = document.getElementById('upload-video').files[0];
-        
-        if (!anio || !titulo || !archivo) {
-            mostrarMensaje('❌ Complete año, título y seleccione video', 'error');
-            return;
-        }
-        
-        if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const videoData = {
-                id: 'video-' + Date.now(),
-                titulo: titulo,
-                descripcion: descripcion,
-                data: e.target.result,
-                tipo: archivo.type,
-                anio: anio,
-                fechaSubida: new Date().toLocaleString(),
-                nombreArchivo: archivo.name
-            };
-            
-            const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
-            videos.push(videoData);
-            localStorage.setItem('videos-ue10febrero', JSON.stringify(videos));
-            
-            cargarListaVideos();
-            actualizarVideosEnPagina();
-            actualizarSelectoresAnio();
-            actualizarHistorial();
-            
-            document.getElementById('titulo-video').value = '';
-            document.getElementById('descripcion-video').value = '';
-            document.getElementById('upload-video').value = '';
-            document.getElementById('preview-video').style.display = 'none';
-            
-            actualizarIndicadorAlmacenamiento();
-            mostrarMensaje(`✅ Video subido para el año ${anio}`, 'success');
-        };
-        reader.readAsDataURL(archivo);
-    }
-
-    function cargarListaVideos() {
-        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
-        const lista = document.getElementById('lista-videos');
-        
-        if (videos.length === 0) {
-            lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay videos</p>';
-            return;
-        }
-        
-        let html = '';
-        videos.forEach((video, index) => {
-            html += `
-                <div class="item-video" data-anio="${video.anio}" style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
-                    <div style="display: flex; align-items: start; gap: 0.5rem;">
-                        <video style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;" controls>
-                            <source src="${video.data}" type="${video.tipo}">
-                        </video>
-                        <div style="flex: 1;">
-                            <div style="font-weight: bold; font-size: 0.9rem;">${video.titulo}</div>
-                            <div style="font-size: 0.7rem; color: #666;">Año ${video.anio}</div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
-                                <small style="color: #999;">${video.fechaSubida}</small>
-                                <button onclick="eliminarVideo(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
+                                <button onclick="eliminarImagenSlider(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
                             </div>
                         </div>
                     </div>
@@ -1587,186 +1360,179 @@
         lista.innerHTML = html;
     }
 
-    function eliminarVideo(index) {
-        if (confirm('¿Eliminar este video?')) {
-            const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
-            videos.splice(index, 1);
-            localStorage.setItem('videos-ue10febrero', JSON.stringify(videos));
-            cargarListaVideos();
-            actualizarVideosEnPagina();
+    function eliminarImagenSlider(index) {
+        if (confirm('¿Eliminar esta imagen del slider?')) {
+            const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
+            slider.splice(index, 1);
+            localStorage.setItem('slider-ue10febrero', JSON.stringify(slider));
+            cargarListaSlider();
+            actualizarSliderEnPagina();
             actualizarIndicadorAlmacenamiento();
-            actualizarHistorial();
-            mostrarMensaje('✅ Video eliminado', 'success');
+            mostrarMensaje('✅ Imagen eliminada del slider', 'success');
         }
     }
 
-    function filtrarVideosPorAnio(anio) {
-        document.querySelectorAll('#selector-anio-videos .btn-anio').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        event.target.classList.add('active');
+    function actualizarSliderEnPagina() {
+        const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
+        const slidesContainer = document.querySelector('.slides');
+        const dotsContainer = document.querySelector('.slider-dots');
         
-        document.querySelectorAll('.item-video').forEach(item => {
-            item.style.display = (anio === 'todos' || item.dataset.anio === anio) ? 'block' : 'none';
-        });
-    }
-
-    function actualizarVideosEnPagina() {
-        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
-        const contenedor = document.getElementById('contenedor-videos');
-        const sinVideos = document.getElementById('sin-videos');
-        
-        if (videos.length === 0) {
-            contenedor.innerHTML = '';
-            sinVideos.style.display = 'block';
+        if (slider.length === 0) {
+            // Si no hay imágenes en el slider, usar las predeterminadas
             return;
         }
         
-        sinVideos.style.display = 'none';
+        let slidesHTML = '';
+        let dotsHTML = '';
+        
+        slider.forEach((img, index) => {
+            slidesHTML += `
+                <div class="slide">
+                    <img src="${img.data}" alt="${img.titulo}">
+                    <div class="slide-content">
+                        <h3>${img.titulo}</h3>
+                        <p>${img.descripcion}</p>
+                    </div>
+                </div>
+            `;
+            
+            dotsHTML += `<span class="dot ${index === 0 ? 'active' : ''}"></span>`;
+        });
+        
+        slidesContainer.innerHTML = slidesHTML;
+        dotsContainer.innerHTML = dotsHTML;
+        
+        // Reiniciar el slider
+        currentSlide = 0;
+        showSlide(0);
+        
+        // Reasignar eventos a los dots
+        document.querySelectorAll('.dot').forEach((dot, i) => {
+            dot.addEventListener('click', () => showSlide(i));
+        });
+    }
+
+    // ==================== SISTEMA DE GALERÍA ====================
+    document.getElementById('upload-galeria')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+                alert('❌ La imagen es muy grande. Máximo 2MB.');
+                this.value = '';
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('img-preview-galeria').src = e.target.result;
+                document.getElementById('preview-galeria').style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    function subirImagenGaleria() {
+        const titulo = document.getElementById('titulo-galeria').value;
+        const descripcion = document.getElementById('descripcion-galeria').value;
+        const archivo = document.getElementById('upload-galeria').files[0];
+        
+        if (!titulo || !archivo) {
+            mostrarMensaje('❌ Complete título y seleccione una imagen', 'error');
+            return;
+        }
+        
+        if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
+            
+            galeria.push({
+                data: e.target.result,
+                titulo: titulo,
+                descripcion: descripcion,
+                fechaSubida: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('galeria-ue10febrero', JSON.stringify(galeria));
+            
+            mostrarMensaje('✅ Imagen agregada a la galería', 'success');
+            document.getElementById('titulo-galeria').value = '';
+            document.getElementById('descripcion-galeria').value = '';
+            document.getElementById('upload-galeria').value = '';
+            document.getElementById('preview-galeria').style.display = 'none';
+            
+            actualizarIndicadorAlmacenamiento();
+            cargarListaGaleria();
+            actualizarGaleriaEnPagina();
+        };
+        reader.readAsDataURL(archivo);
+    }
+
+    function cargarListaGaleria() {
+        const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
+        const lista = document.getElementById('lista-galeria');
+        
+        if (galeria.length === 0) {
+            lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en la galería</p>';
+            return;
+        }
         
         let html = '';
-        videos.forEach(video => {
+        galeria.forEach((img, index) => {
             html += `
-                <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <div style="position: relative;">
-                        <video style="width: 100%; height: 200px; object-fit: cover; display: block;" controls>
-                            <source src="${video.data}" type="${video.tipo}">
-                        </video>
-                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.8rem;">
-                            🎥 ${video.anio}
+                <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                    <div style="display: flex; align-items: start; gap: 0.5rem;">
+                        <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: bold; font-size: 0.9rem;">${img.titulo}</div>
+                            <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                                <small style="color: #999;">${img.fechaSubida}</small>
+                                <button onclick="eliminarImagenGaleria(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
+                            </div>
                         </div>
                     </div>
-                    <div style="padding: 1.5rem;">
-                        <h3 style="margin: 0 0 0.5rem 0; color: #c41e3a; font-size: 1.2rem;">${video.titulo}</h3>
-                        <p style="margin: 0; color: #666; font-size: 0.9rem;">${video.descripcion || ''}</p>
-                    </div>
                 </div>
             `;
         });
-        
-        contenedor.innerHTML = html;
+        lista.innerHTML = html;
     }
 
-    function filtrarVideosVisitante(anio) {
-        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
-        const contenedor = document.getElementById('contenedor-videos');
-        const sinVideos = document.getElementById('sin-videos');
+    function eliminarImagenGaleria(index) {
+        if (confirm('¿Eliminar esta imagen de la galería?')) {
+            const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
+            galeria.splice(index, 1);
+            localStorage.setItem('galeria-ue10febrero', JSON.stringify(galeria));
+            cargarListaGaleria();
+            actualizarGaleriaEnPagina();
+            actualizarIndicadorAlmacenamiento();
+            mostrarMensaje('✅ Imagen eliminada de la galería', 'success');
+        }
+    }
+
+    function actualizarGaleriaEnPagina() {
+        const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
+        const galeriaContainer = document.querySelector('.galeria-container');
         
-        const videosFiltrados = anio === 'todos' ? videos : videos.filter(video => video.anio == anio);
-        
-        if (videosFiltrados.length === 0) {
-            contenedor.innerHTML = '';
-            sinVideos.innerHTML = `
-                <div style="font-size: 4rem; margin-bottom: 1rem;">🎥</div>
-                <h3 style="color: #c41e3a; margin-bottom: 1rem;">No hay videos del año ${anio}</h3>
-            `;
-            sinVideos.style.display = 'block';
+        if (galeria.length === 0) {
+            galeriaContainer.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">No hay imágenes en la galería</p>';
             return;
         }
         
-        sinVideos.style.display = 'none';
         let html = '';
-        videosFiltrados.forEach(video => {
+        galeria.forEach(img => {
             html += `
-                <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <video style="width: 100%; height: 200px; object-fit: cover;" controls>
-                        <source src="${video.data}" type="${video.tipo}">
-                    </video>
-                    <div style="padding: 1.5rem;">
-                        <h3 style="margin: 0 0 0.5rem 0; color: #c41e3a;">${video.titulo}</h3>
-                        <p style="margin: 0; color: #666;">${video.descripcion || ''}</p>
-                        <small style="color: #999;">Año ${video.anio}</small>
-                    </div>
-                </div>
-            `;
-        });
-        contenedor.innerHTML = html;
-    }
-
-    // ==================== SISTEMA DE AÑOS ====================
-    function obtenerAniosUnicos() {
-        const anios = new Set();
-        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
-        Object.values(imagenes).forEach(img => {
-            if (img.anio) anios.add(img.anio);
-        });
-        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
-        videos.forEach(video => {
-            if (video.anio) anios.add(video.anio);
-        });
-        return Array.from(anios).sort((a, b) => b - a);
-    }
-
-    function actualizarSelectoresAnio() {
-        const anios = obtenerAniosUnicos();
-        
-        // Selector imágenes visitante
-        const selectorImagenesVisitante = document.getElementById('filtro-anio-imagenes');
-        selectorImagenesVisitante.innerHTML = '<option value="todos">Todos los años</option>';
-        anios.forEach(anio => {
-            selectorImagenesVisitante.innerHTML += `<option value="${anio}">${anio}</option>`;
-        });
-        selectorImagenesVisitante.onchange = (e) => filtrarImagenesVisitante(e.target.value);
-        
-        // Selector videos visitante
-        const selectorVideosVisitante = document.getElementById('filtro-anio-visitante');
-        selectorVideosVisitante.innerHTML = '<option value="todos">Todos los años</option>';
-        anios.forEach(anio => {
-            selectorVideosVisitante.innerHTML += `<option value="${anio}">${anio}</option>`;
-        });
-        selectorVideosVisitante.onchange = (e) => filtrarVideosVisitante(e.target.value);
-        
-        // Selectores admin
-        const selectores = ['selector-anio-imagenes', 'selector-anio-videos'];
-        selectores.forEach(selectorId => {
-            const selector = document.getElementById(selectorId);
-            if (selector) {
-                selector.innerHTML = '<button class="btn-anio active" onclick="filtrar' + (selectorId.includes('imagenes') ? 'Imagenes' : 'Videos') + 'PorAnio(\'todos\')">Todos</button>';
-                anios.forEach(anio => {
-                    selector.innerHTML += `<button class="btn-anio" onclick="filtrar${selectorId.includes('imagenes') ? 'Imagenes' : 'Videos'}PorAnio('${anio}')">${anio}</button>`;
-                });
-            }
-        });
-        
-        // Actualizar estadísticas
-        document.getElementById('anios-activos').textContent = anios.length;
-        document.getElementById('total-imagenes').textContent = Object.keys(JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}')).length;
-        document.getElementById('total-videos').textContent = (JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]')).length;
-        document.getElementById('ultima-actualizacion').textContent = new Date().toLocaleDateString();
-    }
-
-    // ==================== SISTEMA DE HISTORIAL ====================
-    function actualizarHistorial() {
-        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
-        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
-        const anios = obtenerAniosUnicos();
-        
-        let htmlImagenes = '', htmlVideos = '';
-        anios.forEach(anio => {
-            const imagenesAnio = Object.values(imagenes).filter(img => img.anio == anio);
-            const videosAnio = videos.filter(video => video.anio == anio);
-            
-            htmlImagenes += `
-                <div style="margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 5px; border-left: 4px solid #c41e3a;">
-                    <h6 style="margin: 0 0 0.5rem 0; color: #c41e3a;">📅 Año ${anio}</h6>
-                    <div style="font-size: 0.8rem; color: #666;">
-                        <strong>Imágenes:</strong> ${imagenesAnio.length}
-                    </div>
-                </div>
-            `;
-            
-            htmlVideos += `
-                <div style="margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 5px; border-left: 4px solid #ff6b6b;">
-                    <h6 style="margin: 0 0 0.5rem 0; color: #ff6b6b;">🎥 Año ${anio}</h6>
-                    <div style="font-size: 0.8rem; color: #666;">
-                        <strong>Videos:</strong> ${videosAnio.length}
+                <div class="galeria-item">
+                    <img src="${img.data}" alt="${img.titulo}">
+                    <div class="galeria-overlay">
+                        <h3>${img.titulo}</h3>
+                        <p>${img.descripcion}</p>
                     </div>
                 </div>
             `;
         });
         
-        document.getElementById('historial-imagenes').innerHTML = htmlImagenes || '<p style="color: #666;">No hay imágenes</p>';
-        document.getElementById('historial-videos').innerHTML = htmlVideos || '<p style="color: #666;">No hay videos</p>';
+        galeriaContainer.innerHTML = html;
     }
 
     // ==================== SISTEMA DE RESPALDO ====================
@@ -1782,7 +1548,7 @@
         };
         
         let respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
-        respaldos.push({nombre: nombre, config: config});
+        respaldos.push({nombre, config});
         localStorage.setItem('respaldos-ue10febrero', JSON.stringify(respaldos));
         
         mostrarMensaje(`✅ Respaldo "${nombre}" creado`, 'success');
@@ -1850,41 +1616,26 @@
     const totalSlides = slideItems.length;
 
     function showSlide(index) {
-        if (index >= totalSlides) {
-            currentSlide = 0;
-        } else if (index < 0) {
-            currentSlide = totalSlides - 1;
-        } else {
-            currentSlide = index;
-        }
+        if (index >= totalSlides) currentSlide = 0;
+        else if (index < 0) currentSlide = totalSlides - 1;
+        else currentSlide = index;
         
-        if (slides) {
-            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
         
         document.querySelectorAll('.dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentSlide);
         });
     }
 
-    // Inicializar eventos del slider
-    function inicializarSlider() {
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
-        const dots = document.querySelectorAll('.dot');
-        
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
-        }
-        
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
-        }
-        
-        dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => showSlide(i));
-        });
-    }
+    document.querySelector('.prev')?.addEventListener('click', () => showSlide(currentSlide - 1));
+    document.querySelector('.next')?.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    document.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.addEventListener('click', () => showSlide(i));
+    });
+
+    // Cambiado a 8 segundos en lugar de 5
+    setInterval(() => showSlide(currentSlide + 1), 8000);
 
     // ==================== NAVEGACIÓN ====================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1899,11 +1650,9 @@
 
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    }
+    hamburger?.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
 
     // ==================== INICIALIZACIÓN ====================
     document.addEventListener('DOMContentLoaded', function() {
@@ -1919,17 +1668,12 @@
             if (stats[2]) stats[2].textContent = config.experiencia;
         }
         
-        // Actualizar imágenes y videos en la página
-        actualizarImagenesEnPagina();
-        actualizarVideosEnPagina();
-        actualizarSelectoresAnio();
+        // Actualizar slider y galería en la página
+        actualizarSliderEnPagina();
+        actualizarGaleriaEnPagina();
         
         // Iniciar slider
-        inicializarSlider();
         showSlide(0);
-        
-        // Configurar intervalo para cambio automático de slides
-        setInterval(() => showSlide(currentSlide + 1), 8000);
     });
     </script>
 </body>
