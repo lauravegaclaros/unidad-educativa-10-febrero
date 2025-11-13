@@ -123,7 +123,7 @@
             cursor: pointer;
         }
 
-        /* HERO SECTION MEJORADA - SIN OVERLAY ROJO */
+        /* HERO SECTION */
         .hero {
             background: url('Imagenes/frontis-escuela.jpg') center/cover;
             color: white;
@@ -306,90 +306,6 @@
             margin-top: 0.5rem;
         }
 
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 5px;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #dc143c 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            width: 100%;
-        }
-
-        .btn:hover,
-        .btn:focus {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.4);
-        }
-
-        footer {
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        .contact-info {
-            background: var(--light-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-        }
-
-        .contact-info h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .contact-info p {
-            margin: 0.5rem 0;
-            color: #555;
-        }
-
         .gallery {
             background: white;
         }
@@ -454,7 +370,7 @@
             color: rgba(255,255,255,0.9);
         }
 
-        /* SLIDER SECTION MEJORADO */
+        /* SLIDER SECTION */
         .slider-section {
             background: var(--light-bg);
             padding: 4rem 0;
@@ -482,7 +398,7 @@
 
         .slides {
             display: flex;
-            transition: transform 0.8s ease-in-out; /* Más lento y suave */
+            transition: transform 0.8s ease-in-out;
         }
 
         .slide {
@@ -567,6 +483,11 @@
             background: var(--primary-color);
         }
 
+        /* VIDEOS SECTION */
+        #videos-escuela {
+            background: var(--light-bg);
+        }
+
         .upload-placeholder {
             display: flex;
             flex-direction: column;
@@ -588,59 +509,39 @@
             color: #dc143c;
         }
 
-        .modal {
-            display: none;
+        /* BOTÓN ADMIN */
+        #boton-admin {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 9999;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        #boton-admin:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            background: none;
-            border: none;
+        #boton-admin small {
+            font-size: 0.6rem;
+            margin-top: 2px;
         }
 
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: transform 0.3s, opacity 0.3s;
-            z-index: 2000;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Responsive */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -729,7 +630,7 @@
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#galeria">Galería</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#videos-escuela">Videos</a></li>
             </ul>
         </nav>
     </header>
@@ -741,7 +642,7 @@
                 <p>Con estudio, esfuerzo y esmero... Adelante 10 de Febrero</p>
                 <div class="hero-buttons">
                     <a href="#nosotros" class="btn-hero">Conócenos</a>
-                    <a href="#contacto" class="btn-hero primary">Contáctanos</a>
+                    <a href="#videos-escuela" class="btn-hero primary">Ver Videos</a>
                 </div>
             </div>
         </section>
@@ -844,7 +745,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN SLIDER CORREGIDA Y MEJORADA -->
+        <!-- SLIDER SECTION -->
         <section class="slider-section">
             <div class="slider-container">
                 <h2 class="slider-title">Eventos y Actividades</h2>
@@ -878,20 +779,6 @@
                                 <p>Participación en competencias deportivas y académicas</p>
                             </div>
                         </div>
-                        <div class="slide">
-                            <img src="Imagenes/actividades-deportivas.jpg" alt="Actividades Deportivas">
-                            <div class="slide-content">
-                                <h3>Actividades Deportivas</h3>
-                                <p>Competencias y entrenamientos deportivos</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <img src="Imagenes/ceremonias-escolares.jpg" alt="Ceremonias Escolares">
-                            <div class="slide-content">
-                                <h3>Ceremonias Escolares</h3>
-                                <p>Actos cívicos y ceremonias importantes</p>
-                            </div>
-                        </div>
                     </div>
                     <div class="slider-nav">
                         <button class="slider-btn prev">❮</button>
@@ -902,227 +789,1039 @@
                         <span class="dot"></span>
                         <span class="dot"></span>
                         <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contacto">
-            <h2>Contáctanos</h2>
-            
-            <div class="contact-info">
-                <h3>Información de Contacto</h3>
-                <p>📍 Dirección: 6 de Agosto</p>
-                <p>📞 Teléfono: ...</p>
-                <p>📧 Email: ...</p>
-                <p>🕒 Horario de atención: Lunes a Viernes, 8:30 AM - 12:30 PM</p>
-            </div>
-
-            <div class="contact-form">
-                <form name="contacto" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-                    <input type="hidden" name="form-name" value="contacto">
-                    <p style="display:none;">
-                        <label>No llenes esto: <input name="bot-field"></label>
-                    </p>
-                    <div class="form-group">
-                        <label for="nombre">Nombre completo</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input type="tel" id="telefono" name="telefono">
-                    </div>
-                    <div class="form-group">
-                        <label for="mensaje">Mensaje</label>
-                        <textarea id="mensaje" name="mensaje" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Enviar Mensaje</button>
-                </form>
+        <!-- VIDEOS SECTION -->
+        <section id="videos-escuela" style="padding: 4rem 2rem; background: #f8f9fa; display: none;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2 style="text-align: center; color: #c41e3a; margin-bottom: 1rem;">🎥 Videos por Año Académico</h2>
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <label for="filtro-anio-visitante" style="margin-right: 1rem; font-weight: bold;">Filtrar por año:</label>
+                    <select id="filtro-anio-visitante" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="todos">Todos los años</option>
+                    </select>
+                </div>
+                
+                <div id="contenedor-videos" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                </div>
+                
+                <div id="sin-videos" style="text-align: center; padding: 3rem; color: #666; display: none;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🎥</div>
+                    <h3 style="color: #c41e3a; margin-bottom: 1rem;">Aún no hay videos</h3>
+                    <p>Próximamente se agregarán videos de las actividades escolares</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer style="background: var(--primary-color); color: white; text-align: center; padding: 2rem; margin-top: 4rem;">
         <p>&copy; 2025 Unidad Educativa 10 de Febrero. Todos los derechos reservados.</p>
         <p>Formando el futuro de Bolivia</p>
     </footer>
 
-    <div class="modal" id="imageModal">
-        <button class="modal-close" aria-label="Cerrar modal">&times;</button>
-        <img class="modal-content" id="modalImage" src="" alt="">
-    </div>
+    <!-- ==================== SISTEMA DE ADMINISTRACIÓN ==================== -->
+    <section id="editor-directora" style="display: none; background: white; padding: 2rem; margin: 2rem; border: 2px solid #c41e3a; border-radius: 10px; max-width: 1000px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; max-height: 90vh; overflow-y: auto; width: 90%;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h2 style="color: #c41e3a; margin: 0;">🎛️ Sistema de Gestión - Directora</h2>
+            <button onclick="ocultarEditor()" style="background: #666; color: white; border: none; border-radius: 5px; padding: 0.5rem 1rem; cursor: pointer;">✕ Cerrar</button>
+        </div>
 
-    <div class="toast" id="toast"></div>
+        <!-- INDICADOR DE ALMACENAMIENTO -->
+        <div id="almacenamiento-info" style="background: #e3f2fd; padding: 0.75rem; border-radius: 5px; margin-bottom: 1rem; border-left: 4px solid #2196f3;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <strong>💾 Almacenamiento Usado:</strong>
+                <span id="porcentaje-almacenamiento" style="font-weight: bold;">0%</span>
+            </div>
+            <div style="background: #ddd; border-radius: 10px; height: 10px;">
+                <div id="barra-almacenamiento" style="background: #4caf50; height: 100%; border-radius: 10px; width: 0%; transition: width 0.3s;"></div>
+            </div>
+            <div style="font-size: 0.8rem; color: #666; margin-top: 0.25rem;">
+                <span id="espacio-usado">0 KB</span> de <span id="espacio-total">5 MB</span> disponibles
+            </div>
+            <div id="alerta-almacenamiento" style="display: none; background: #ffebee; color: #c62828; padding: 0.5rem; border-radius: 3px; margin-top: 0.5rem; font-size: 0.8rem;">
+                ⚠️ El almacenamiento está casi lleno. Considere eliminar contenido antiguo.
+            </div>
+        </div>
 
+        <!-- PESTAÑAS -->
+        <div style="display: flex; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #ddd; flex-wrap: wrap;">
+            <button class="tab-btn active" onclick="mostrarPestana('textos')">📝 Textos</button>
+            <button class="tab-btn" onclick="mostrarPestana('imagenes')">🖼️ Imágenes</button>
+            <button class="tab-btn" onclick="mostrarPestana('videos')">🎥 Videos</button>
+            <button class="tab-btn" onclick="mostrarPestana('historial')">📊 Historial</button>
+            <button class="tab-btn" onclick="mostrarPestana('respaldo')">💾 Respaldo</button>
+        </div>
+
+        <!-- PESTAÑA TEXTOS -->
+        <div id="pestana-textos" class="pestana">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <h4>📊 Estadísticas</h4>
+                    <input type="text" id="edit-estudiantes" placeholder="600+ Estudiantes" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" id="edit-docentes" placeholder="45+ Docentes" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" id="edit-experiencia" placeholder="30+ Años" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div>
+                    <h4>📞 Información</h4>
+                    <input type="text" id="edit-direccion" placeholder="Dirección" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" id="edit-telefono" placeholder="Teléfono" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" id="edit-email" placeholder="Email" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" id="edit-horario" placeholder="Horario" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <h4>🎯 Misión y Visión</h4>
+                <textarea id="edit-mision" placeholder="Escriba la misión aquí..." style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 100px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                <textarea id="edit-vision" placeholder="Escriba la visión aquí..." style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 100px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+            </div>
+        </div>
+
+        <!-- PESTAÑA IMÁGENES -->
+        <div id="pestana-imagenes" class="pestana" style="display: none;">
+            <div style="background: #e8f5e8; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                <h4>🖼️ Gestión de Imágenes por Año</h4>
+                <p style="font-size: 0.9rem; margin: 0.5rem 0;">
+                    Organice las imágenes por año académico. Formatos: JPG, PNG (Máx. 2MB)
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <h5>Subir Nueva Imagen</h5>
+                    
+                    <select id="anio-imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="">Seleccione el año</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                    </select>
+                    
+                    <select id="select-imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="">Seleccione categoría</option>
+                        <option value="frontis-escuela.jpg">Foto del Frontis</option>
+                        <option value="eventos-academicos.jpeg">Eventos Académicos</option>
+                        <option value="eventos-culturales.jpg">Eventos Culturales</option>
+                        <option value="docentes-alumnos.jpg">Docentes y Alumnos</option>
+                        <option value="concursos.jpg">Concursos</option>
+                        <option value="infraestructura.jpg">Infraestructura</option>
+                        <option value="laboratorios.jpg">Laboratorios</option>
+                        <option value="deportes.jpg">Áreas Deportivas</option>
+                    </select>
+                    
+                    <input type="file" id="upload-imagen" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    
+                    <button onclick="subirImagen()" style="background: #28a745; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem;">
+                        📤 Subir Imagen
+                    </button>
+                    
+                    <div id="preview-imagen" style="margin-top: 1rem; text-align: center; display: none;">
+                        <img id="img-preview" style="max-width: 200px; max-height: 150px; border: 2px solid #ddd; border-radius: 5px;">
+                        <p style="font-size: 0.8rem; margin: 0.5rem 0;">Vista previa</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5>Imágenes por Año</h5>
+                    <div id="selector-anio-imagenes" style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <button class="btn-anio active" onclick="filtrarImagenesPorAnio('todos')">Todos</button>
+                    </div>
+                    <div id="galeria-imagenes" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA VIDEOS -->
+        <div id="pestana-videos" class="pestana" style="display: none;">
+            <div style="background: #e3f2fd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                <h4>🎥 Gestión de Videos por Año</h4>
+                <p style="font-size: 0.9rem; margin: 0.5rem 0;">
+                    Organice los videos por año académico. Formatos: MP4, WebM (Máx. 10MB)
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <h5>Subir Nuevo Video</h5>
+                    
+                    <select id="anio-video" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="">Seleccione el año</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                    </select>
+                    
+                    <input type="text" id="titulo-video" placeholder="Título del video" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <textarea id="descripcion-video" placeholder="Descripción del video" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 80px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                    
+                    <input type="file" id="upload-video" accept="video/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    
+                    <button onclick="subirVideo()" style="background: #ff6b6b; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem;">
+                        📤 Subir Video
+                    </button>
+                    
+                    <div id="preview-video" style="margin-top: 1rem; text-align: center; display: none;">
+                        <video id="video-preview" controls style="max-width: 100%; max-height: 150px; border: 2px solid #ddd; border-radius: 5px;">
+                            Tu navegador no soporta la reproducción de videos.
+                        </video>
+                        <p style="font-size: 0.8rem; margin: 0.5rem 0;">Vista previa</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5>Videos por Año</h5>
+                    <div id="selector-anio-videos" style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <button class="btn-anio active" onclick="filtrarVideosPorAnio('todos')">Todos</button>
+                    </div>
+                    <div id="lista-videos" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA HISTORIAL -->
+        <div id="pestana-historial" class="pestana" style="display: none;">
+            <div style="background: #fff3cd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                <h4>📊 Historial por Años</h4>
+                <p style="font-size: 0.9rem; margin: 0.5rem 0;">
+                    Vea el contenido organizado por año académico
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h5>🖼️ Imágenes por Año</h5>
+                    <div id="historial-imagenes" style="max-height: 400px; overflow-y: auto;">
+                    </div>
+                </div>
+                
+                <div>
+                    <h5>🎥 Videos por Año</h5>
+                    <div id="historial-videos" style="max-height: 400px; overflow-y: auto;">
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+                <h5>📈 Estadísticas de Uso</h5>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+                    <div>
+                        <strong>Total de Imágenes:</strong> <span id="total-imagenes">0</span><br>
+                        <strong>Total de Videos:</strong> <span id="total-videos">0</span><br>
+                        <strong>Espacio Usado:</strong> <span id="espacio-total-historial">0 KB</span>
+                    </div>
+                    <div>
+                        <strong>Años Activos:</strong> <span id="anios-activos">0</span><br>
+                        <strong>Última Actualización:</strong> <span id="ultima-actualizacion">-</span><br>
+                        <strong>Estado:</strong> <span id="estado-almacenamiento" style="color: #4caf50;">● Normal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA RESPALDO -->
+        <div id="pestana-respaldo" class="pestana" style="display: none;">
+            <div style="background: #fff3cd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                <h4>🛡️ Sistema de Respaldo</h4>
+                <p style="font-size: 0.9rem; margin: 0.5rem 0;">
+                    Guarde y restaure versiones anteriores por si comete algún error.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <h5>💾 Guardar Respaldo</h5>
+                    <input type="text" id="nombre-respaldo" placeholder="Nombre del respaldo" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <button onclick="crearRespaldo()" style="background: #17a2b8; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%;">
+                        💾 Crear Respaldo
+                    </button>
+                </div>
+                
+                <div>
+                    <h5>🔄 Restaurar Respaldo</h5>
+                    <select id="select-respaldo" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="">Seleccione respaldo</option>
+                    </select>
+                    <button onclick="restaurarRespaldo()" style="background: #dc3545; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%;">
+                        🔄 Restaurar
+                    </button>
+                </div>
+            </div>
+
+            <div id="lista-respaldos" style="margin-top: 1rem;">
+                <h5>📦 Respaldos Guardados:</h5>
+                <div id="contenedor-respaldos" style="max-height: 200px; overflow-y: auto;">
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTONES PRINCIPALES -->
+        <div style="display: flex; gap: 1rem; margin-top: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button onclick="aplicarCambios()" style="background: #c41e3a; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;">
+                💾 Aplicar Cambios
+            </button>
+            
+            <button onclick="previsualizarCambios()" style="background: #28a745; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;">
+                👁️ Previsualizar
+            </button>
+            
+            <button onclick="limpiarAlmacenamiento()" style="background: #ff9800; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;">
+                🧹 Limpiar Antiguo
+            </button>
+        </div>
+
+        <div id="mensaje-estado" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
+    </section>
+
+    <!-- ==================== SISTEMA DE SEGURIDAD Y FUNCIONALIDAD ==================== -->
     <script>
-        // Navegación suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    // ==================== SISTEMA DE SEGURIDAD ====================
+    const PALABRA_SECRETA = "admin10febrero2025";
 
-        // Menú hamburguesa para móviles
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+    function verificarAccesoSeguro() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const claveURL = urlParams.get('clave');
+        const hashURL = window.location.hash.replace('#', '');
+        const sesionActiva = localStorage.getItem('sesionAdminActiva');
         
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Cerrar menú al hacer clic en un enlace (móviles)
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Actualizar navegación activa al hacer scroll
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 100)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Manejo del formulario
-        const form = document.querySelector('form');
-        const toast = document.getElementById('toast');
+        const accesoPermitido = 
+            claveURL === PALABRA_SECRETA ||
+            hashURL === PALABRA_SECRETA || 
+            sesionActiva === 'true';
         
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Simulación de envío exitoso
-            showToast('Mensaje enviado correctamente. Nos pondremos en contacto pronto.', 'success');
-            form.reset();
-        });
-
-        function showToast(message, type) {
-            toast.textContent = message;
-            toast.className = 'toast show';
-            if (type === 'error') {
-                toast.style.background = '#e74c3c';
-            } else {
-                toast.style.background = '#2ecc71';
-            }
-            
+        if (!accesoPermitido) {
+            document.getElementById('boton-admin')?.remove();
+            document.getElementById('editor-directora')?.remove();
+            return false;
+        }
+        
+        localStorage.setItem('sesionAdminActiva', 'true');
+        setTimeout(() => {
+            localStorage.removeItem('sesionAdminActiva');
+        }, 4 * 60 * 60 * 1000);
+        
+        if (claveURL === PALABRA_SECRETA || hashURL === PALABRA_SECRETA) {
             setTimeout(() => {
-                toast.className = 'toast';
-            }, 3000);
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }, 1000);
         }
-
-        // SLIDER FUNCTIONALITY MEJORADO
-        const slides = document.querySelector('.slides');
-        const slideItems = document.querySelectorAll('.slide');
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
-        const dots = document.querySelectorAll('.dot');
         
-        let currentSlide = 0;
-        const totalSlides = slideItems.length;
-        let autoSlideInterval;
+        mostrarInterfazAdministrativa();
+        return true;
+    }
 
-        // Función para mostrar slide específico
-        function showSlide(index) {
-            if (index >= totalSlides) {
-                currentSlide = 0;
-            } else if (index < 0) {
-                currentSlide = totalSlides - 1;
-            } else {
-                currentSlide = index;
+    function mostrarInterfazAdministrativa() {
+        if (!document.getElementById('boton-admin')) {
+            const botonAdmin = document.createElement('button');
+            botonAdmin.innerHTML = '⚙️<br><small>Admin</small>';
+            botonAdmin.id = 'boton-admin';
+            botonAdmin.onclick = toggleEditor;
+            document.body.appendChild(botonAdmin);
+        }
+    }
+
+    function toggleEditor() {
+        const editor = document.getElementById('editor-directora');
+        if (editor) {
+            const mostrar = editor.style.display === 'none';
+            editor.style.display = mostrar ? 'block' : 'none';
+            
+            if (mostrar) {
+                cargarValoresActuales();
+                cargarGaleriaImagenes();
+                cargarListaVideos();
+                cargarRespaldos();
+                actualizarIndicadorAlmacenamiento();
+                actualizarSelectoresAnio();
+                actualizarHistorial();
             }
-            
-            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            // Actualizar dots activos
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
+        }
+    }
+
+    function ocultarEditor() {
+        document.getElementById('editor-directora').style.display = 'none';
+    }
+
+    // ==================== SISTEMA DE PESTAÑAS ====================
+    function mostrarPestana(nombrePestana) {
+        document.querySelectorAll('.pestana').forEach(pestana => {
+            pestana.style.display = 'none';
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        document.getElementById(`pestana-${nombrePestana}`).style.display = 'block';
+        event.target.classList.add('active');
+    }
+
+    // ==================== CONTROL DE ALMACENAMIENTO ====================
+    const LIMITE_ALMACENAMIENTO = 5 * 1024 * 1024;
+
+    function calcularUsoAlmacenamiento() {
+        let totalBytes = 0;
+        const textos = localStorage.getItem('config-ue10febrero');
+        if (textos) totalBytes += new Blob([textos]).size;
+        
+        const imagenes = localStorage.getItem('imagenes-ue10febrero');
+        if (imagenes) {
+            const imgData = JSON.parse(imagenes);
+            Object.values(imgData).forEach(img => {
+                if (img.data) totalBytes += atob(img.data.split(',')[1]).length;
             });
         }
-
-        // Función para iniciar auto-slide
-        function startAutoSlide() {
-            autoSlideInterval = setInterval(() => {
-                showSlide(currentSlide + 1);
-            }, 6000); // 6 segundos en lugar de 5
-        }
-
-        // Función para detener auto-slide
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
-
-        // Event listeners para botones
-        prevBtn.addEventListener('click', () => {
-            stopAutoSlide();
-            showSlide(currentSlide - 1);
-            startAutoSlide();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            stopAutoSlide();
-            showSlide(currentSlide + 1);
-            startAutoSlide();
-        });
-
-        // Event listeners para dots
-        dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-                stopAutoSlide();
-                showSlide(i);
-                startAutoSlide();
+        
+        const videos = localStorage.getItem('videos-ue10febrero');
+        if (videos) {
+            const videosData = JSON.parse(videos);
+            videosData.forEach(video => {
+                totalBytes += atob(video.data.split(',')[1]).length;
             });
-        });
-
-        // Pausar auto-slide cuando el mouse está sobre el slider
-        const slider = document.querySelector('.slider');
-        slider.addEventListener('mouseenter', stopAutoSlide);
-        slider.addEventListener('mouseleave', startAutoSlide);
-
-        // Iniciar auto-slide
-        startAutoSlide();
-
-        // Para la galería (cuando se agreguen imágenes reales)
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        const closeModal = document.querySelector('.modal-close');
+        }
         
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
+        return totalBytes;
+    }
+
+    function actualizarIndicadorAlmacenamiento() {
+        const bytesUsados = calcularUsoAlmacenamiento();
+        const porcentaje = (bytesUsados / LIMITE_ALMACENAMIENTO) * 100;
+        const mbUsados = (bytesUsados / (1024 * 1024)).toFixed(2);
+        
+        document.getElementById('porcentaje-almacenamiento').textContent = porcentaje.toFixed(1) + '%';
+        document.getElementById('barra-almacenamiento').style.width = porcentaje + '%';
+        document.getElementById('espacio-usado').textContent = mbUsados + ' MB';
+        document.getElementById('espacio-total-historial').textContent = mbUsados + ' MB';
+        
+        const barra = document.getElementById('barra-almacenamiento');
+        const alerta = document.getElementById('alerta-almacenamiento');
+        const estado = document.getElementById('estado-almacenamiento');
+        
+        if (porcentaje < 70) {
+            barra.style.background = '#4caf50';
+            alerta.style.display = 'none';
+            estado.textContent = '● Normal';
+            estado.style.color = '#4caf50';
+        } else if (porcentaje < 90) {
+            barra.style.background = '#ff9800';
+            alerta.style.display = 'block';
+            estado.textContent = '⚠️ Atención';
+            estado.style.color = '#ff9800';
+        } else {
+            barra.style.background = '#f44336';
+            alerta.style.display = 'block';
+            alerta.innerHTML = '❌ ALMACENAMIENTO LLENO. Elimine contenido antiguo.';
+            estado.textContent = '❌ Crítico';
+            estado.style.color = '#f44336';
+        }
+    }
+
+    function verificarAlmacenamientoAntesDeSubir(archivo) {
+        const bytesActuales = calcularUsoAlmacenamiento();
+        const bytesArchivo = archivo.size;
+        const totalDespues = bytesActuales + bytesArchivo;
+        
+        if (totalDespues > LIMITE_ALMACENAMIENTO) {
+            const espacioNecesario = (bytesArchivo / (1024 * 1024)).toFixed(2);
+            const espacioDisponible = ((LIMITE_ALMACENAMIENTO - bytesActuales) / (1024 * 1024)).toFixed(2);
+            mostrarMensaje(`❌ No hay espacio suficiente. Necesita ${espacioNecesario} MB, pero solo hay ${espacioDisponible} MB disponibles.`, 'error');
+            return false;
+        }
+        return true;
+    }
+
+    function limpiarAlmacenamiento() {
+        if (confirm('¿Eliminar contenido anterior al año actual para liberar espacio?')) {
+            const anioActual = new Date().getFullYear();
+            let contenidoEliminado = 0;
+            
+            const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
+            Object.keys(imagenes).forEach(key => {
+                if (imagenes[key].anio && imagenes[key].anio < anioActual) {
+                    delete imagenes[key];
+                    contenidoEliminado++;
+                }
+            });
+            localStorage.setItem('imagenes-ue10febrero', JSON.stringify(imagenes));
+            
+            const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
+            const videosActualizados = videos.filter(video => !video.anio || video.anio >= anioActual);
+            contenidoEliminado += (videos.length - videosActualizados.length);
+            localStorage.setItem('videos-ue10febrero', JSON.stringify(videosActualizados));
+            
+            actualizarIndicadorAlmacenamiento();
+            cargarGaleriaImagenes();
+            cargarListaVideos();
+            actualizarVideosEnPagina();
+            actualizarHistorial();
+            
+            mostrarMensaje(`✅ Se eliminaron ${contenidoEliminado} elementos antiguos.`, 'success');
+        }
+    }
+
+    // ==================== SISTEMA DE TEXTOS ====================
+    function cargarValoresActuales() {
+        const config = JSON.parse(localStorage.getItem('config-ue10febrero') || '{}');
+        
+        document.getElementById('edit-estudiantes').value = config.estudiantes || '';
+        document.getElementById('edit-docentes').value = config.docentes || '';
+        document.getElementById('edit-experiencia').value = config.experiencia || '';
+        document.getElementById('edit-direccion').value = config.direccion || '';
+        document.getElementById('edit-telefono').value = config.telefono || '';
+        document.getElementById('edit-email').value = config.email || '';
+        document.getElementById('edit-horario').value = config.horario || '';
+        document.getElementById('edit-mision').value = config.mision || '';
+        document.getElementById('edit-vision').value = config.vision || '';
+    }
+
+    function aplicarCambios() {
+        const config = {
+            estudiantes: document.getElementById('edit-estudiantes').value,
+            docentes: document.getElementById('edit-docentes').value,
+            experiencia: document.getElementById('edit-experiencia').value,
+            direccion: document.getElementById('edit-direccion').value,
+            telefono: document.getElementById('edit-telefono').value,
+            email: document.getElementById('edit-email').value,
+            horario: document.getElementById('edit-horario').value,
+            mision: document.getElementById('edit-mision').value,
+            vision: document.getElementById('edit-vision').value
+        };
+        
+        localStorage.setItem('config-ue10febrero', JSON.stringify(config));
+        
+        const stats = document.querySelectorAll('.stat-number');
+        if (stats[0]) stats[0].textContent = config.estudiantes;
+        if (stats[1]) stats[1].textContent = config.docentes;
+        if (stats[2]) stats[2].textContent = config.experiencia;
+        
+        mostrarMensaje('✅ Cambios aplicados correctamente', 'success');
+    }
+
+    function previsualizarCambios() {
+        alert('👁️ Los cambios se aplicarán inmediatamente al hacer clic en "Aplicar Cambios"');
+    }
+
+    // ==================== SISTEMA DE IMÁGENES ====================
+    document.getElementById('upload-imagen')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+                alert('❌ La imagen es muy grande. Máximo 2MB.');
+                this.value = '';
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('img-preview').src = e.target.result;
+                document.getElementById('preview-imagen').style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    function subirImagen() {
+        const anio = document.getElementById('anio-imagen').value;
+        const destino = document.getElementById('select-imagen').value;
+        const archivo = document.getElementById('upload-imagen').files[0];
+        
+        if (!anio || !destino || !archivo) {
+            mostrarMensaje('❌ Complete todos los campos y seleccione una imagen', 'error');
+            return;
+        }
+        
+        if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
+            const claveUnica = `${destino}_${anio}_${Date.now()}`;
+            
+            imagenes[claveUnica] = {
+                data: e.target.result,
+                anio: anio,
+                categoria: destino,
+                fechaSubida: new Date().toLocaleString(),
+                nombreOriginal: archivo.name
+            };
+            
+            localStorage.setItem('imagenes-ue10febrero', JSON.stringify(imagenes));
+            
+            mostrarMensaje(`✅ Imagen subida para el año ${anio}`, 'success');
+            document.getElementById('upload-imagen').value = '';
+            document.getElementById('preview-imagen').style.display = 'none';
+            
+            actualizarIndicadorAlmacenamiento();
+            cargarGaleriaImagenes();
+            actualizarSelectoresAnio();
+            actualizarHistorial();
+        };
+        reader.readAsDataURL(archivo);
+    }
+
+    function cargarGaleriaImagenes() {
+        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
+        const galeria = document.getElementById('galeria-imagenes');
+        
+        if (Object.keys(imagenes).length === 0) {
+            galeria.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes</p>';
+            return;
+        }
+        
+        let html = '';
+        Object.keys(imagenes).forEach(clave => {
+            const img = imagenes[clave];
+            const nombreLindo = img.categoria.replace('.jpg', '').replace('.jpeg', '').replace(/-/g, ' ');
+            html += `
+                <div class="item-imagen" data-anio="${img.anio}" style="display: flex; align-items: center; padding: 0.5rem; border-bottom: 1px solid #eee; gap: 0.5rem;">
+                    <img src="${img.data}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">
+                    <div style="flex: 1;">
+                        <div style="font-weight: bold; font-size: 0.9rem;">${nombreLindo}</div>
+                        <div style="font-size: 0.7rem; color: #666;">Año ${img.anio}</div>
+                    </div>
+                    <button onclick="eliminarImagen('${clave}')" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
+                </div>
+            `;
+        });
+        galeria.innerHTML = html;
+    }
+
+    function eliminarImagen(clave) {
+        if (confirm('¿Eliminar esta imagen?')) {
+            const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
+            delete imagenes[clave];
+            localStorage.setItem('imagenes-ue10febrero', JSON.stringify(imagenes));
+            cargarGaleriaImagenes();
+            actualizarIndicadorAlmacenamiento();
+            actualizarHistorial();
+            mostrarMensaje('✅ Imagen eliminada', 'success');
+        }
+    }
+
+    function filtrarImagenesPorAnio(anio) {
+        document.querySelectorAll('#selector-anio-imagenes .btn-anio').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        document.querySelectorAll('.item-imagen').forEach(item => {
+            item.style.display = (anio === 'todos' || item.dataset.anio === anio) ? 'flex' : 'none';
+        });
+    }
+
+    // ==================== SISTEMA DE VIDEOS ====================
+    document.getElementById('upload-video')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 10 * 1024 * 1024) {
+                alert('❌ El video es muy grande. Máximo 10MB.');
+                this.value = '';
+                return;
+            }
+            const url = URL.createObjectURL(file);
+            document.getElementById('video-preview').src = url;
+            document.getElementById('preview-video').style.display = 'block';
+        }
+    });
+
+    function subirVideo() {
+        const anio = document.getElementById('anio-video').value;
+        const titulo = document.getElementById('titulo-video').value;
+        const descripcion = document.getElementById('descripcion-video').value;
+        const archivo = document.getElementById('upload-video').files[0];
+        
+        if (!anio || !titulo || !archivo) {
+            mostrarMensaje('❌ Complete año, título y seleccione video', 'error');
+            return;
+        }
+        
+        if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const videoData = {
+                id: 'video-' + Date.now(),
+                titulo: titulo,
+                descripcion: descripcion,
+                data: e.target.result,
+                tipo: archivo.type,
+                anio: anio,
+                fechaSubida: new Date().toLocaleString(),
+                nombreArchivo: archivo.name
+            };
+            
+            const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
+            videos.push(videoData);
+            localStorage.setItem('videos-ue10febrero', JSON.stringify(videos));
+            
+            cargarListaVideos();
+            actualizarVideosEnPagina();
+            actualizarSelectoresAnio();
+            actualizarHistorial();
+            
+            document.getElementById('titulo-video').value = '';
+            document.getElementById('descripcion-video').value = '';
+            document.getElementById('upload-video').value = '';
+            document.getElementById('preview-video').style.display = 'none';
+            
+            actualizarIndicadorAlmacenamiento();
+            mostrarMensaje(`✅ Video subido para el año ${anio}`, 'success');
+        };
+        reader.readAsDataURL(archivo);
+    }
+
+    function cargarListaVideos() {
+        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
+        const lista = document.getElementById('lista-videos');
+        
+        if (videos.length === 0) {
+            lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay videos</p>';
+            return;
+        }
+        
+        let html = '';
+        videos.forEach((video, index) => {
+            html += `
+                <div class="item-video" data-anio="${video.anio}" style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                    <div style="display: flex; align-items: start; gap: 0.5rem;">
+                        <video style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;" controls>
+                            <source src="${video.data}" type="${video.tipo}">
+                        </video>
+                        <div style="flex: 1;">
+                            <div style="font-weight: bold; font-size: 0.9rem;">${video.titulo}</div>
+                            <div style="font-size: 0.7rem; color: #666;">Año ${video.anio}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                                <small style="color: #999;">${video.fechaSubida}</small>
+                                <button onclick="eliminarVideo(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        lista.innerHTML = html;
+    }
+
+    function eliminarVideo(index) {
+        if (confirm('¿Eliminar este video?')) {
+            const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
+            videos.splice(index, 1);
+            localStorage.setItem('videos-ue10febrero', JSON.stringify(videos));
+            cargarListaVideos();
+            actualizarVideosEnPagina();
+            actualizarIndicadorAlmacenamiento();
+            actualizarHistorial();
+            mostrarMensaje('✅ Video eliminado', 'success');
+        }
+    }
+
+    function filtrarVideosPorAnio(anio) {
+        document.querySelectorAll('#selector-anio-videos .btn-anio').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        document.querySelectorAll('.item-video').forEach(item => {
+            item.style.display = (anio === 'todos' || item.dataset.anio === anio) ? 'block' : 'none';
+        });
+    }
+
+    function actualizarVideosEnPagina() {
+        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
+        const contenedor = document.getElementById('contenedor-videos');
+        const sinVideos = document.getElementById('sin-videos');
+        
+        if (videos.length === 0) {
+            contenedor.innerHTML = '';
+            sinVideos.style.display = 'block';
+            document.getElementById('videos-escuela').style.display = 'block';
+            return;
+        }
+        
+        sinVideos.style.display = 'none';
+        
+        let html = '';
+        videos.forEach(video => {
+            html += `
+                <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="position: relative;">
+                        <video style="width: 100%; height: 200px; object-fit: cover; display: block;" controls>
+                            <source src="${video.data}" type="${video.tipo}">
+                        </video>
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.8rem;">
+                            🎥 ${video.anio}
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="margin: 0 0 0.5rem 0; color: #c41e3a; font-size: 1.2rem;">${video.titulo}</h3>
+                        <p style="margin: 0; color: #666; font-size: 0.9rem;">${video.descripcion || ''}</p>
+                    </div>
+                </div>
+            `;
         });
         
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
+        contenedor.innerHTML = html;
+        document.getElementById('videos-escuela').style.display = 'block';
+    }
+
+    function filtrarVideosVisitante(anio) {
+        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
+        const contenedor = document.getElementById('contenedor-videos');
+        const sinVideos = document.getElementById('sin-videos');
+        
+        const videosFiltrados = anio === 'todos' ? videos : videos.filter(video => video.anio == anio);
+        
+        if (videosFiltrados.length === 0) {
+            contenedor.innerHTML = '';
+            sinVideos.innerHTML = `
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🎥</div>
+                <h3 style="color: #c41e3a; margin-bottom: 1rem;">No hay videos del año ${anio}</h3>
+            `;
+            sinVideos.style.display = 'block';
+            return;
+        }
+        
+        sinVideos.style.display = 'none';
+        let html = '';
+        videosFiltrados.forEach(video => {
+            html += `
+                <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <video style="width: 100%; height: 200px; object-fit: cover;" controls>
+                        <source src="${video.data}" type="${video.tipo}">
+                    </video>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="margin: 0 0 0.5rem 0; color: #c41e3a;">${video.titulo}</h3>
+                        <p style="margin: 0; color: #666;">${video.descripcion || ''}</p>
+                        <small style="color: #999;">Año ${video.anio}</small>
+                    </div>
+                </div>
+            `;
+        });
+        contenedor.innerHTML = html;
+    }
+
+    // ==================== SISTEMA DE AÑOS ====================
+    function obtenerAniosUnicos() {
+        const anios = new Set();
+        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
+        Object.values(imagenes).forEach(img => {
+            if (img.anio) anios.add(img.anio);
+        });
+        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
+        videos.forEach(video => {
+            if (video.anio) anios.add(video.anio);
+        });
+        return Array.from(anios).sort((a, b) => b - a);
+    }
+
+    function actualizarSelectoresAnio() {
+        const anios = obtenerAniosUnicos();
+        
+        // Selector visitante
+        const selectorVisitante = document.getElementById('filtro-anio-visitante');
+        selectorVisitante.innerHTML = '<option value="todos">Todos los años</option>';
+        anios.forEach(anio => {
+            selectorVisitante.innerHTML += `<option value="${anio}">${anio}</option>`;
+        });
+        selectorVisitante.onchange = (e) => filtrarVideosVisitante(e.target.value);
+        
+        // Selectores admin
+        const selectores = ['selector-anio-imagenes', 'selector-anio-videos'];
+        selectores.forEach(selectorId => {
+            const selector = document.getElementById(selectorId);
+            if (selector) {
+                selector.innerHTML = '<button class="btn-anio active" onclick="filtrar' + (selectorId.includes('imagenes') ? 'Imagenes' : 'Videos') + 'PorAnio(\'todos\')">Todos</button>';
+                anios.forEach(anio => {
+                    selector.innerHTML += `<button class="btn-anio" onclick="filtrar${selectorId.includes('imagenes') ? 'Imagenes' : 'Videos'}PorAnio('${anio}')">${anio}</button>`;
+                });
             }
         });
+        
+        // Actualizar estadísticas
+        document.getElementById('anios-activos').textContent = anios.length;
+        document.getElementById('total-imagenes').textContent = Object.keys(JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}')).length;
+        document.getElementById('total-videos').textContent = (JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]')).length;
+        document.getElementById('ultima-actualizacion').textContent = new Date().toLocaleDateString();
+    }
+
+    // ==================== SISTEMA DE HISTORIAL ====================
+    function actualizarHistorial() {
+        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
+        const videos = JSON.parse(localStorage.getItem('videos-ue10febrero') || '[]');
+        const anios = obtenerAniosUnicos();
+        
+        let htmlImagenes = '', htmlVideos = '';
+        anios.forEach(anio => {
+            const imagenesAnio = Object.values(imagenes).filter(img => img.anio == anio);
+            const videosAnio = videos.filter(video => video.anio == anio);
+            
+            htmlImagenes += `
+                <div style="margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 5px; border-left: 4px solid #c41e3a;">
+                    <h6 style="margin: 0 0 0.5rem 0; color: #c41e3a;">📅 Año ${anio}</h6>
+                    <div style="font-size: 0.8rem; color: #666;">
+                        <strong>Imágenes:</strong> ${imagenesAnio.length}
+                    </div>
+                </div>
+            `;
+            
+            htmlVideos += `
+                <div style="margin-bottom: 1rem; padding: 1rem; background: white; border-radius: 5px; border-left: 4px solid #ff6b6b;">
+                    <h6 style="margin: 0 0 0.5rem 0; color: #ff6b6b;">🎥 Año ${anio}</h6>
+                    <div style="font-size: 0.8rem; color: #666;">
+                        <strong>Videos:</strong> ${videosAnio.length}
+                    </div>
+                </div>
+            `;
+        });
+        
+        document.getElementById('historial-imagenes').innerHTML = htmlImagenes || '<p style="color: #666;">No hay imágenes</p>';
+        document.getElementById('historial-videos').innerHTML = htmlVideos || '<p style="color: #666;">No hay videos</p>';
+    }
+
+    // ==================== SISTEMA DE RESPALDO ====================
+    function crearRespaldo() {
+        const nombre = document.getElementById('nombre-respaldo').value || `Respaldo-${new Date().toLocaleDateString()}`;
+        const config = {
+            textos: {
+                estudiantes: document.getElementById('edit-estudiantes').value,
+                docentes: document.getElementById('edit-docentes').value,
+                experiencia: document.getElementById('edit-experiencia').value
+            },
+            fecha: new Date().toLocaleString()
+        };
+        
+        let respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
+        respaldos.push({nombre, config});
+        localStorage.setItem('respaldos-ue10febrero', JSON.stringify(respaldos));
+        
+        mostrarMensaje(`✅ Respaldo "${nombre}" creado`, 'success');
+        document.getElementById('nombre-respaldo').value = '';
+        cargarRespaldos();
+    }
+
+    function cargarRespaldos() {
+        const respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
+        const select = document.getElementById('select-respaldo');
+        const contenedor = document.getElementById('contenedor-respaldos');
+        
+        select.innerHTML = '<option value="">Seleccione respaldo</option>';
+        contenedor.innerHTML = '';
+        
+        respaldos.forEach((respaldo, index) => {
+            select.innerHTML += `<option value="${index}">${respaldo.nombre}</option>`;
+            contenedor.innerHTML += `
+                <div style="padding: 0.5rem; background: #f8f9fa; margin: 0.25rem 0; border-radius: 3px;">
+                    <strong>${respaldo.nombre}</strong><br>
+                    <small>${respaldo.config.fecha}</small>
+                </div>
+            `;
+        });
+    }
+
+    function restaurarRespaldo() {
+        const index = document.getElementById('select-respaldo').value;
+        if (index === '') {
+            mostrarMensaje('❌ Seleccione un respaldo', 'error');
+            return;
+        }
+        
+        const respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
+        const respaldo = respaldos[index];
+        
+        if (confirm(`¿Restaurar respaldo "${respaldo.nombre}"?`)) {
+            const config = respaldo.config.textos;
+            document.getElementById('edit-estudiantes').value = config.estudiantes;
+            document.getElementById('edit-docentes').value = config.docentes;
+            document.getElementById('edit-experiencia').value = config.experiencia;
+            aplicarCambios();
+            mostrarMensaje(`✅ Respaldo restaurado`, 'success');
+        }
+    }
+
+    // ==================== FUNCIONES UTILITARIAS ====================
+    function mostrarMensaje(mensaje, tipo) {
+        const div = document.getElementById('mensaje-estado');
+        div.textContent = mensaje;
+        div.style.display = 'block';
+        div.style.background = tipo === 'success' ? '#d4edda' : '#f8d7da';
+        div.style.color = tipo === 'success' ? '#155724' : '#721c24';
+        div.style.border = tipo === 'success' ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
+        
+        setTimeout(() => {
+            div.style.display = 'none';
+        }, 5000);
+    }
+
+    // ==================== SLIDER ====================
+    let currentSlide = 0;
+    const slides = document.querySelector('.slides');
+    const slideItems = document.querySelectorAll('.slide');
+    const totalSlides = slideItems.length;
+
+    function showSlide(index) {
+        if (index >= totalSlides) currentSlide = 0;
+        else if (index < 0) currentSlide = totalSlides - 1;
+        else currentSlide = index;
+        
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        document.querySelectorAll('.dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentSlide);
+        });
+    }
+
+    document.querySelector('.prev')?.addEventListener('click', () => showSlide(currentSlide - 1));
+    document.querySelector('.next')?.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    document.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.addEventListener('click', () => showSlide(i));
+    });
+
+    setInterval(() => showSlide(currentSlide + 1), 5000);
+
+    // ==================== NAVEGACIÓN ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger?.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // ==================== INICIALIZACIÓN ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar acceso seguro
+        verificarAccesoSeguro();
+        
+        // Cargar datos guardados
+        const config = JSON.parse(localStorage.getItem('config-ue10febrero') || '{}');
+        if (config.estudiantes) {
+            const stats = document.querySelectorAll('.stat-number');
+            if (stats[0]) stats[0].textContent = config.estudiantes;
+            if (stats[1]) stats[1].textContent = config.docentes;
+            if (stats[2]) stats[2].textContent = config.experiencia;
+        }
+        
+        // Actualizar videos en la página
+        actualizarVideosEnPagina();
+        
+        // Iniciar slider
+        showSlide(0);
+    });
     </script>
 </body>
 </html>
