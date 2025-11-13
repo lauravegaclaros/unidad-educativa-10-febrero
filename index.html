@@ -125,7 +125,7 @@
 
         /* HERO SECTION */
         .hero {
-            background: url('Imagenes/frontis-escuela.jpg') center/cover;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #dc143c 100%);
             color: white;
             padding: 160px 2rem 100px;
             text-align: center;
@@ -306,70 +306,6 @@
             margin-top: 0.5rem;
         }
 
-        .gallery {
-            background: white;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: transform 0.3s;
-            aspect-ratio: 4/3;
-            background: #f0f0f0;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(196, 30, 58, 0.9), transparent);
-            color: white;
-            padding: 1.5rem;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-
-        .gallery-overlay h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-
-        .gallery-overlay p {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.9);
-        }
-
         /* SLIDER SECTION */
         .slider-section {
             background: var(--light-bg);
@@ -486,6 +422,10 @@
         /* VIDEOS SECTION */
         #videos-escuela {
             background: var(--light-bg);
+        }
+
+        #imagenes-escuela {
+            background: white;
         }
 
         .upload-placeholder {
@@ -661,7 +601,7 @@
                 <li><a href="#inicio" class="active">Inicio</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#imagenes-escuela">Imágenes</a></li>
                 <li><a href="#videos-escuela">Videos</a></li>
                 <li><a href="#contactos">Contactos</a></li>
             </ul>
@@ -675,6 +615,7 @@
                 <p>Con estudio, esfuerzo y esmero... Adelante 10 de Febrero</p>
                 <div class="hero-buttons">
                     <a href="#nosotros" class="btn-hero">Conócenos</a>
+                    <a href="#imagenes-escuela" class="btn-hero primary">Ver Imágenes</a>
                     <a href="#videos-escuela" class="btn-hero primary">Ver Videos</a>
                 </div>
             </div>
@@ -790,76 +731,31 @@
             </div>
         </section>
 
-        <!-- GALERÍA DE IMÁGENES POR EVENTOS -->
-        <section id="galeria" class="gallery">
-            <h2>Galería de Imágenes</h2>
-            <p style="text-align: center; color: #666; margin-bottom: 2rem;">Momentos especiales de nuestra comunidad educativa</p>
-            
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <div class="upload-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p><strong>Eventos</strong></p>
-                        <p style="font-size: 0.85rem;">Ceremonias y celebraciones</p>
-                    </div>
+        <!-- IMÁGENES SECTION -->
+        <section id="imagenes-escuela" style="padding: 4rem 2rem; background: white;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2 style="text-align: center; color: #c41e3a; margin-bottom: 1rem;">🖼️ Imágenes por Año Académico</h2>
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <label for="filtro-anio-imagenes" style="margin-right: 1rem; font-weight: bold;">Filtrar por año:</label>
+                    <select id="filtro-anio-imagenes" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="todos">Todos los años</option>
+                    </select>
                 </div>
                 
-                <div class="gallery-item">
-                    <div class="upload-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p><strong>Ceremonias</strong></p>
-                        <p style="font-size: 0.85rem;">Actos cívicos y graduaciones</p>
-                    </div>
+                <div id="contenedor-imagenes" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                 </div>
                 
-                <div class="gallery-item">
-                    <div class="upload-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p><strong>Cursos</strong></p>
-                        <p style="font-size: 0.85rem;">Actividades en el aula</p>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <div class="upload-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p><strong>Concursos</strong></p>
-                        <p style="font-size: 0.85rem;">Competencias académicas</p>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <div class="upload-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p><strong>Infraestructura</strong></p>
-                        <p style="font-size: 0.85rem;">Nuestras instalaciones</p>
-                    </div>
-                </div>
-
-                <div class="gallery-item">
-                    <div class="upload-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p><strong>Laboratorios</strong></p>
-                        <p style="font-size: 0.85rem;">Espacios de aprendizaje</p>
-                    </div>
+                <div id="sin-imagenes" style="text-align: center; padding: 3rem; color: #666;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
+                    <h3 style="color: #c41e3a; margin-bottom: 1rem;">Aún no hay imágenes</h3>
+                    <p>Próximamente se agregarán imágenes de las actividades escolares</p>
                 </div>
             </div>
         </section>
 
         <!-- VIDEOS SECTION -->
-        <section id="videos-escuela" style="padding: 4rem 2rem; background: #f8f9fa; display: none;">
+        <section id="videos-escuela" style="padding: 4rem 2rem; background: #f8f9fa;">
             <div style="max-width: 1200px; margin: 0 auto;">
                 <h2 style="text-align: center; color: #c41e3a; margin-bottom: 1rem;">🎥 Videos por Año Académico</h2>
                 
@@ -873,7 +769,7 @@
                 <div id="contenedor-videos" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
                 </div>
                 
-                <div id="sin-videos" style="text-align: center; padding: 3rem; color: #666; display: none;">
+                <div id="sin-videos" style="text-align: center; padding: 3rem; color: #666;">
                     <div style="font-size: 4rem; margin-bottom: 1rem;">🎥</div>
                     <h3 style="color: #c41e3a; margin-bottom: 1rem;">Aún no hay videos</h3>
                     <p>Próximamente se agregarán videos de las actividades escolares</p>
@@ -997,13 +893,12 @@
                     
                     <select id="select-imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                         <option value="">Seleccione categoría</option>
-                        <option value="frontis-escuela.jpg">Foto del Frontis</option>
-                        <option value="eventos.jpg">Eventos</option>
-                        <option value="ceremonias.jpg">Ceremonias</option>
-                        <option value="cursos.jpg">Cursos</option>
-                        <option value="concursos.jpg">Concursos</option>
-                        <option value="infraestructura.jpg">Infraestructura</option>
-                        <option value="laboratorios.jpg">Laboratorios</option>
+                        <option value="eventos">Eventos</option>
+                        <option value="ceremonias">Ceremonias</option>
+                        <option value="cursos">Cursos</option>
+                        <option value="concursos">Concursos</option>
+                        <option value="infraestructura">Infraestructura</option>
+                        <option value="laboratorios">Laboratorios</option>
                     </select>
                     
                     <input type="file" id="upload-imagen" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
@@ -1350,6 +1245,7 @@
             actualizarIndicadorAlmacenamiento();
             cargarGaleriaImagenes();
             cargarListaVideos();
+            actualizarImagenesEnPagina();
             actualizarVideosEnPagina();
             actualizarHistorial();
             
@@ -1435,10 +1331,10 @@
 
     function subirImagen() {
         const anio = document.getElementById('anio-imagen').value;
-        const destino = document.getElementById('select-imagen').value;
+        const categoria = document.getElementById('select-imagen').value;
         const archivo = document.getElementById('upload-imagen').files[0];
         
-        if (!anio || !destino || !archivo) {
+        if (!anio || !categoria || !archivo) {
             mostrarMensaje('❌ Complete todos los campos y seleccione una imagen', 'error');
             return;
         }
@@ -1448,12 +1344,13 @@
         const reader = new FileReader();
         reader.onload = function(e) {
             const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
-            const claveUnica = `${destino}_${anio}_${Date.now()}`;
+            const claveUnica = `${categoria}_${anio}_${Date.now()}`;
             
             imagenes[claveUnica] = {
                 data: e.target.result,
                 anio: anio,
-                categoria: destino,
+                categoria: categoria,
+                titulo: `Imagen de ${categoria}`,
                 fechaSubida: new Date().toLocaleString(),
                 nombreOriginal: archivo.name
             };
@@ -1466,6 +1363,7 @@
             
             actualizarIndicadorAlmacenamiento();
             cargarGaleriaImagenes();
+            actualizarImagenesEnPagina();
             actualizarSelectoresAnio();
             actualizarHistorial();
         };
@@ -1484,15 +1382,19 @@
         let html = '';
         Object.keys(imagenes).forEach(clave => {
             const img = imagenes[clave];
-            const nombreLindo = img.categoria.replace('.jpg', '').replace('.jpeg', '').replace(/-/g, ' ');
             html += `
-                <div class="item-imagen" data-anio="${img.anio}" style="display: flex; align-items: center; padding: 0.5rem; border-bottom: 1px solid #eee; gap: 0.5rem;">
-                    <img src="${img.data}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">
-                    <div style="flex: 1;">
-                        <div style="font-weight: bold; font-size: 0.9rem;">${nombreLindo}</div>
-                        <div style="font-size: 0.7rem; color: #666;">Año ${img.anio}</div>
+                <div class="item-imagen" data-anio="${img.anio}" style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                    <div style="display: flex; align-items: start; gap: 0.5rem;">
+                        <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: bold; font-size: 0.9rem;">${img.titulo}</div>
+                            <div style="font-size: 0.7rem; color: #666;">Año ${img.anio} - ${img.categoria}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                                <small style="color: #999;">${img.fechaSubida}</small>
+                                <button onclick="eliminarImagen('${clave}')" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
+                            </div>
+                        </div>
                     </div>
-                    <button onclick="eliminarImagen('${clave}')" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
                 </div>
             `;
         });
@@ -1505,6 +1407,7 @@
             delete imagenes[clave];
             localStorage.setItem('imagenes-ue10febrero', JSON.stringify(imagenes));
             cargarGaleriaImagenes();
+            actualizarImagenesEnPagina();
             actualizarIndicadorAlmacenamiento();
             actualizarHistorial();
             mostrarMensaje('✅ Imagen eliminada', 'success');
@@ -1518,8 +1421,77 @@
         event.target.classList.add('active');
         
         document.querySelectorAll('.item-imagen').forEach(item => {
-            item.style.display = (anio === 'todos' || item.dataset.anio === anio) ? 'flex' : 'none';
+            item.style.display = (anio === 'todos' || item.dataset.anio === anio) ? 'block' : 'none';
         });
+    }
+
+    function actualizarImagenesEnPagina() {
+        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
+        const contenedor = document.getElementById('contenedor-imagenes');
+        const sinImagenes = document.getElementById('sin-imagenes');
+        
+        if (Object.keys(imagenes).length === 0) {
+            contenedor.innerHTML = '';
+            sinImagenes.style.display = 'block';
+            return;
+        }
+        
+        sinImagenes.style.display = 'none';
+        
+        let html = '';
+        Object.values(imagenes).forEach(img => {
+            html += `
+                <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="position: relative;">
+                        <img src="${img.data}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.8rem;">
+                            🖼️ ${img.anio}
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="margin: 0 0 0.5rem 0; color: #c41e3a; font-size: 1.2rem;">${img.titulo}</h3>
+                        <p style="margin: 0; color: #666; font-size: 0.9rem;">Categoría: ${img.categoria}</p>
+                    </div>
+                </div>
+            `;
+        });
+        
+        contenedor.innerHTML = html;
+    }
+
+    function filtrarImagenesVisitante(anio) {
+        const imagenes = JSON.parse(localStorage.getItem('imagenes-ue10febrero') || '{}');
+        const contenedor = document.getElementById('contenedor-imagenes');
+        const sinImagenes = document.getElementById('sin-imagenes');
+        
+        const imagenesFiltradas = anio === 'todos' ? Object.values(imagenes) : 
+            Object.values(imagenes).filter(img => img.anio == anio);
+        
+        if (imagenesFiltradas.length === 0) {
+            contenedor.innerHTML = '';
+            sinImagenes.innerHTML = `
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
+                <h3 style="color: #c41e3a; margin-bottom: 1rem;">No hay imágenes del año ${anio}</h3>
+            `;
+            sinImagenes.style.display = 'block';
+            return;
+        }
+        
+        sinImagenes.style.display = 'none';
+        let html = '';
+        imagenesFiltradas.forEach(img => {
+            html += `
+                <div style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <img src="${img.data}" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 1.5rem;">
+                        <h3 style="margin: 0 0 0.5rem 0; color: #c41e3a;">${img.titulo}</h3>
+                        <p style="margin: 0; color: #666;">Categoría: ${img.categoria}</p>
+                        <small style="color: #999;">Año ${img.anio}</small>
+                    </div>
+                </div>
+            `;
+        });
+        contenedor.innerHTML = html;
     }
 
     // ==================== SISTEMA DE VIDEOS ====================
@@ -1647,7 +1619,6 @@
         if (videos.length === 0) {
             contenedor.innerHTML = '';
             sinVideos.style.display = 'block';
-            document.getElementById('videos-escuela').style.display = 'block';
             return;
         }
         
@@ -1674,7 +1645,6 @@
         });
         
         contenedor.innerHTML = html;
-        document.getElementById('videos-escuela').style.display = 'block';
     }
 
     function filtrarVideosVisitante(anio) {
@@ -1730,13 +1700,21 @@
     function actualizarSelectoresAnio() {
         const anios = obtenerAniosUnicos();
         
-        // Selector visitante
-        const selectorVisitante = document.getElementById('filtro-anio-visitante');
-        selectorVisitante.innerHTML = '<option value="todos">Todos los años</option>';
+        // Selector imágenes visitante
+        const selectorImagenesVisitante = document.getElementById('filtro-anio-imagenes');
+        selectorImagenesVisitante.innerHTML = '<option value="todos">Todos los años</option>';
         anios.forEach(anio => {
-            selectorVisitante.innerHTML += `<option value="${anio}">${anio}</option>`;
+            selectorImagenesVisitante.innerHTML += `<option value="${anio}">${anio}</option>`;
         });
-        selectorVisitante.onchange = (e) => filtrarVideosVisitante(e.target.value);
+        selectorImagenesVisitante.onchange = (e) => filtrarImagenesVisitante(e.target.value);
+        
+        // Selector videos visitante
+        const selectorVideosVisitante = document.getElementById('filtro-anio-visitante');
+        selectorVideosVisitante.innerHTML = '<option value="todos">Todos los años</option>';
+        anios.forEach(anio => {
+            selectorVideosVisitante.innerHTML += `<option value="${anio}">${anio}</option>`;
+        });
+        selectorVideosVisitante.onchange = (e) => filtrarVideosVisitante(e.target.value);
         
         // Selectores admin
         const selectores = ['selector-anio-imagenes', 'selector-anio-videos'];
@@ -1804,7 +1782,7 @@
         };
         
         let respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
-        respaldos.push({nombre, config});
+        respaldos.push({nombre: nombre, config: config});
         localStorage.setItem('respaldos-ue10febrero', JSON.stringify(respaldos));
         
         mostrarMensaje(`✅ Respaldo "${nombre}" creado`, 'success');
@@ -1872,25 +1850,41 @@
     const totalSlides = slideItems.length;
 
     function showSlide(index) {
-        if (index >= totalSlides) currentSlide = 0;
-        else if (index < 0) currentSlide = totalSlides - 1;
-        else currentSlide = index;
+        if (index >= totalSlides) {
+            currentSlide = 0;
+        } else if (index < 0) {
+            currentSlide = totalSlides - 1;
+        } else {
+            currentSlide = index;
+        }
         
-        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        if (slides) {
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
         
         document.querySelectorAll('.dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentSlide);
         });
     }
 
-    document.querySelector('.prev')?.addEventListener('click', () => showSlide(currentSlide - 1));
-    document.querySelector('.next')?.addEventListener('click', () => showSlide(currentSlide + 1));
-
-    document.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.addEventListener('click', () => showSlide(i));
-    });
-
-    setInterval(() => showSlide(currentSlide + 1), 5000);
+    // Inicializar eventos del slider
+    function inicializarSlider() {
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const dots = document.querySelectorAll('.dot');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+        }
+        
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => showSlide(i));
+        });
+    }
 
     // ==================== NAVEGACIÓN ====================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1905,9 +1899,11 @@
 
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    hamburger?.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
 
     // ==================== INICIALIZACIÓN ====================
     document.addEventListener('DOMContentLoaded', function() {
@@ -1923,11 +1919,17 @@
             if (stats[2]) stats[2].textContent = config.experiencia;
         }
         
-        // Actualizar videos en la página
+        // Actualizar imágenes y videos en la página
+        actualizarImagenesEnPagina();
         actualizarVideosEnPagina();
+        actualizarSelectoresAnio();
         
         // Iniciar slider
+        inicializarSlider();
         showSlide(0);
+        
+        // Configurar intervalo para cambio automático de slides
+        setInterval(() => showSlide(currentSlide + 1), 8000);
     });
     </script>
 </body>
