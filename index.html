@@ -509,6 +509,38 @@
             color: #dc143c;
         }
 
+        /* CONTACTOS SECTION */
+        #contactos {
+            background: var(--light-bg);
+        }
+
+        .contactos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contacto-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .contacto-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .contacto-item p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
         /* BOTÓN ADMIN */
         #boton-admin {
             position: fixed;
@@ -631,6 +663,7 @@
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#galeria">Galería</a></li>
                 <li><a href="#videos-escuela">Videos</a></li>
+                <li><a href="#contactos">Contactos</a></li>
             </ul>
         </nav>
     </header>
@@ -708,43 +741,6 @@
             </div>
         </section>
 
-        <section id="galeria" class="gallery">
-            <h2>Nuestra Infraestructura</h2>
-            <p style="text-align: center; color: #666; margin-bottom: 2rem;">Conoce nuestras instalaciones y espacios educativos</p>
-            
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <div class="upload-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p><strong>Infraestructura</strong></p>
-                        <p style="font-size: 0.85rem;">Aulas equipadas</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="upload-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p><strong>Laboratorios</strong></p>
-                        <p style="font-size: 0.85rem;">Tecnología moderna</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="upload-placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p><strong>Áreas Deportivas</strong></p>
-                        <p style="font-size: 0.85rem;">Canchas y gimnasio</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- SLIDER SECTION -->
         <section class="slider-section">
             <div class="slider-container">
@@ -794,6 +790,74 @@
             </div>
         </section>
 
+        <!-- GALERÍA DE IMÁGENES POR EVENTOS -->
+        <section id="galeria" class="gallery">
+            <h2>Galería de Imágenes</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">Momentos especiales de nuestra comunidad educativa</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="upload-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p><strong>Eventos</strong></p>
+                        <p style="font-size: 0.85rem;">Ceremonias y celebraciones</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="upload-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p><strong>Ceremonias</strong></p>
+                        <p style="font-size: 0.85rem;">Actos cívicos y graduaciones</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="upload-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p><strong>Cursos</strong></p>
+                        <p style="font-size: 0.85rem;">Actividades en el aula</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="upload-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p><strong>Concursos</strong></p>
+                        <p style="font-size: 0.85rem;">Competencias académicas</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="upload-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p><strong>Infraestructura</strong></p>
+                        <p style="font-size: 0.85rem;">Nuestras instalaciones</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="upload-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p><strong>Laboratorios</strong></p>
+                        <p style="font-size: 0.85rem;">Espacios de aprendizaje</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- VIDEOS SECTION -->
         <section id="videos-escuela" style="padding: 4rem 2rem; background: #f8f9fa; display: none;">
             <div style="max-width: 1200px; margin: 0 auto;">
@@ -813,6 +877,34 @@
                     <div style="font-size: 4rem; margin-bottom: 1rem;">🎥</div>
                     <h3 style="color: #c41e3a; margin-bottom: 1rem;">Aún no hay videos</h3>
                     <p>Próximamente se agregarán videos de las actividades escolares</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTOS SECTION -->
+        <section id="contactos">
+            <h2>Contactos</h2>
+            <div class="contactos-container">
+                <div class="contacto-item">
+                    <h3>📍 Dirección</h3>
+                    <p>Av. Principal #123</p>
+                    <p>Ciudad, Departamento</p>
+                    <p>Bolivia</p>
+                </div>
+                <div class="contacto-item">
+                    <h3>📧 Correo Electrónico</h3>
+                    <p>ue10defebrero@educacion.bo</p>
+                    <p>informacion.ue10febrero@gmail.com</p>
+                </div>
+                <div class="contacto-item">
+                    <h3>📞 Teléfono</h3>
+                    <p>+591 4 1234567</p>
+                    <p>+591 4 7654321</p>
+                </div>
+                <div class="contacto-item">
+                    <h3>💬 WhatsApp</h3>
+                    <p>+591 71234567</p>
+                    <p>Horario: 8:00 - 16:00</p>
                 </div>
             </div>
         </section>
@@ -867,11 +959,11 @@
                 </div>
 
                 <div>
-                    <h4>📞 Información</h4>
+                    <h4>📞 Información de Contacto</h4>
                     <input type="text" id="edit-direccion" placeholder="Dirección" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                     <input type="text" id="edit-telefono" placeholder="Teléfono" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                     <input type="text" id="edit-email" placeholder="Email" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="text" id="edit-horario" placeholder="Horario" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" id="edit-whatsapp" placeholder="WhatsApp" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                 </div>
             </div>
 
@@ -885,9 +977,9 @@
         <!-- PESTAÑA IMÁGENES -->
         <div id="pestana-imagenes" class="pestana" style="display: none;">
             <div style="background: #e8f5e8; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-                <h4>🖼️ Gestión de Imágenes por Año</h4>
+                <h4>🖼️ Gestión de Imágenes por Categoría y Año</h4>
                 <p style="font-size: 0.9rem; margin: 0.5rem 0;">
-                    Organice las imágenes por año académico. Formatos: JPG, PNG (Máx. 2MB)
+                    Organice las imágenes por categoría y año académico. Formatos: JPG, PNG (Máx. 2MB)
                 </p>
             </div>
 
@@ -906,13 +998,12 @@
                     <select id="select-imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
                         <option value="">Seleccione categoría</option>
                         <option value="frontis-escuela.jpg">Foto del Frontis</option>
-                        <option value="eventos-academicos.jpeg">Eventos Académicos</option>
-                        <option value="eventos-culturales.jpg">Eventos Culturales</option>
-                        <option value="docentes-alumnos.jpg">Docentes y Alumnos</option>
+                        <option value="eventos.jpg">Eventos</option>
+                        <option value="ceremonias.jpg">Ceremonias</option>
+                        <option value="cursos.jpg">Cursos</option>
                         <option value="concursos.jpg">Concursos</option>
                         <option value="infraestructura.jpg">Infraestructura</option>
                         <option value="laboratorios.jpg">Laboratorios</option>
-                        <option value="deportes.jpg">Áreas Deportivas</option>
                     </select>
                     
                     <input type="file" id="upload-imagen" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
@@ -1276,7 +1367,7 @@
         document.getElementById('edit-direccion').value = config.direccion || '';
         document.getElementById('edit-telefono').value = config.telefono || '';
         document.getElementById('edit-email').value = config.email || '';
-        document.getElementById('edit-horario').value = config.horario || '';
+        document.getElementById('edit-whatsapp').value = config.whatsapp || '';
         document.getElementById('edit-mision').value = config.mision || '';
         document.getElementById('edit-vision').value = config.vision || '';
     }
@@ -1289,17 +1380,33 @@
             direccion: document.getElementById('edit-direccion').value,
             telefono: document.getElementById('edit-telefono').value,
             email: document.getElementById('edit-email').value,
-            horario: document.getElementById('edit-horario').value,
+            whatsapp: document.getElementById('edit-whatsapp').value,
             mision: document.getElementById('edit-mision').value,
             vision: document.getElementById('edit-vision').value
         };
         
         localStorage.setItem('config-ue10febrero', JSON.stringify(config));
         
+        // Actualizar estadísticas en la página
         const stats = document.querySelectorAll('.stat-number');
         if (stats[0]) stats[0].textContent = config.estudiantes;
         if (stats[1]) stats[1].textContent = config.docentes;
         if (stats[2]) stats[2].textContent = config.experiencia;
+        
+        // Actualizar información de contacto
+        const contactos = document.querySelectorAll('.contacto-item');
+        if (contactos[0]) {
+            contactos[0].querySelectorAll('p')[0].textContent = config.direccion || 'Av. Principal #123';
+        }
+        if (contactos[1]) {
+            contactos[1].querySelectorAll('p')[0].textContent = config.email || 'ue10defebrero@educacion.bo';
+        }
+        if (contactos[2]) {
+            contactos[2].querySelectorAll('p')[0].textContent = config.telefono || '+591 4 1234567';
+        }
+        if (contactos[3]) {
+            contactos[3].querySelectorAll('p')[0].textContent = config.whatsapp || '+591 71234567';
+        }
         
         mostrarMensaje('✅ Cambios aplicados correctamente', 'success');
     }
