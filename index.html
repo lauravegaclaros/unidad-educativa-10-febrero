@@ -1367,6 +1367,8 @@
 
     // ==================== INICIALIZACIÓN DE DATOS ====================
     function inicializarDatos() {
+        console.log("🔧 Inicializando datos...");
+        
         // Verificar si ya existen datos en localStorage
         const configExistente = localStorage.getItem('config-ue10febrero');
         const sliderExistente = localStorage.getItem('slider-ue10febrero');
@@ -1374,22 +1376,30 @@
         
         // Si no existen datos, inicializar con valores por defecto
         if (!configExistente) {
+            console.log("📝 Configuración no encontrada, inicializando...");
             localStorage.setItem('config-ue10febrero', JSON.stringify(DATOS_POR_DEFECTO.config));
+        } else {
+            console.log("✅ Configuración encontrada:", JSON.parse(configExistente));
         }
         
         if (!sliderExistente) {
+            console.log("🖼️ Slider no encontrado, inicializando...");
             localStorage.setItem('slider-ue10febrero', JSON.stringify(DATOS_POR_DEFECTO.slider));
+        } else {
+            console.log("✅ Slider encontrado con", JSON.parse(sliderExistente).length, "imágenes");
         }
         
         if (!galeriaExistente) {
+            console.log("🖼️ Galería no encontrada, inicializando...");
             localStorage.setItem('galeria-ue10febrero', JSON.stringify(DATOS_POR_DEFECTO.galeria));
+        } else {
+            console.log("✅ Galería encontrada con", JSON.parse(galeriaExistente).length, "imágenes");
         }
         
         console.log("✅ Datos inicializados correctamente");
     }
 
     // ==================== SISTEMA DE SEGURIDAD MEJORADO ====================
-    // Array de caracteres ASCII de "admin10febrero2025" - NO VISIBLE COMO TEXTO
     const CLAVE_CIFRADA = [97, 100, 109, 105, 110, 49, 48, 102, 101, 98, 114, 101, 114, 111, 50, 48, 50, 53];
 
     function verificarAccesoSeguro() {
@@ -1398,7 +1408,7 @@
         const hashURL = window.location.hash.replace('#', '');
         const sesionActiva = localStorage.getItem('sesionAdminActiva');
         
-        // Convertir array ASCII a string - la contraseña real se reconstruye aquí
+        // Convertir array ASCII a string
         const PALABRA_SECRETA = CLAVE_CIFRADA.map(code => String.fromCharCode(code)).join('');
         
         const accesoPermitido = 
@@ -1407,11 +1417,13 @@
             sesionActiva === 'true';
         
         if (!accesoPermitido) {
+            console.log("❌ Acceso denegado al panel de administración");
             document.getElementById('boton-admin')?.remove();
             document.getElementById('editor-directora')?.remove();
             return false;
         }
         
+        console.log("✅ Acceso permitido al panel de administración");
         localStorage.setItem('sesionAdminActiva', 'true');
         setTimeout(() => {
             localStorage.removeItem('sesionAdminActiva');
@@ -1432,6 +1444,7 @@
         if (botonAdmin) {
             botonAdmin.style.display = 'flex';
             botonAdmin.onclick = toggleEditor;
+            console.log("✅ Botón de administración activado");
         }
     }
 
@@ -1442,6 +1455,7 @@
             editor.style.display = mostrar ? 'block' : 'none';
             
             if (mostrar) {
+                console.log("📋 Cargando datos en el editor...");
                 cargarValoresActuales();
                 cargarListaSlider();
                 cargarListaGaleria();
@@ -1473,158 +1487,206 @@
 
     function calcularUsoAlmacenamiento() {
         let totalBytes = 0;
-        const textos = localStorage.getItem('config-ue10febrero');
-        if (textos) totalBytes += new Blob([textos]).size;
         
-        const slider = localStorage.getItem('slider-ue10febrero');
-        if (slider) {
-            const sliderData = JSON.parse(slider);
-            sliderData.forEach(img => {
-                if (img.data) totalBytes += atob(img.data.split(',')[1]).length;
-            });
-        }
-        
-        const galeria = localStorage.getItem('galeria-ue10febrero');
-        if (galeria) {
-            const galeriaData = JSON.parse(galeria);
-            galeriaData.forEach(img => {
-                if (img.data) totalBytes += atob(img.data.split(',')[1]).length;
-            });
+        try {
+            const textos = localStorage.getItem('config-ue10febrero');
+            if (textos) totalBytes += new Blob([textos]).size;
+            
+            const slider = localStorage.getItem('slider-ue10febrero');
+            if (slider) {
+                const sliderData = JSON.parse(slider);
+                sliderData.forEach(img => {
+                    if (img.data) {
+                        const base64Data = img.data.split(',')[1];
+                        if (base64Data) {
+                            totalBytes += atob(base64Data).length;
+                        }
+                    }
+                });
+            }
+            
+            const galeria = localStorage.getItem('galeria-ue10febrero');
+            if (galeria) {
+                const galeriaData = JSON.parse(galeria);
+                galeriaData.forEach(img => {
+                    if (img.data) {
+                        const base64Data = img.data.split(',')[1];
+                        if (base64Data) {
+                            totalBytes += atob(base64Data).length;
+                        }
+                    }
+                });
+            }
+        } catch (error) {
+            console.error("❌ Error calculando almacenamiento:", error);
         }
         
         return totalBytes;
     }
 
     function actualizarIndicadorAlmacenamiento() {
-        const bytesUsados = calcularUsoAlmacenamiento();
-        const porcentaje = (bytesUsados / LIMITE_ALMACENAMIENTO) * 100;
-        const mbUsados = (bytesUsados / (1024 * 1024)).toFixed(2);
-        
-        document.getElementById('porcentaje-almacenamiento').textContent = porcentaje.toFixed(1) + '%';
-        document.getElementById('barra-almacenamiento').style.width = porcentaje + '%';
-        document.getElementById('espacio-usado').textContent = mbUsados + ' MB';
-        
-        const barra = document.getElementById('barra-almacenamiento');
-        const alerta = document.getElementById('alerta-almacenamiento');
-        
-        if (porcentaje < 70) {
-            barra.style.background = '#4caf50';
-            alerta.style.display = 'none';
-        } else if (porcentaje < 90) {
-            barra.style.background = '#ff9800';
-            alerta.style.display = 'block';
-        } else {
-            barra.style.background = '#f44336';
-            alerta.style.display = 'block';
-            alerta.innerHTML = '❌ ALMACENAMIENTO LLENO. Elimine contenido antiguo.';
+        try {
+            const bytesUsados = calcularUsoAlmacenamiento();
+            const porcentaje = (bytesUsados / LIMITE_ALMACENAMIENTO) * 100;
+            const mbUsados = (bytesUsados / (1024 * 1024)).toFixed(2);
+            
+            document.getElementById('porcentaje-almacenamiento').textContent = porcentaje.toFixed(1) + '%';
+            document.getElementById('barra-almacenamiento').style.width = porcentaje + '%';
+            document.getElementById('espacio-usado').textContent = mbUsados + ' MB';
+            
+            const barra = document.getElementById('barra-almacenamiento');
+            const alerta = document.getElementById('alerta-almacenamiento');
+            
+            if (porcentaje < 70) {
+                barra.style.background = '#4caf50';
+                alerta.style.display = 'none';
+            } else if (porcentaje < 90) {
+                barra.style.background = '#ff9800';
+                alerta.style.display = 'block';
+            } else {
+                barra.style.background = '#f44336';
+                alerta.style.display = 'block';
+                alerta.innerHTML = '❌ ALMACENAMIENTO LLENO. Elimine contenido antiguo.';
+            }
+        } catch (error) {
+            console.error("❌ Error actualizando indicador de almacenamiento:", error);
         }
     }
 
     function verificarAlmacenamientoAntesDeSubir(archivo) {
-        const bytesActuales = calcularUsoAlmacenamiento();
-        const bytesArchivo = archivo.size;
-        const totalDespues = bytesActuales + bytesArchivo;
-        
-        if (totalDespues > LIMITE_ALMACENAMIENTO) {
-            const espacioNecesario = (bytesArchivo / (1024 * 1024)).toFixed(2);
-            const espacioDisponible = ((LIMITE_ALMACENAMIENTO - bytesActuales) / (1024 * 1024)).toFixed(2);
-            mostrarMensaje(`❌ No hay espacio suficiente. Necesita ${espacioNecesario} MB, pero solo hay ${espacioDisponible} MB disponibles.`, 'error');
+        try {
+            const bytesActuales = calcularUsoAlmacenamiento();
+            const bytesArchivo = archivo.size;
+            const totalDespues = bytesActuales + bytesArchivo;
+            
+            if (totalDespues > LIMITE_ALMACENAMIENTO) {
+                const espacioNecesario = (bytesArchivo / (1024 * 1024)).toFixed(2);
+                const espacioDisponible = ((LIMITE_ALMACENAMIENTO - bytesActuales) / (1024 * 1024)).toFixed(2);
+                mostrarMensaje(`❌ No hay espacio suficiente. Necesita ${espacioNecesario} MB, pero solo hay ${espacioDisponible} MB disponibles.`, 'error');
+                return false;
+            }
+            return true;
+        } catch (error) {
+            console.error("❌ Error verificando almacenamiento:", error);
             return false;
         }
-        return true;
     }
 
     function limpiarAlmacenamiento() {
         if (confirm('¿Eliminar todo el contenido para liberar espacio?')) {
-            localStorage.removeItem('slider-ue10febrero');
-            localStorage.removeItem('galeria-ue10febrero');
-            
-            actualizarIndicadorAlmacenamiento();
-            cargarListaSlider();
-            cargarListaGaleria();
-            actualizarSliderEnPagina();
-            actualizarGaleriaEnPagina();
-            
-            mostrarMensaje('✅ Contenido eliminado', 'success');
+            try {
+                localStorage.removeItem('slider-ue10febrero');
+                localStorage.removeItem('galeria-ue10febrero');
+                
+                actualizarIndicadorAlmacenamiento();
+                cargarListaSlider();
+                cargarListaGaleria();
+                actualizarSliderEnPagina();
+                actualizarGaleriaEnPagina();
+                
+                mostrarMensaje('✅ Contenido eliminado', 'success');
+            } catch (error) {
+                console.error("❌ Error limpiando almacenamiento:", error);
+                mostrarMensaje('❌ Error al limpiar el almacenamiento', 'error');
+            }
         }
     }
 
     // ==================== SISTEMA DE TEXTOS CORREGIDO ====================
     function cargarValoresActuales() {
-        const config = JSON.parse(localStorage.getItem('config-ue10febrero') || '{}');
-        
-        document.getElementById('edit-estudiantes').value = config.estudiantes || '500+';
-        document.getElementById('edit-docentes').value = config.docentes || '40+';
-        document.getElementById('edit-experiencia').value = config.experiencia || '25+';
-        document.getElementById('edit-direccion').value = config.direccion || 'Av. Principal #123, Ciudad';
-        document.getElementById('edit-telefono').value = config.telefono || '+591 4 123 4567';
-        document.getElementById('edit-email').value = config.email || 'ue10defebrero@educacion.bo';
-        document.getElementById('edit-whatsapp').value = config.whatsapp || '+591 7123 4567';
-        document.getElementById('edit-facebook').value = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
-        document.getElementById('edit-mision').value = config.mision || '';
-        document.getElementById('edit-vision').value = config.vision || '';
-        
-        // Actualizar la página con los valores guardados
-        actualizarPaginaConConfig(config);
+        try {
+            const config = JSON.parse(localStorage.getItem('config-ue10febrero') || '{}');
+            console.log("📖 Cargando configuración:", config);
+            
+            document.getElementById('edit-estudiantes').value = config.estudiantes || '500+';
+            document.getElementById('edit-docentes').value = config.docentes || '40+';
+            document.getElementById('edit-experiencia').value = config.experiencia || '25+';
+            document.getElementById('edit-direccion').value = config.direccion || 'Av. Principal #123, Ciudad';
+            document.getElementById('edit-telefono').value = config.telefono || '+591 4 123 4567';
+            document.getElementById('edit-email').value = config.email || 'ue10defebrero@educacion.bo';
+            document.getElementById('edit-whatsapp').value = config.whatsapp || '+591 7123 4567';
+            document.getElementById('edit-facebook').value = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
+            document.getElementById('edit-mision').value = config.mision || '';
+            document.getElementById('edit-vision').value = config.vision || '';
+            
+            // Actualizar la página con los valores guardados
+            actualizarPaginaConConfig(config);
+        } catch (error) {
+            console.error("❌ Error cargando valores actuales:", error);
+        }
     }
 
     function aplicarCambios() {
-        const config = {
-            estudiantes: document.getElementById('edit-estudiantes').value,
-            docentes: document.getElementById('edit-docentes').value,
-            experiencia: document.getElementById('edit-experiencia').value,
-            direccion: document.getElementById('edit-direccion').value,
-            telefono: document.getElementById('edit-telefono').value,
-            email: document.getElementById('edit-email').value,
-            whatsapp: document.getElementById('edit-whatsapp').value,
-            facebook: document.getElementById('edit-facebook').value,
-            mision: document.getElementById('edit-mision').value,
-            vision: document.getElementById('edit-vision').value
-        };
-        
-        localStorage.setItem('config-ue10febrero', JSON.stringify(config));
-        actualizarPaginaConConfig(config);
-        mostrarMensaje('✅ Cambios aplicados correctamente', 'success');
+        try {
+            const config = {
+                estudiantes: document.getElementById('edit-estudiantes').value,
+                docentes: document.getElementById('edit-docentes').value,
+                experiencia: document.getElementById('edit-experiencia').value,
+                direccion: document.getElementById('edit-direccion').value,
+                telefono: document.getElementById('edit-telefono').value,
+                email: document.getElementById('edit-email').value,
+                whatsapp: document.getElementById('edit-whatsapp').value,
+                facebook: document.getElementById('edit-facebook').value,
+                mision: document.getElementById('edit-mision').value,
+                vision: document.getElementById('edit-vision').value
+            };
+            
+            console.log("💾 Guardando configuración:", config);
+            localStorage.setItem('config-ue10febrero', JSON.stringify(config));
+            actualizarPaginaConConfig(config);
+            mostrarMensaje('✅ Cambios aplicados correctamente', 'success');
+        } catch (error) {
+            console.error("❌ Error aplicando cambios:", error);
+            mostrarMensaje('❌ Error al aplicar cambios', 'error');
+        }
     }
 
     function actualizarPaginaConConfig(config) {
-        // Actualizar estadísticas
-        const estudiantesElem = document.getElementById('estudiantes');
-        const docentesElem = document.getElementById('docentes');
-        const experienciaElem = document.getElementById('experiencia');
+        console.log("🔄 Actualizando página con configuración:", config);
         
-        if (estudiantesElem) estudiantesElem.textContent = config.estudiantes || '500+';
-        if (docentesElem) docentesElem.textContent = config.docentes || '40+';
-        if (experienciaElem) experienciaElem.textContent = config.experiencia || '25+';
-        
-        // Actualizar información de contacto
-        document.getElementById('texto-direccion').textContent = config.direccion || 'Av. Principal #123, Ciudad';
-        document.getElementById('texto-email').textContent = config.email || 'ue10defebrero@educacion.bo';
-        document.getElementById('texto-telefono').textContent = config.telefono || '+591 4 123 4567';
-        document.getElementById('texto-whatsapp').textContent = config.whatsapp || '+591 7123 4567';
-        document.getElementById('texto-direccion-mapa').textContent = config.direccion || 'Av. Principal #123, Ciudad';
-        
-        // Actualizar textos de misión y visión
-        const misionElem = document.getElementById('texto-mision');
-        const visionElem = document.getElementById('texto-vision');
-        
-        if (misionElem && config.mision) misionElem.textContent = config.mision;
-        if (visionElem && config.vision) visionElem.textContent = config.vision;
-        
-        // Actualizar enlaces
-        const linkWhatsapp = document.getElementById('link-whatsapp');
-        const botonWhatsapp = document.getElementById('boton-whatsapp');
-        const whatsappNum = config.whatsapp?.replace(/\D/g, '') || '59171234567';
-        
-        if (linkWhatsapp) linkWhatsapp.href = `https://wa.me/${whatsappNum}`;
-        if (botonWhatsapp) botonWhatsapp.href = `https://wa.me/${whatsappNum}`;
-        
-        const linkFacebook = document.getElementById('link-facebook');
-        const botonFacebook = document.getElementById('boton-facebook');
-        const facebookUrl = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
-        
-        if (linkFacebook) linkFacebook.href = facebookUrl;
-        if (botonFacebook) botonFacebook.href = facebookUrl;
+        try {
+            // Actualizar estadísticas
+            const estudiantesElem = document.getElementById('estudiantes');
+            const docentesElem = document.getElementById('docentes');
+            const experienciaElem = document.getElementById('experiencia');
+            
+            if (estudiantesElem) estudiantesElem.textContent = config.estudiantes || '500+';
+            if (docentesElem) docentesElem.textContent = config.docentes || '40+';
+            if (experienciaElem) experienciaElem.textContent = config.experiencia || '25+';
+            
+            // Actualizar información de contacto
+            document.getElementById('texto-direccion').textContent = config.direccion || 'Av. Principal #123, Ciudad';
+            document.getElementById('texto-email').textContent = config.email || 'ue10defebrero@educacion.bo';
+            document.getElementById('texto-telefono').textContent = config.telefono || '+591 4 123 4567';
+            document.getElementById('texto-whatsapp').textContent = config.whatsapp || '+591 7123 4567';
+            document.getElementById('texto-direccion-mapa').textContent = config.direccion || 'Av. Principal #123, Ciudad';
+            
+            // Actualizar textos de misión y visión
+            const misionElem = document.getElementById('texto-mision');
+            const visionElem = document.getElementById('texto-vision');
+            
+            if (misionElem && config.mision) misionElem.textContent = config.mision;
+            if (visionElem && config.vision) visionElem.textContent = config.vision;
+            
+            // Actualizar enlaces
+            const linkWhatsapp = document.getElementById('link-whatsapp');
+            const botonWhatsapp = document.getElementById('boton-whatsapp');
+            const whatsappNum = config.whatsapp?.replace(/\D/g, '') || '59171234567';
+            
+            if (linkWhatsapp) linkWhatsapp.href = `https://wa.me/${whatsappNum}`;
+            if (botonWhatsapp) botonWhatsapp.href = `https://wa.me/${whatsappNum}`;
+            
+            const linkFacebook = document.getElementById('link-facebook');
+            const botonFacebook = document.getElementById('boton-facebook');
+            const facebookUrl = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
+            
+            if (linkFacebook) linkFacebook.href = facebookUrl;
+            if (botonFacebook) botonFacebook.href = facebookUrl;
+            
+            console.log("✅ Página actualizada correctamente");
+        } catch (error) {
+            console.error("❌ Error actualizando página:", error);
+        }
     }
 
     function previsualizarCambios() {
@@ -1650,138 +1712,160 @@
     });
 
     function subirImagenSlider() {
-        const titulo = document.getElementById('titulo-slider').value;
-        const descripcion = document.getElementById('descripcion-slider').value;
-        const archivo = document.getElementById('upload-slider').files[0];
-        
-        if (!titulo || !archivo) {
-            mostrarMensaje('❌ Complete título y seleccione una imagen', 'error');
-            return;
+        try {
+            const titulo = document.getElementById('titulo-slider').value;
+            const descripcion = document.getElementById('descripcion-slider').value;
+            const archivo = document.getElementById('upload-slider').files[0];
+            
+            if (!titulo || !archivo) {
+                mostrarMensaje('❌ Complete título y seleccione una imagen', 'error');
+                return;
+            }
+            
+            if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
+                
+                slider.push({
+                    data: e.target.result,
+                    titulo: titulo,
+                    descripcion: descripcion,
+                    fechaSubida: new Date().toLocaleString()
+                });
+                
+                localStorage.setItem('slider-ue10febrero', JSON.stringify(slider));
+                
+                mostrarMensaje('✅ Imagen agregada al slider', 'success');
+                document.getElementById('titulo-slider').value = '';
+                document.getElementById('descripcion-slider').value = '';
+                document.getElementById('upload-slider').value = '';
+                document.getElementById('preview-slider').style.display = 'none';
+                
+                actualizarIndicadorAlmacenamiento();
+                cargarListaSlider();
+                actualizarSliderEnPagina();
+            };
+            reader.readAsDataURL(archivo);
+        } catch (error) {
+            console.error("❌ Error subiendo imagen al slider:", error);
+            mostrarMensaje('❌ Error al subir la imagen', 'error');
         }
-        
-        if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
-            
-            slider.push({
-                data: e.target.result,
-                titulo: titulo,
-                descripcion: descripcion,
-                fechaSubida: new Date().toLocaleString()
-            });
-            
-            localStorage.setItem('slider-ue10febrero', JSON.stringify(slider));
-            
-            mostrarMensaje('✅ Imagen agregada al slider', 'success');
-            document.getElementById('titulo-slider').value = '';
-            document.getElementById('descripcion-slider').value = '';
-            document.getElementById('upload-slider').value = '';
-            document.getElementById('preview-slider').style.display = 'none';
-            
-            actualizarIndicadorAlmacenamiento();
-            cargarListaSlider();
-            actualizarSliderEnPagina();
-        };
-        reader.readAsDataURL(archivo);
     }
 
     function cargarListaSlider() {
-        const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
-        const lista = document.getElementById('lista-slider');
-        
-        if (slider.length === 0) {
-            lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en el slider</p>';
-            return;
-        }
-        
-        let html = '';
-        slider.forEach((img, index) => {
-            html += `
-                <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
-                    <div style="display: flex; align-items: start; gap: 0.5rem;">
-                        <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: bold; font-size: 0.9rem;">${img.titulo}</div>
-                            <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
-                                <small style="color: #999;">${img.fechaSubida}</small>
-                                <button onclick="eliminarImagenSlider(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
+        try {
+            const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
+            const lista = document.getElementById('lista-slider');
+            
+            if (slider.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en el slider</p>';
+                return;
+            }
+            
+            let html = '';
+            slider.forEach((img, index) => {
+                html += `
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                        <div style="display: flex; align-items: start; gap: 0.5rem;">
+                            <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
+                            <div style="flex: 1;">
+                                <div style="font-weight: bold; font-size: 0.9rem;">${img.titulo}</div>
+                                <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                                    <small style="color: #999;">${img.fechaSubida}</small>
+                                    <button onclick="eliminarImagenSlider(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
-        });
-        lista.innerHTML = html;
+                `;
+            });
+            lista.innerHTML = html;
+        } catch (error) {
+            console.error("❌ Error cargando lista del slider:", error);
+        }
     }
 
     function eliminarImagenSlider(index) {
         if (confirm('¿Eliminar esta imagen del slider?')) {
-            const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
-            slider.splice(index, 1);
-            localStorage.setItem('slider-ue10febrero', JSON.stringify(slider));
-            cargarListaSlider();
-            actualizarSliderEnPagina();
-            actualizarIndicadorAlmacenamiento();
-            mostrarMensaje('✅ Imagen eliminada del slider', 'success');
+            try {
+                const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
+                slider.splice(index, 1);
+                localStorage.setItem('slider-ue10febrero', JSON.stringify(slider));
+                cargarListaSlider();
+                actualizarSliderEnPagina();
+                actualizarIndicadorAlmacenamiento();
+                mostrarMensaje('✅ Imagen eliminada del slider', 'success');
+            } catch (error) {
+                console.error("❌ Error eliminando imagen del slider:", error);
+                mostrarMensaje('❌ Error al eliminar la imagen', 'error');
+            }
         }
     }
 
     function actualizarSliderEnPagina() {
-        const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
-        const slidesContainer = document.querySelector('.slides');
-        const dotsContainer = document.querySelector('.slider-dots');
-        
-        if (slider.length === 0) {
-            // Mostrar slider vacío
-            slidesContainer.innerHTML = `
-                <div class="slide">
-                    <div style="background: #f8f9fa; height: 500px; display: flex; align-items: center; justify-content: center; color: #666;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
-                            <h3>Slider vacío</h3>
-                            <p>Agregue imágenes desde el panel de administración</p>
+        try {
+            const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
+            const slidesContainer = document.querySelector('.slides');
+            const dotsContainer = document.querySelector('.slider-dots');
+            
+            console.log("🔄 Actualizando slider con", slider.length, "imágenes");
+            
+            if (slider.length === 0) {
+                // Mostrar slider vacío
+                slidesContainer.innerHTML = `
+                    <div class="slide">
+                        <div style="background: #f8f9fa; height: 500px; display: flex; align-items: center; justify-content: center; color: #666;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
+                                <h3>Slider vacío</h3>
+                                <p>Agregue imágenes desde el panel de administración</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            dotsContainer.innerHTML = '<span class="dot active"></span>';
-            return;
-        }
-        
-        let slidesHTML = '';
-        let dotsHTML = '';
-        
-        slider.forEach((img, index) => {
-            slidesHTML += `
-                <div class="slide">
-                    <img src="${img.data}" alt="${img.titulo}">
-                    <div class="slide-content">
-                        <h3>${img.titulo}</h3>
-                        <p>${img.descripcion}</p>
-                    </div>
-                </div>
-            `;
+                `;
+                dotsContainer.innerHTML = '<span class="dot active"></span>';
+                return;
+            }
             
-            dotsHTML += `<span class="dot ${index === 0 ? 'active' : ''}" data-index="${index}"></span>`;
-        });
-        
-        slidesContainer.innerHTML = slidesHTML;
-        dotsContainer.innerHTML = dotsHTML;
-        
-        // Reiniciar el slider
-        currentSlide = 0;
-        showSlide(0);
-        
-        // Reasignar eventos a los dots
-        document.querySelectorAll('.dot').forEach((dot) => {
-            dot.addEventListener('click', function() {
-                const index = parseInt(this.getAttribute('data-index'));
-                showSlide(index);
+            let slidesHTML = '';
+            let dotsHTML = '';
+            
+            slider.forEach((img, index) => {
+                slidesHTML += `
+                    <div class="slide">
+                        <img src="${img.data}" alt="${img.titulo}">
+                        <div class="slide-content">
+                            <h3>${img.titulo}</h3>
+                            <p>${img.descripcion}</p>
+                        </div>
+                    </div>
+                `;
+                
+                dotsHTML += `<span class="dot ${index === 0 ? 'active' : ''}" data-index="${index}"></span>`;
             });
-        });
+            
+            slidesContainer.innerHTML = slidesHTML;
+            dotsContainer.innerHTML = dotsHTML;
+            
+            // Reiniciar el slider
+            currentSlide = 0;
+            showSlide(0);
+            
+            // Reasignar eventos a los dots
+            document.querySelectorAll('.dot').forEach((dot) => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    showSlide(index);
+                });
+            });
+            
+            console.log("✅ Slider actualizado correctamente");
+        } catch (error) {
+            console.error("❌ Error actualizando slider:", error);
+        }
     }
 
     // ==================== SISTEMA DE GALERÍA ====================
@@ -1803,215 +1887,258 @@
     });
 
     function subirImagenGaleria() {
-        const titulo = document.getElementById('titulo-galeria').value;
-        const descripcion = document.getElementById('descripcion-galeria').value;
-        const archivo = document.getElementById('upload-galeria').files[0];
-        
-        if (!titulo || !archivo) {
-            mostrarMensaje('❌ Complete título y seleccione una imagen', 'error');
-            return;
+        try {
+            const titulo = document.getElementById('titulo-galeria').value;
+            const descripcion = document.getElementById('descripcion-galeria').value;
+            const archivo = document.getElementById('upload-galeria').files[0];
+            
+            if (!titulo || !archivo) {
+                mostrarMensaje('❌ Complete título y seleccione una imagen', 'error');
+                return;
+            }
+            
+            if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
+                
+                galeria.push({
+                    data: e.target.result,
+                    titulo: titulo,
+                    descripcion: descripcion,
+                    fechaSubida: new Date().toLocaleString()
+                });
+                
+                localStorage.setItem('galeria-ue10febrero', JSON.stringify(galeria));
+                
+                mostrarMensaje('✅ Imagen agregada a la galería', 'success');
+                document.getElementById('titulo-galeria').value = '';
+                document.getElementById('descripcion-galeria').value = '';
+                document.getElementById('upload-galeria').value = '';
+                document.getElementById('preview-galeria').style.display = 'none';
+                
+                actualizarIndicadorAlmacenamiento();
+                cargarListaGaleria();
+                actualizarGaleriaEnPagina();
+            };
+            reader.readAsDataURL(archivo);
+        } catch (error) {
+            console.error("❌ Error subiendo imagen a la galería:", error);
+            mostrarMensaje('❌ Error al subir la imagen', 'error');
         }
-        
-        if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
-            
-            galeria.push({
-                data: e.target.result,
-                titulo: titulo,
-                descripcion: descripcion,
-                fechaSubida: new Date().toLocaleString()
-            });
-            
-            localStorage.setItem('galeria-ue10febrero', JSON.stringify(galeria));
-            
-            mostrarMensaje('✅ Imagen agregada a la galería', 'success');
-            document.getElementById('titulo-galeria').value = '';
-            document.getElementById('descripcion-galeria').value = '';
-            document.getElementById('upload-galeria').value = '';
-            document.getElementById('preview-galeria').style.display = 'none';
-            
-            actualizarIndicadorAlmacenamiento();
-            cargarListaGaleria();
-            actualizarGaleriaEnPagina();
-        };
-        reader.readAsDataURL(archivo);
     }
 
     function cargarListaGaleria() {
-        const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
-        const lista = document.getElementById('lista-galeria');
-        
-        if (galeria.length === 0) {
-            lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en la galería</p>';
-            return;
-        }
-        
-        let html = '';
-        galeria.forEach((img, index) => {
-            html += `
-                <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
-                    <div style="display: flex; align-items: start; gap: 0.5rem;">
-                        <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
-                        <div style="flex: 1;">
-                            <div style="font-weight: bold; font-size: 0.9rem;">${img.titulo}</div>
-                            <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
-                                <small style="color: #999;">${img.fechaSubida}</small>
-                                <button onclick="eliminarImagenGaleria(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
+        try {
+            const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
+            const lista = document.getElementById('lista-galeria');
+            
+            if (galeria.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en la galería</p>';
+                return;
+            }
+            
+            let html = '';
+            galeria.forEach((img, index) => {
+                html += `
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                        <div style="display: flex; align-items: start; gap: 0.5rem;">
+                            <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
+                            <div style="flex: 1;">
+                                <div style="font-weight: bold; font-size: 0.9rem;">${img.titulo}</div>
+                                <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                                    <small style="color: #999;">${img.fechaSubida}</small>
+                                    <button onclick="eliminarImagenGaleria(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
-        });
-        lista.innerHTML = html;
+                `;
+            });
+            lista.innerHTML = html;
+        } catch (error) {
+            console.error("❌ Error cargando lista de galería:", error);
+        }
     }
 
     function eliminarImagenGaleria(index) {
         if (confirm('¿Eliminar esta imagen de la galería?')) {
-            const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
-            galeria.splice(index, 1);
-            localStorage.setItem('galeria-ue10febrero', JSON.stringify(galeria));
-            cargarListaGaleria();
-            actualizarGaleriaEnPagina();
-            actualizarIndicadorAlmacenamiento();
-            mostrarMensaje('✅ Imagen eliminada de la galería', 'success');
+            try {
+                const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
+                galeria.splice(index, 1);
+                localStorage.setItem('galeria-ue10febrero', JSON.stringify(galeria));
+                cargarListaGaleria();
+                actualizarGaleriaEnPagina();
+                actualizarIndicadorAlmacenamiento();
+                mostrarMensaje('✅ Imagen eliminada de la galería', 'success');
+            } catch (error) {
+                console.error("❌ Error eliminando imagen de la galería:", error);
+                mostrarMensaje('❌ Error al eliminar la imagen', 'error');
+            }
         }
     }
 
     function actualizarGaleriaEnPagina() {
-        const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
-        const galeriaContainer = document.querySelector('.galeria-container');
-        
-        if (galeria.length === 0) {
-            galeriaContainer.innerHTML = `
-                <div style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
-                    <h3 style="color: #c41e3a; margin-bottom: 1rem;">Galería vacía</h3>
-                    <p>Agregue imágenes desde el panel de administración</p>
-                </div>
-            `;
-            return;
-        }
-        
-        let html = '';
-        galeria.forEach(img => {
-            html += `
-                <div class="galeria-item">
-                    <img src="${img.data}" alt="${img.titulo}">
-                    <div class="galeria-overlay">
-                        <h3>${img.titulo}</h3>
-                        <p>${img.descripcion}</p>
+        try {
+            const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
+            const galeriaContainer = document.querySelector('.galeria-container');
+            
+            console.log("🔄 Actualizando galería con", galeria.length, "imágenes");
+            
+            if (galeria.length === 0) {
+                galeriaContainer.innerHTML = `
+                    <div style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
+                        <h3 style="color: #c41e3a; margin-bottom: 1rem;">Galería vacía</h3>
+                        <p>Agregue imágenes desde el panel de administración</p>
                     </div>
-                </div>
-            `;
-        });
-        
-        galeriaContainer.innerHTML = html;
+                `;
+                return;
+            }
+            
+            let html = '';
+            galeria.forEach(img => {
+                html += `
+                    <div class="galeria-item">
+                        <img src="${img.data}" alt="${img.titulo}">
+                        <div class="galeria-overlay">
+                            <h3>${img.titulo}</h3>
+                            <p>${img.descripcion}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            galeriaContainer.innerHTML = html;
+            console.log("✅ Galería actualizada correctamente");
+        } catch (error) {
+            console.error("❌ Error actualizando galería:", error);
+        }
     }
 
     // ==================== SISTEMA DE RESPALDO ====================
     function crearRespaldo() {
-        const nombre = document.getElementById('nombre-respaldo').value || `Respaldo-${new Date().toLocaleDateString()}`;
-        const config = {
-            textos: JSON.parse(localStorage.getItem('config-ue10febrero') || '{}'),
-            slider: JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]'),
-            galeria: JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]'),
-            fecha: new Date().toLocaleString()
-        };
-        
-        let respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
-        respaldos.push({nombre, config});
-        localStorage.setItem('respaldos-ue10febrero', JSON.stringify(respaldos));
-        
-        mostrarMensaje(`✅ Respaldo "${nombre}" creado`, 'success');
-        document.getElementById('nombre-respaldo').value = '';
-        cargarRespaldos();
+        try {
+            const nombre = document.getElementById('nombre-respaldo').value || `Respaldo-${new Date().toLocaleDateString()}`;
+            const config = {
+                textos: JSON.parse(localStorage.getItem('config-ue10febrero') || '{}'),
+                slider: JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]'),
+                galeria: JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]'),
+                fecha: new Date().toLocaleString()
+            };
+            
+            let respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
+            respaldos.push({nombre, config});
+            localStorage.setItem('respaldos-ue10febrero', JSON.stringify(respaldos));
+            
+            mostrarMensaje(`✅ Respaldo "${nombre}" creado`, 'success');
+            document.getElementById('nombre-respaldo').value = '';
+            cargarRespaldos();
+        } catch (error) {
+            console.error("❌ Error creando respaldo:", error);
+            mostrarMensaje('❌ Error al crear respaldo', 'error');
+        }
     }
 
     function cargarRespaldos() {
-        const respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
-        const select = document.getElementById('select-respaldo');
-        const contenedor = document.getElementById('contenedor-respaldos');
-        
-        select.innerHTML = '<option value="">Seleccione respaldo</option>';
-        contenedor.innerHTML = '';
-        
-        respaldos.forEach((respaldo, index) => {
-            select.innerHTML += `<option value="${index}">${respaldo.nombre}</option>`;
-            contenedor.innerHTML += `
-                <div style="padding: 0.5rem; background: #f8f9fa; margin: 0.25rem 0; border-radius: 3px;">
-                    <strong>${respaldo.nombre}</strong><br>
-                    <small>${respaldo.config.fecha}</small>
-                </div>
-            `;
-        });
+        try {
+            const respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
+            const select = document.getElementById('select-respaldo');
+            const contenedor = document.getElementById('contenedor-respaldos');
+            
+            select.innerHTML = '<option value="">Seleccione respaldo</option>';
+            contenedor.innerHTML = '';
+            
+            respaldos.forEach((respaldo, index) => {
+                select.innerHTML += `<option value="${index}">${respaldo.nombre}</option>`;
+                contenedor.innerHTML += `
+                    <div style="padding: 0.5rem; background: #f8f9fa; margin: 0.25rem 0; border-radius: 3px;">
+                        <strong>${respaldo.nombre}</strong><br>
+                        <small>${respaldo.config.fecha}</small>
+                    </div>
+                `;
+            });
+        } catch (error) {
+            console.error("❌ Error cargando respaldos:", error);
+        }
     }
 
     function restaurarRespaldo() {
-        const index = document.getElementById('select-respaldo').value;
-        if (index === '') {
-            mostrarMensaje('❌ Seleccione un respaldo', 'error');
-            return;
-        }
-        
-        const respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
-        const respaldo = respaldos[index];
-        
-        if (confirm(`¿Restaurar respaldo "${respaldo.nombre}"? Se perderán los datos actuales.`)) {
-            // Restaurar configuración
-            localStorage.setItem('config-ue10febrero', JSON.stringify(respaldo.config.textos || {}));
-            localStorage.setItem('slider-ue10febrero', JSON.stringify(respaldo.config.slider || []));
-            localStorage.setItem('galeria-ue10febrero', JSON.stringify(respaldo.config.galeria || []));
+        try {
+            const index = document.getElementById('select-respaldo').value;
+            if (index === '') {
+                mostrarMensaje('❌ Seleccione un respaldo', 'error');
+                return;
+            }
             
-            // Actualizar interfaz
-            cargarValoresActuales();
-            cargarListaSlider();
-            cargarListaGaleria();
-            actualizarSliderEnPagina();
-            actualizarGaleriaEnPagina();
-            actualizarIndicadorAlmacenamiento();
+            const respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
+            const respaldo = respaldos[index];
             
-            mostrarMensaje(`✅ Respaldo "${respaldo.nombre}" restaurado`, 'success');
+            if (confirm(`¿Restaurar respaldo "${respaldo.nombre}"? Se perderán los datos actuales.`)) {
+                // Restaurar configuración
+                localStorage.setItem('config-ue10febrero', JSON.stringify(respaldo.config.textos || {}));
+                localStorage.setItem('slider-ue10febrero', JSON.stringify(respaldo.config.slider || []));
+                localStorage.setItem('galeria-ue10febrero', JSON.stringify(respaldo.config.galeria || []));
+                
+                // Actualizar interfaz
+                cargarValoresActuales();
+                cargarListaSlider();
+                cargarListaGaleria();
+                actualizarSliderEnPagina();
+                actualizarGaleriaEnPagina();
+                actualizarIndicadorAlmacenamiento();
+                
+                mostrarMensaje(`✅ Respaldo "${respaldo.nombre}" restaurado`, 'success');
+            }
+        } catch (error) {
+            console.error("❌ Error restaurando respaldo:", error);
+            mostrarMensaje('❌ Error al restaurar respaldo', 'error');
         }
     }
 
     // ==================== FUNCIONES UTILITARIAS ====================
     function mostrarMensaje(mensaje, tipo) {
-        const div = document.getElementById('mensaje-estado');
-        div.textContent = mensaje;
-        div.style.display = 'block';
-        div.style.background = tipo === 'success' ? '#d4edda' : '#f8d7da';
-        div.style.color = tipo === 'success' ? '#155724' : '#721c24';
-        div.style.border = tipo === 'success' ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
-        
-        setTimeout(() => {
-            div.style.display = 'none';
-        }, 5000);
+        try {
+            const div = document.getElementById('mensaje-estado');
+            div.textContent = mensaje;
+            div.style.display = 'block';
+            div.style.background = tipo === 'success' ? '#d4edda' : '#f8d7da';
+            div.style.color = tipo === 'success' ? '#155724' : '#721c24';
+            div.style.border = tipo === 'success' ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
+            
+            setTimeout(() => {
+                div.style.display = 'none';
+            }, 5000);
+        } catch (error) {
+            console.error("❌ Error mostrando mensaje:", error);
+        }
     }
 
     // ==================== SLIDER FUNCIONAL ====================
     let currentSlide = 0;
 
     function showSlide(index) {
-        const slides = document.querySelector('.slides');
-        const slidesCount = document.querySelectorAll('.slide').length;
-        const dots = document.querySelectorAll('.dot');
-        
-        if (index >= slidesCount) currentSlide = 0;
-        else if (index < 0) currentSlide = slidesCount - 1;
-        else currentSlide = index;
-        
-        if (slides) {
-            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        try {
+            const slides = document.querySelector('.slides');
+            const slidesCount = document.querySelectorAll('.slide').length;
+            const dots = document.querySelectorAll('.dot');
+            
+            if (index >= slidesCount) currentSlide = 0;
+            else if (index < 0) currentSlide = slidesCount - 1;
+            else currentSlide = index;
+            
+            if (slides) {
+                slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        } catch (error) {
+            console.error("❌ Error mostrando slide:", error);
         }
-        
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentSlide);
-        });
     }
 
     // ==================== NAVEGACIÓN MEJORADA ====================
@@ -2046,6 +2173,8 @@
 
     // ==================== INICIALIZACIÓN COMPLETA ====================
     document.addEventListener('DOMContentLoaded', function() {
+        console.log("🚀 Iniciando aplicación...");
+        
         // Inicializar datos por defecto
         inicializarDatos();
         
@@ -2068,6 +2197,8 @@
                 showSlide(currentSlide + 1);
             }
         }, 8000);
+        
+        console.log("✅ Aplicación iniciada correctamente");
     });
     </script>
 </body>
