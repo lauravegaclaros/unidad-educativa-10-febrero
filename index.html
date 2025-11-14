@@ -477,67 +477,269 @@
             opacity: 0.9;
         }
 
-        /* CONTACTOS SECTION */
+        /* ==================== SECCIÓN CONTACTOS MEJORADA ==================== */
         #contactos {
-            background: var(--light-bg);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 5rem 2rem;
         }
 
-        .contactos-container {
+        .contactos-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contactos-header h2 {
+            font-size: 2.8rem;
+            color: #c41e3a;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .contactos-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #c41e3a, #dc143c);
+            border-radius: 2px;
+        }
+
+        .contactos-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contactos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-contacto {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-left: 5px solid #c41e3a;
+        }
+
+        .info-contacto h3 {
+            color: #c41e3a;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .contacto-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .contacto-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            border-left: 4px solid var(--primary-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
         }
 
-        .contacto-item h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        .contacto-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .contacto-icono {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
             font-size: 1.3rem;
         }
 
-        .contacto-item p {
+        .icono-direccion {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .icono-email {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .icono-telefono {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+        }
+
+        .icono-whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+        }
+
+        .icono-facebook {
+            background: linear-gradient(135deg, #1877f2, #0d5cb6);
+            color: white;
+        }
+
+        .contacto-info {
+            flex: 1;
+        }
+
+        .contacto-info h4 {
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .contacto-info p {
             color: #666;
-            margin-bottom: 0.5rem;
+            margin: 0.2rem 0;
+            line-height: 1.5;
         }
 
-        .whatsapp-link {
+        .contacto-link {
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: #25D366;
-            text-decoration: none;
-            font-weight: bold;
         }
 
-        .facebook-link {
-            display: inline-flex;
+        .contacto-link:hover {
+            color: #dc143c;
+            text-decoration: underline;
+        }
+
+        .horario-atencion {
+            background: linear-gradient(135deg, #c41e3a, #dc143c);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .horario-atencion h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
-            color: #1877F2;
-            text-decoration: none;
-            font-weight: bold;
         }
 
+        .horario-atencion p {
+            margin: 0.3rem 0;
+            font-size: 1rem;
+        }
+
+        /* Mapa mejorado */
         .mapa-container {
-            margin-top: 2rem;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        .mapa-container iframe {
+        .mapa-container h3 {
+            color: #c41e3a;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .mapa-frame {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .mapa-frame iframe {
             width: 100%;
             height: 400px;
             border: none;
+            display: block;
+        }
+
+        .mapa-info {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .mapa-info p {
+            color: #666;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        /* Redes sociales mejoradas */
+        .redes-sociales {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .red-social {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+        }
+
+        .red-social:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .red-social.whatsapp:hover {
+            background: #25d366;
+            color: white;
+            border-color: #25d366;
+        }
+
+        .red-social.facebook:hover {
+            background: #1877f2;
+            color: white;
+            border-color: #1877f2;
+        }
+
+        .red-social.email:hover {
+            background: #ea4335;
+            color: white;
+            border-color: #ea4335;
         }
 
         /* BOTÓN ADMIN */
@@ -573,6 +775,21 @@
         }
 
         /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .contactos-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .contactos-header h2 {
+                font-size: 2.3rem;
+            }
+            
+            .info-contacto {
+                padding: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -641,11 +858,52 @@
             .galeria-container {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
+
+            #contactos {
+                padding: 3rem 1rem;
+            }
+            
+            .contactos-header h2 {
+                font-size: 2rem;
+            }
+            
+            .contacto-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            
+            .contacto-icono {
+                align-self: center;
+            }
+            
+            .redes-sociales {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .red-social {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
             .logo-text {
                 display: none;
+            }
+
+            .info-contacto {
+                padding: 1.5rem;
+            }
+            
+            .contactos-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .mapa-container {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -800,50 +1058,119 @@
             </div>
         </section>
 
-        <!-- CONTACTOS SECTION -->
+        <!-- SECCIÓN CONTACTOS MEJORADA -->
         <section id="contactos">
-            <h2>Contactos</h2>
-            <div class="contactos-container">
-                <div class="contacto-item">
-                    <h3>📍 Dirección</h3>
-                    <p>Av. Principal #123</p>
-                    <p>Ciudad, Departamento</p>
-                    <p>Bolivia</p>
+            <div class="contactos-header">
+                <h2>📞 Contáctanos</h2>
+                <p>Estamos aquí para responder todas tus preguntas y brindarte la información que necesites</p>
+            </div>
+
+            <div class="contactos-grid">
+                <!-- Información de Contacto -->
+                <div class="info-contacto">
+                    <h3>📍 Información de Contacto</h3>
+                    <div class="contacto-lista">
+                        <div class="contacto-item">
+                            <div class="contacto-icono icono-direccion">
+                                📍
+                            </div>
+                            <div class="contacto-info">
+                                <h4>Dirección</h4>
+                                <p>Av. Principal #123, Ciudad</p>
+                                <p>Departamento, Bolivia</p>
+                            </div>
+                        </div>
+
+                        <div class="contacto-item">
+                            <div class="contacto-icono icono-email">
+                                ✉️
+                            </div>
+                            <div class="contacto-info">
+                                <h4>Correo Electrónico</h4>
+                                <p>ue10defebrero@educacion.bo</p>
+                                <p>informacion.ue10febrero@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="contacto-item">
+                            <div class="contacto-icono icono-telefono">
+                                📞
+                            </div>
+                            <div class="contacto-info">
+                                <h4>Teléfonos</h4>
+                                <p>+591 4 123 4567</p>
+                                <p>+591 4 765 4321</p>
+                            </div>
+                        </div>
+
+                        <div class="contacto-item">
+                            <div class="contacto-icono icono-whatsapp">
+                                💬
+                            </div>
+                            <div class="contacto-info">
+                                <h4>WhatsApp</h4>
+                                <p>+591 7123 4567</p>
+                                <a href="https://wa.me/59171234567" class="contacto-link" target="_blank">
+                                    💬 Escribir por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contacto-item">
+                            <div class="contacto-icono icono-facebook">
+                                👍
+                            </div>
+                            <div class="contacto-info">
+                                <h4>Facebook</h4>
+                                <p>Unidad Educativa 10 de Febrero</p>
+                                <a href="https://facebook.com/unidadeducativa10defebrero" class="contacto-link" target="_blank">
+                                    👍 Seguir en Facebook
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="horario-atencion">
+                        <h4>🕒 Horario de Atención</h4>
+                        <p><strong>Lunes a Viernes:</strong> 7:30 AM - 4:30 PM</p>
+                        <p><strong>Sábados:</strong> 8:00 AM - 12:00 PM</p>
+                        <p><strong>Domingos:</strong> Cerrado</p>
+                    </div>
                 </div>
-                <div class="contacto-item">
-                    <h3>📧 Correo Electrónico</h3>
-                    <p>ue10defebrero@educacion.bo</p>
-                    <p>informacion.ue10febrero@gmail.com</p>
-                </div>
-                <div class="contacto-item">
-                    <h3>📞 Teléfono</h3>
-                    <p>+591 4 1234567</p>
-                    <p>+591 4 7654321</p>
-                </div>
-                <div class="contacto-item">
-                    <h3>💬 WhatsApp</h3>
-                    <a href="https://wa.me/59171234567" class="whatsapp-link" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.187-3.55-8.418"/>
-                        </svg>
-                        +591 71234567
-                    </a>
-                    <p>Horario: 8:00 - 16:00</p>
-                </div>
-                <div class="contacto-item">
-                    <h3>📱 Facebook</h3>
-                    <a href="https://facebook.com/unidadeducativa10defebrero" class="facebook-link" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                        Unidad Educativa 10 de Febrero
-                    </a>
+
+                <!-- Mapa -->
+                <div class="mapa-container">
+                    <h3>🗺️ Nuestra Ubicación</h3>
+                    <div class="mapa-frame">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.454292553921!2d-66.1651236846903!3d-17.39290478807437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e373e0d9e4ab27%3A0xa2719a6c5c7d5b5c!2sLa%20Paz%2C%20Bolivia!5e0!3m2!1ses!2ses!4v1641234567890!5m2!1ses!2ses" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="mapa-info">
+                        <p><strong>📍 Dirección exacta:</strong> Av. Principal #123, Ciudad</p>
+                        <p><strong>🚗 Estacionamiento:</strong> Disponible frente al colegio</p>
+                        <p><strong>🚌 Transporte público:</strong> Líneas 123, 456, 789</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="mapa-container">
-                <h3 style="text-align: center; margin-bottom: 1rem; color: var(--primary-color);">Ubicación</h3>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.454292553921!2d-66.1651236846903!3d-17.39290478807437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e373e0d9e4ab27%3A0xa2719a6c5c7d5b5c!2sLa%20Paz%2C%20Bolivia!5e0!3m2!1ses!2ses!4v1641234567890!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe>
+
+            <!-- Botones de acción rápida -->
+            <div class="redes-sociales">
+                <a href="https://wa.me/59171234567" class="red-social whatsapp" target="_blank">
+                    <span>💬</span>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="https://facebook.com/unidadeducativa10defebrero" class="red-social facebook" target="_blank">
+                    <span>👍</span>
+                    <span>Facebook</span>
+                </a>
+                <a href="mailto:ue10defebrero@educacion.bo" class="red-social email">
+                    <span>✉️</span>
+                    <span>Enviar Email</span>
+                </a>
             </div>
         </section>
     </main>
@@ -1038,6 +1365,10 @@
         <div id="mensaje-estado" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
     </section>
 
+    <button id="boton-admin" style="display: none;">
+        ⚙️<br><small>Admin</small>
+    </button>
+
     <!-- ==================== SISTEMA DE SEGURIDAD Y FUNCIONALIDAD ==================== -->
     <script>
     // ==================== SISTEMA DE SEGURIDAD ====================
@@ -1076,12 +1407,10 @@
     }
 
     function mostrarInterfazAdministrativa() {
-        if (!document.getElementById('boton-admin')) {
-            const botonAdmin = document.createElement('button');
-            botonAdmin.innerHTML = '⚙️<br><small>Admin</small>';
-            botonAdmin.id = 'boton-admin';
+        const botonAdmin = document.getElementById('boton-admin');
+        if (botonAdmin) {
+            botonAdmin.style.display = 'flex';
             botonAdmin.onclick = toggleEditor;
-            document.body.appendChild(botonAdmin);
         }
     }
 
@@ -1236,36 +1565,6 @@
         if (stats[0]) stats[0].textContent = config.estudiantes;
         if (stats[1]) stats[1].textContent = config.docentes;
         if (stats[2]) stats[2].textContent = config.experiencia;
-        
-        // Actualizar información de contacto
-        const contactos = document.querySelectorAll('.contacto-item');
-        if (contactos[0]) {
-            contactos[0].querySelectorAll('p')[0].textContent = config.direccion || 'Av. Principal #123';
-        }
-        if (contactos[1]) {
-            contactos[1].querySelectorAll('p')[0].textContent = config.email || 'ue10defebrero@educacion.bo';
-        }
-        if (contactos[2]) {
-            contactos[2].querySelectorAll('p')[0].textContent = config.telefono || '+591 4 1234567';
-        }
-        if (contactos[3]) {
-            const whatsappLink = contactos[3].querySelector('.whatsapp-link');
-            if (whatsappLink) {
-                whatsappLink.href = `https://wa.me/${config.whatsapp?.replace(/\D/g, '') || '59171234567'}`;
-                whatsappLink.innerHTML = `
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.187-3.55-8.418"/>
-                    </svg>
-                    ${config.whatsapp || '+591 71234567'}
-                `;
-            }
-        }
-        if (contactos[4]) {
-            const facebookLink = contactos[4].querySelector('.facebook-link');
-            if (facebookLink) {
-                facebookLink.href = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
-            }
-        }
         
         mostrarMensaje('✅ Cambios aplicados correctamente', 'success');
     }
