@@ -953,27 +953,27 @@
             <div class="about-content">
                 <div class="about-text">
                     <h3>Nuestra Historia</h3>
-                    <p>La Unidad Educativa 10 de Febrero es una institución comprometida con la formación integral de nuestros estudiantes. Con años de experiencia en educación, nos enorgullece ser parte del desarrollo académico y personal de cada uno de nuestros alumnos.</p>
-                    <p>Nuestra misión es proporcionar una educación de calidad que forme ciudadanos responsables, críticos y comprometidos con su comunidad y país.</p>
+                    <p id="texto-historia">La Unidad Educativa 10 de Febrero es una institución comprometida con la formación integral de nuestros estudiantes. Con años de experiencia en educación, nos enorgullece ser parte del desarrollo académico y personal de cada uno de nuestros alumnos.</p>
+                    <p id="texto-mision">Nuestra misión es proporcionar una educación de calidad que forme ciudadanos responsables, críticos y comprometidos con su comunidad y país.</p>
                 </div>
                 <div class="about-text">
                     <h3>Nuestra Visión</h3>
-                    <p>Ser una institución educativa líder reconocida por su excelencia académica, formación en valores y compromiso con el desarrollo integral de nuestros estudiantes.</p>
+                    <p id="texto-vision">Ser una institución educativa líder reconocida por su excelencia académica, formación en valores y compromiso con el desarrollo integral de nuestros estudiantes.</p>
                     <p>Buscamos crear un ambiente de aprendizaje innovador que prepare a nuestros estudiantes para los desafíos del siglo XXI.</p>
                 </div>
             </div>
 
             <div class="stats">
                 <div class="stat-box">
-                    <span class="stat-number">500+</span>
+                    <span class="stat-number" id="estudiantes">500+</span>
                     <span class="stat-label">Estudiantes</span>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-number">40+</span>
+                    <span class="stat-number" id="docentes">40+</span>
                     <span class="stat-label">Docentes</span>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-number">25+</span>
+                    <span class="stat-number" id="experiencia">25+</span>
                     <span class="stat-label">Años de Experiencia</span>
                 </div>
             </div>
@@ -1347,6 +1347,47 @@
 
     <!-- ==================== SISTEMA DE SEGURIDAD Y FUNCIONALIDAD ==================== -->
     <script>
+    // ==================== DATOS POR DEFECTO ====================
+    const DATOS_POR_DEFECTO = {
+        config: {
+            estudiantes: "500+",
+            docentes: "40+",
+            experiencia: "25+",
+            direccion: "Av. Principal #123, Ciudad",
+            telefono: "+591 4 123 4567",
+            email: "ue10defebrero@educacion.bo",
+            whatsapp: "+591 7123 4567",
+            facebook: "https://facebook.com/unidadeducativa10defebrero",
+            mision: "Nuestra misión es proporcionar una educación de calidad que forme ciudadanos responsables, críticos y comprometidos con su comunidad y país.",
+            vision: "Ser una institución educativa líder reconocida por su excelencia académica, formación en valores y compromiso con el desarrollo integral de nuestros estudiantes."
+        },
+        slider: [],
+        galeria: []
+    };
+
+    // ==================== INICIALIZACIÓN DE DATOS ====================
+    function inicializarDatos() {
+        // Verificar si ya existen datos en localStorage
+        const configExistente = localStorage.getItem('config-ue10febrero');
+        const sliderExistente = localStorage.getItem('slider-ue10febrero');
+        const galeriaExistente = localStorage.getItem('galeria-ue10febrero');
+        
+        // Si no existen datos, inicializar con valores por defecto
+        if (!configExistente) {
+            localStorage.setItem('config-ue10febrero', JSON.stringify(DATOS_POR_DEFECTO.config));
+        }
+        
+        if (!sliderExistente) {
+            localStorage.setItem('slider-ue10febrero', JSON.stringify(DATOS_POR_DEFECTO.slider));
+        }
+        
+        if (!galeriaExistente) {
+            localStorage.setItem('galeria-ue10febrero', JSON.stringify(DATOS_POR_DEFECTO.galeria));
+        }
+        
+        console.log("✅ Datos inicializados correctamente");
+    }
+
     // ==================== SISTEMA DE SEGURIDAD MEJORADO ====================
     // Array de caracteres ASCII de "admin10febrero2025" - NO VISIBLE COMO TEXTO
     const CLAVE_CIFRADA = [97, 100, 109, 105, 110, 49, 48, 102, 101, 98, 114, 101, 114, 111, 50, 48, 50, 53];
@@ -1548,10 +1589,13 @@
 
     function actualizarPaginaConConfig(config) {
         // Actualizar estadísticas
-        const stats = document.querySelectorAll('.stat-number');
-        if (stats[0]) stats[0].textContent = config.estudiantes || '500+';
-        if (stats[1]) stats[1].textContent = config.docentes || '40+';
-        if (stats[2]) stats[2].textContent = config.experiencia || '25+';
+        const estudiantesElem = document.getElementById('estudiantes');
+        const docentesElem = document.getElementById('docentes');
+        const experienciaElem = document.getElementById('experiencia');
+        
+        if (estudiantesElem) estudiantesElem.textContent = config.estudiantes || '500+';
+        if (docentesElem) docentesElem.textContent = config.docentes || '40+';
+        if (experienciaElem) experienciaElem.textContent = config.experiencia || '25+';
         
         // Actualizar información de contacto
         document.getElementById('texto-direccion').textContent = config.direccion || 'Av. Principal #123, Ciudad';
@@ -1559,6 +1603,13 @@
         document.getElementById('texto-telefono').textContent = config.telefono || '+591 4 123 4567';
         document.getElementById('texto-whatsapp').textContent = config.whatsapp || '+591 7123 4567';
         document.getElementById('texto-direccion-mapa').textContent = config.direccion || 'Av. Principal #123, Ciudad';
+        
+        // Actualizar textos de misión y visión
+        const misionElem = document.getElementById('texto-mision');
+        const visionElem = document.getElementById('texto-vision');
+        
+        if (misionElem && config.mision) misionElem.textContent = config.mision;
+        if (visionElem && config.vision) visionElem.textContent = config.vision;
         
         // Actualizar enlaces
         const linkWhatsapp = document.getElementById('link-whatsapp');
@@ -1963,27 +2014,6 @@
         });
     }
 
-    // Inicializar eventos del slider
-    document.addEventListener('DOMContentLoaded', function() {
-        const prevBtn = document.querySelector('.slider-btn.prev');
-        const nextBtn = document.querySelector('.slider-btn.next');
-        
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
-        }
-        
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
-        }
-        
-        // Auto-avance cada 8 segundos
-        setInterval(() => {
-            if (document.querySelectorAll('.slide').length > 1) {
-                showSlide(currentSlide + 1);
-            }
-        }, 8000);
-    });
-
     // ==================== NAVEGACIÓN MEJORADA ====================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -2016,6 +2046,9 @@
 
     // ==================== INICIALIZACIÓN COMPLETA ====================
     document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar datos por defecto
+        inicializarDatos();
+        
         // Verificar acceso seguro
         verificarAccesoSeguro();
         
@@ -2028,6 +2061,13 @@
         
         // Iniciar slider
         showSlide(0);
+        
+        // Auto-avance cada 8 segundos
+        setInterval(() => {
+            if (document.querySelectorAll('.slide').length > 1) {
+                showSlide(currentSlide + 1);
+            }
+        }, 8000);
     });
     </script>
 </body>
