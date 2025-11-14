@@ -652,12 +652,13 @@
             font-size: 1rem;
         }
 
-        /* Mapa mejorado */
+        /* Mapa mejorado - menos espacio en blanco */
         .mapa-container {
             background: white;
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            height: fit-content;
         }
 
         .mapa-container h3 {
@@ -675,11 +676,12 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            height: 450px; /* Más alto para menos espacio en blanco */
         }
 
         .mapa-frame iframe {
             width: 100%;
-            height: 400px;
+            height: 100%;
             border: none;
             display: block;
         }
@@ -695,7 +697,7 @@
             font-size: 1rem;
         }
 
-        /* Redes sociales mejoradas */
+        /* Redes sociales mejoradas - sin email */
         .redes-sociales {
             display: flex;
             justify-content: center;
@@ -734,12 +736,6 @@
             background: #1877f2;
             color: white;
             border-color: #1877f2;
-        }
-
-        .red-social.email:hover {
-            background: #ea4335;
-            color: white;
-            border-color: #ea4335;
         }
 
         /* BOTÓN ADMIN */
@@ -787,6 +783,10 @@
             
             .info-contacto {
                 padding: 2rem;
+            }
+
+            .mapa-frame {
+                height: 400px;
             }
         }
 
@@ -887,6 +887,10 @@
                 max-width: 250px;
                 justify-content: center;
             }
+
+            .mapa-frame {
+                height: 350px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -904,6 +908,10 @@
             
             .mapa-container {
                 padding: 1.5rem;
+            }
+
+            .mapa-frame {
+                height: 300px;
             }
         }
     </style>
@@ -1007,44 +1015,14 @@
                 <h2 class="slider-title">Eventos y Actividades</h2>
                 <div class="slider">
                     <div class="slides">
-                        <div class="slide">
-                            <img src="Imagenes/eventos-academicos.jpeg" alt="Eventos Académicos">
-                            <div class="slide-content">
-                                <h3>Eventos Académicos</h3>
-                                <p>Ferias científicas, olimpiadas y competencias académicas</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <img src="Imagenes/eventos-culturales.jpg" alt="Eventos Culturales">
-                            <div class="slide-content">
-                                <h3>Eventos Culturales</h3>
-                                <p>Presentaciones artísticas, festivales y celebraciones</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <img src="Imagenes/docentes-alumnos.jpg" alt="Docentes y Alumnos">
-                            <div class="slide-content">
-                                <h3>Comunidad Educativa</h3>
-                                <p>Nuestros docentes y estudiantes en actividades diarias</p>
-                            </div>
-                        </div>
-                        <div class="slide">
-                            <img src="Imagenes/concursos.jpg" alt="Concursos y Competencias">
-                            <div class="slide-content">
-                                <h3>Concursos</h3>
-                                <p>Participación en competencias deportivas y académicas</p>
-                            </div>
-                        </div>
+                        <!-- Las imágenes del slider se cargarán dinámicamente -->
                     </div>
                     <div class="slider-nav">
                         <button class="slider-btn prev">❮</button>
                         <button class="slider-btn next">❯</button>
                     </div>
                     <div class="slider-dots">
-                        <span class="dot active"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
+                        <!-- Los dots se generarán dinámicamente -->
                     </div>
                 </div>
             </div>
@@ -1076,7 +1054,7 @@
                             </div>
                             <div class="contacto-info">
                                 <h4>Dirección</h4>
-                                <p>Av. Principal #123, Ciudad</p>
+                                <p id="texto-direccion">Av. Principal #123, Ciudad</p>
                                 <p>Departamento, Bolivia</p>
                             </div>
                         </div>
@@ -1087,7 +1065,7 @@
                             </div>
                             <div class="contacto-info">
                                 <h4>Correo Electrónico</h4>
-                                <p>ue10defebrero@educacion.bo</p>
+                                <p id="texto-email">ue10defebrero@educacion.bo</p>
                                 <p>informacion.ue10febrero@gmail.com</p>
                             </div>
                         </div>
@@ -1098,7 +1076,7 @@
                             </div>
                             <div class="contacto-info">
                                 <h4>Teléfonos</h4>
-                                <p>+591 4 123 4567</p>
+                                <p id="texto-telefono">+591 4 123 4567</p>
                                 <p>+591 4 765 4321</p>
                             </div>
                         </div>
@@ -1109,8 +1087,8 @@
                             </div>
                             <div class="contacto-info">
                                 <h4>WhatsApp</h4>
-                                <p>+591 7123 4567</p>
-                                <a href="https://wa.me/59171234567" class="contacto-link" target="_blank">
+                                <p id="texto-whatsapp">+591 7123 4567</p>
+                                <a href="https://wa.me/59171234567" class="contacto-link" target="_blank" id="link-whatsapp">
                                     💬 Escribir por WhatsApp
                                 </a>
                             </div>
@@ -1123,7 +1101,7 @@
                             <div class="contacto-info">
                                 <h4>Facebook</h4>
                                 <p>Unidad Educativa 10 de Febrero</p>
-                                <a href="https://facebook.com/unidadeducativa10defebrero" class="contacto-link" target="_blank">
+                                <a href="https://facebook.com/unidadeducativa10defebrero" class="contacto-link" target="_blank" id="link-facebook">
                                     👍 Seguir en Facebook
                                 </a>
                             </div>
@@ -1150,26 +1128,22 @@
                         </iframe>
                     </div>
                     <div class="mapa-info">
-                        <p><strong>📍 Dirección exacta:</strong> Av. Principal #123, Ciudad</p>
+                        <p><strong>📍 Dirección exacta:</strong> <span id="texto-direccion-mapa">Av. Principal #123, Ciudad</span></p>
                         <p><strong>🚗 Estacionamiento:</strong> Disponible frente al colegio</p>
                         <p><strong>🚌 Transporte público:</strong> Líneas 123, 456, 789</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Botones de acción rápida -->
+            <!-- Botones de acción rápida - SIN EMAIL -->
             <div class="redes-sociales">
-                <a href="https://wa.me/59171234567" class="red-social whatsapp" target="_blank">
+                <a href="https://wa.me/59171234567" class="red-social whatsapp" target="_blank" id="boton-whatsapp">
                     <span>💬</span>
                     <span>WhatsApp</span>
                 </a>
-                <a href="https://facebook.com/unidadeducativa10defebrero" class="red-social facebook" target="_blank">
+                <a href="https://facebook.com/unidadeducativa10defebrero" class="red-social facebook" target="_blank" id="boton-facebook">
                     <span>👍</span>
                     <span>Facebook</span>
-                </a>
-                <a href="mailto:ue10defebrero@educacion.bo" class="red-social email">
-                    <span>✉️</span>
-                    <span>Enviar Email</span>
                 </a>
             </div>
         </section>
@@ -1270,6 +1244,7 @@
                 <div>
                     <h5>Imágenes en el Slider</h5>
                     <div id="lista-slider" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
+                        <p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en el slider</p>
                     </div>
                 </div>
             </div>
@@ -1306,6 +1281,7 @@
                 <div>
                     <h5>Imágenes en la Galería</h5>
                     <div id="lista-galeria" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
+                        <p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en la galería</p>
                     </div>
                 </div>
             </div>
@@ -1371,14 +1347,18 @@
 
     <!-- ==================== SISTEMA DE SEGURIDAD Y FUNCIONALIDAD ==================== -->
     <script>
-    // ==================== SISTEMA DE SEGURIDAD ====================
-    const PALABRA_SECRETA = "admin10febrero2025";
+    // ==================== SISTEMA DE SEGURIDAD MEJORADO ====================
+    // Array de caracteres ASCII de "admin10febrero2025" - NO VISIBLE COMO TEXTO
+    const CLAVE_CIFRADA = [97, 100, 109, 105, 110, 49, 48, 102, 101, 98, 114, 101, 114, 111, 50, 48, 50, 53];
 
     function verificarAccesoSeguro() {
         const urlParams = new URLSearchParams(window.location.search);
         const claveURL = urlParams.get('clave');
         const hashURL = window.location.hash.replace('#', '');
         const sesionActiva = localStorage.getItem('sesionAdminActiva');
+        
+        // Convertir array ASCII a string - la contraseña real se reconstruye aquí
+        const PALABRA_SECRETA = CLAVE_CIFRADA.map(code => String.fromCharCode(code)).join('');
         
         const accesoPermitido = 
             claveURL === PALABRA_SECRETA ||
@@ -1514,7 +1494,7 @@
     }
 
     function limpiarAlmacenamiento() {
-        if (confirm('¿Eliminar contenido antiguo para liberar espacio?')) {
+        if (confirm('¿Eliminar todo el contenido para liberar espacio?')) {
             localStorage.removeItem('slider-ue10febrero');
             localStorage.removeItem('galeria-ue10febrero');
             
@@ -1524,24 +1504,27 @@
             actualizarSliderEnPagina();
             actualizarGaleriaEnPagina();
             
-            mostrarMensaje('✅ Contenido antiguo eliminado', 'success');
+            mostrarMensaje('✅ Contenido eliminado', 'success');
         }
     }
 
-    // ==================== SISTEMA DE TEXTOS ====================
+    // ==================== SISTEMA DE TEXTOS CORREGIDO ====================
     function cargarValoresActuales() {
         const config = JSON.parse(localStorage.getItem('config-ue10febrero') || '{}');
         
-        document.getElementById('edit-estudiantes').value = config.estudiantes || '';
-        document.getElementById('edit-docentes').value = config.docentes || '';
-        document.getElementById('edit-experiencia').value = config.experiencia || '';
-        document.getElementById('edit-direccion').value = config.direccion || '';
-        document.getElementById('edit-telefono').value = config.telefono || '';
-        document.getElementById('edit-email').value = config.email || '';
-        document.getElementById('edit-whatsapp').value = config.whatsapp || '';
-        document.getElementById('edit-facebook').value = config.facebook || '';
+        document.getElementById('edit-estudiantes').value = config.estudiantes || '500+';
+        document.getElementById('edit-docentes').value = config.docentes || '40+';
+        document.getElementById('edit-experiencia').value = config.experiencia || '25+';
+        document.getElementById('edit-direccion').value = config.direccion || 'Av. Principal #123, Ciudad';
+        document.getElementById('edit-telefono').value = config.telefono || '+591 4 123 4567';
+        document.getElementById('edit-email').value = config.email || 'ue10defebrero@educacion.bo';
+        document.getElementById('edit-whatsapp').value = config.whatsapp || '+591 7123 4567';
+        document.getElementById('edit-facebook').value = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
         document.getElementById('edit-mision').value = config.mision || '';
         document.getElementById('edit-vision').value = config.vision || '';
+        
+        // Actualizar la página con los valores guardados
+        actualizarPaginaConConfig(config);
     }
 
     function aplicarCambios() {
@@ -1559,21 +1542,45 @@
         };
         
         localStorage.setItem('config-ue10febrero', JSON.stringify(config));
-        
-        // Actualizar estadísticas en la página
-        const stats = document.querySelectorAll('.stat-number');
-        if (stats[0]) stats[0].textContent = config.estudiantes;
-        if (stats[1]) stats[1].textContent = config.docentes;
-        if (stats[2]) stats[2].textContent = config.experiencia;
-        
+        actualizarPaginaConConfig(config);
         mostrarMensaje('✅ Cambios aplicados correctamente', 'success');
+    }
+
+    function actualizarPaginaConConfig(config) {
+        // Actualizar estadísticas
+        const stats = document.querySelectorAll('.stat-number');
+        if (stats[0]) stats[0].textContent = config.estudiantes || '500+';
+        if (stats[1]) stats[1].textContent = config.docentes || '40+';
+        if (stats[2]) stats[2].textContent = config.experiencia || '25+';
+        
+        // Actualizar información de contacto
+        document.getElementById('texto-direccion').textContent = config.direccion || 'Av. Principal #123, Ciudad';
+        document.getElementById('texto-email').textContent = config.email || 'ue10defebrero@educacion.bo';
+        document.getElementById('texto-telefono').textContent = config.telefono || '+591 4 123 4567';
+        document.getElementById('texto-whatsapp').textContent = config.whatsapp || '+591 7123 4567';
+        document.getElementById('texto-direccion-mapa').textContent = config.direccion || 'Av. Principal #123, Ciudad';
+        
+        // Actualizar enlaces
+        const linkWhatsapp = document.getElementById('link-whatsapp');
+        const botonWhatsapp = document.getElementById('boton-whatsapp');
+        const whatsappNum = config.whatsapp?.replace(/\D/g, '') || '59171234567';
+        
+        if (linkWhatsapp) linkWhatsapp.href = `https://wa.me/${whatsappNum}`;
+        if (botonWhatsapp) botonWhatsapp.href = `https://wa.me/${whatsappNum}`;
+        
+        const linkFacebook = document.getElementById('link-facebook');
+        const botonFacebook = document.getElementById('boton-facebook');
+        const facebookUrl = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
+        
+        if (linkFacebook) linkFacebook.href = facebookUrl;
+        if (botonFacebook) botonFacebook.href = facebookUrl;
     }
 
     function previsualizarCambios() {
         alert('👁️ Los cambios se aplicarán inmediatamente al hacer clic en "Aplicar Cambios"');
     }
 
-    // ==================== SISTEMA DE SLIDER ====================
+    // ==================== SISTEMA DE SLIDER CORREGIDO ====================
     document.getElementById('upload-slider')?.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
@@ -1677,7 +1684,19 @@
         const dotsContainer = document.querySelector('.slider-dots');
         
         if (slider.length === 0) {
-            // Si no hay imágenes en el slider, usar las predeterminadas
+            // Mostrar slider vacío
+            slidesContainer.innerHTML = `
+                <div class="slide">
+                    <div style="background: #f8f9fa; height: 500px; display: flex; align-items: center; justify-content: center; color: #666;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
+                            <h3>Slider vacío</h3>
+                            <p>Agregue imágenes desde el panel de administración</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            dotsContainer.innerHTML = '<span class="dot active"></span>';
             return;
         }
         
@@ -1695,7 +1714,7 @@
                 </div>
             `;
             
-            dotsHTML += `<span class="dot ${index === 0 ? 'active' : ''}"></span>`;
+            dotsHTML += `<span class="dot ${index === 0 ? 'active' : ''}" data-index="${index}"></span>`;
         });
         
         slidesContainer.innerHTML = slidesHTML;
@@ -1706,8 +1725,11 @@
         showSlide(0);
         
         // Reasignar eventos a los dots
-        document.querySelectorAll('.dot').forEach((dot, i) => {
-            dot.addEventListener('click', () => showSlide(i));
+        document.querySelectorAll('.dot').forEach((dot) => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                showSlide(index);
+            });
         });
     }
 
@@ -1814,7 +1836,13 @@
         const galeriaContainer = document.querySelector('.galeria-container');
         
         if (galeria.length === 0) {
-            galeriaContainer.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">No hay imágenes en la galería</p>';
+            galeriaContainer.innerHTML = `
+                <div style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
+                    <h3 style="color: #c41e3a; margin-bottom: 1rem;">Galería vacía</h3>
+                    <p>Agregue imágenes desde el panel de administración</p>
+                </div>
+            `;
             return;
         }
         
@@ -1838,11 +1866,9 @@
     function crearRespaldo() {
         const nombre = document.getElementById('nombre-respaldo').value || `Respaldo-${new Date().toLocaleDateString()}`;
         const config = {
-            textos: {
-                estudiantes: document.getElementById('edit-estudiantes').value,
-                docentes: document.getElementById('edit-docentes').value,
-                experiencia: document.getElementById('edit-experiencia').value
-            },
+            textos: JSON.parse(localStorage.getItem('config-ue10febrero') || '{}'),
+            slider: JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]'),
+            galeria: JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]'),
             fecha: new Date().toLocaleString()
         };
         
@@ -1884,13 +1910,21 @@
         const respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
         const respaldo = respaldos[index];
         
-        if (confirm(`¿Restaurar respaldo "${respaldo.nombre}"?`)) {
-            const config = respaldo.config.textos;
-            document.getElementById('edit-estudiantes').value = config.estudiantes;
-            document.getElementById('edit-docentes').value = config.docentes;
-            document.getElementById('edit-experiencia').value = config.experiencia;
-            aplicarCambios();
-            mostrarMensaje(`✅ Respaldo restaurado`, 'success');
+        if (confirm(`¿Restaurar respaldo "${respaldo.nombre}"? Se perderán los datos actuales.`)) {
+            // Restaurar configuración
+            localStorage.setItem('config-ue10febrero', JSON.stringify(respaldo.config.textos || {}));
+            localStorage.setItem('slider-ue10febrero', JSON.stringify(respaldo.config.slider || []));
+            localStorage.setItem('galeria-ue10febrero', JSON.stringify(respaldo.config.galeria || []));
+            
+            // Actualizar interfaz
+            cargarValoresActuales();
+            cargarListaSlider();
+            cargarListaGaleria();
+            actualizarSliderEnPagina();
+            actualizarGaleriaEnPagina();
+            actualizarIndicadorAlmacenamiento();
+            
+            mostrarMensaje(`✅ Respaldo "${respaldo.nombre}" restaurado`, 'success');
         }
     }
 
@@ -1908,64 +1942,85 @@
         }, 5000);
     }
 
-    // ==================== SLIDER ====================
+    // ==================== SLIDER FUNCIONAL ====================
     let currentSlide = 0;
-    const slides = document.querySelector('.slides');
-    const slideItems = document.querySelectorAll('.slide');
-    const totalSlides = slideItems.length;
 
     function showSlide(index) {
-        if (index >= totalSlides) currentSlide = 0;
-        else if (index < 0) currentSlide = totalSlides - 1;
+        const slides = document.querySelector('.slides');
+        const slidesCount = document.querySelectorAll('.slide').length;
+        const dots = document.querySelectorAll('.dot');
+        
+        if (index >= slidesCount) currentSlide = 0;
+        else if (index < 0) currentSlide = slidesCount - 1;
         else currentSlide = index;
         
-        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        if (slides) {
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
         
-        document.querySelectorAll('.dot').forEach((dot, i) => {
+        dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === currentSlide);
         });
     }
 
-    document.querySelector('.prev')?.addEventListener('click', () => showSlide(currentSlide - 1));
-    document.querySelector('.next')?.addEventListener('click', () => showSlide(currentSlide + 1));
-
-    document.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.addEventListener('click', () => showSlide(i));
+    // Inicializar eventos del slider
+    document.addEventListener('DOMContentLoaded', function() {
+        const prevBtn = document.querySelector('.slider-btn.prev');
+        const nextBtn = document.querySelector('.slider-btn.next');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+        }
+        
+        // Auto-avance cada 8 segundos
+        setInterval(() => {
+            if (document.querySelectorAll('.slide').length > 1) {
+                showSlide(currentSlide + 1);
+            }
+        }, 8000);
     });
 
-    // Cambiado a 8 segundos en lugar de 5
-    setInterval(() => showSlide(currentSlide + 1), 8000);
-
-    // ==================== NAVEGACIÓN ====================
+    // ==================== NAVEGACIÓN MEJORADA ====================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Cerrar menú hamburguesa en móviles
+                document.querySelector('.nav-links').classList.remove('active');
             }
         });
     });
 
+    // Menú hamburguesa corregido
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    hamburger?.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
+    
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
-    // ==================== INICIALIZACIÓN ====================
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+
+    // ==================== INICIALIZACIÓN COMPLETA ====================
     document.addEventListener('DOMContentLoaded', function() {
         // Verificar acceso seguro
         verificarAccesoSeguro();
         
         // Cargar datos guardados
-        const config = JSON.parse(localStorage.getItem('config-ue10febrero') || '{}');
-        if (config.estudiantes) {
-            const stats = document.querySelectorAll('.stat-number');
-            if (stats[0]) stats[0].textContent = config.estudiantes;
-            if (stats[1]) stats[1].textContent = config.docentes;
-            if (stats[2]) stats[2].textContent = config.experiencia;
-        }
+        cargarValoresActuales();
         
         // Actualizar slider y galería en la página
         actualizarSliderEnPagina();
