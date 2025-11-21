@@ -3,2203 +3,666 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Unidad Educativa 10 de Febrero - Con estudio, esfuerzo y esmero... Adelante 10 de Febrero">
-    <title>Unidad Educativa 10 de Febrero</title>
+    <title>Unidad Educativa "10 de Febrero"</title>
     <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #3498db;
+            --accent-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #e74c3c;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #c41e3a;
-            --primary-dark: #b91c2e;
-            --secondary-color: #667eea;
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-        }
-
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
             line-height: 1.6;
-            color: var(--text-color);
-            scroll-behavior: smooth;
         }
-
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: var(--primary-color);
-            color: white;
-            padding: 8px;
-            z-index: 1001;
-            text-decoration: none;
-            border-radius: 0 0 4px 4px;
-            transition: top 0.3s;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* CABECERA */
+        
         header {
-            background: linear-gradient(rgba(196, 30, 58, 0.9), rgba(196, 30, 58, 0.9)), url('Imagenes/frontis-escuela.jpg') center/cover;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        nav {
+        
+        .logo-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            margin-bottom: 1rem;
         }
-
+        
         .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
             display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-img {
-            width: 45px;
-            height: 45px;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            font-size: 1.3rem;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            position: relative;
-            padding: 0.5rem 0;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover,
-        .nav-links a:focus {
-            opacity: 0.8;
-        }
-
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: white;
-            border-radius: 2px;
-        }
-
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            background: url('Imagenes/frontis-escuela.jpg') center/cover;
-            color: white;
-            padding: 160px 2rem 100px;
-            text-align: center;
-            margin-top: 60px;
-            position: relative;
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
             justify-content: center;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 1;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s 0.2s backwards;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            animation: fadeInUp 1s 0.4s backwards;
-        }
-
-        .btn-hero {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: 2px solid white;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-hero.primary {
-            background: white;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .btn-hero:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
-            text-align: center;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 4px solid var(--primary-color);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .card p {
-            color: #666;
-        }
-
-        .about {
-            background: var(--light-bg);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
             align-items: center;
-        }
-
-        .about-text h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            color: #555;
-            text-align: justify;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-box {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-
-        .stat-number {
-            font-size: 3rem;
+            margin-right: 1rem;
             font-weight: bold;
-            color: #dc143c;
-            display: block;
-        }
-
-        .stat-label {
-            color: #666;
-            margin-top: 0.5rem;
-        }
-
-        /* SLIDER SECTION */
-        .slider-section {
-            background: var(--light-bg);
-            padding: 4rem 0;
-        }
-
-        .slider-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-        }
-
-        .slider-title {
-            text-align: center;
-            margin-bottom: 2rem;
             color: var(--primary-color);
-        }
-
-        .slider {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .slides {
-            display: flex;
-            transition: transform 0.8s ease-in-out;
-        }
-
-        .slide {
-            min-width: 100%;
-            position: relative;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .slide-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            color: white;
-            padding: 2rem;
-        }
-
-        .slide-content h3 {
             font-size: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
             margin-bottom: 0.5rem;
         }
-
-        .slide-content p {
-            font-size: 1rem;
+        
+        .subtitle {
+            font-size: 1.2rem;
             opacity: 0.9;
         }
-
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            padding: 0 1rem;
-            z-index: 10;
+        
+        nav {
+            background-color: var(--dark-color);
+            padding: 0.8rem 0;
         }
-
-        .slider-btn {
-            background: rgba(255, 255, 255, 0.8);
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.2rem;
+            margin: 0 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.7rem 1.5rem;
             border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            text-decoration: none;
         }
-
-        .slider-btn:hover {
-            background: white;
-            transform: scale(1.1);
+        
+        .btn:hover {
+            background-color: var(--primary-color);
         }
-
-        .slider-dots {
-            display: flex;
-            justify-content: center;
-            margin-top: 1.5rem;
-            gap: 0.5rem;
+        
+        .btn-warning {
+            background-color: var(--warning-color);
         }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ccc;
-            cursor: pointer;
-            transition: background 0.3s;
+        
+        .btn-warning:hover {
+            background-color: #c0392b;
         }
-
-        .dot.active {
-            background: var(--primary-color);
+        
+        .btn-success {
+            background-color: var(--success-color);
         }
-
-        /* GALERÍA SECTION */
-        #galeria {
-            background: white;
+        
+        .btn-success:hover {
+            background-color: #219653;
         }
-
-        .galeria-container {
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
         }
-
-        .galeria-item {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-
-        .galeria-item:hover {
-            transform: scale(1.03);
-        }
-
-        .galeria-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .galeria-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            color: white;
-            padding: 1rem;
-            transform: translateY(100%);
+        
+        .event-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1.2rem;
             transition: transform 0.3s;
         }
-
-        .galeria-item:hover .galeria-overlay {
-            transform: translateY(0);
+        
+        .event-card:hover {
+            transform: translateY(-5px);
         }
-
-        .galeria-overlay h3 {
+        
+        .event-title {
             font-size: 1.2rem;
+            color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
-
-        .galeria-overlay p {
-            font-size: 0.9rem;
-            opacity: 0.9;
+        
+        .event-date {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
         }
-
-        /* ==================== SECCIÓN CONTACTOS MEJORADA ==================== */
-        #contactos {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 5rem 2rem;
+        
+        .event-description {
+            color: #666;
         }
-
-        .contactos-header {
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
             text-align: center;
-            margin-bottom: 3rem;
+            padding: 2rem 0;
+            margin-top: 3rem;
         }
-
-        .contactos-header h2 {
-            font-size: 2.8rem;
-            color: #c41e3a;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .contactos-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #c41e3a, #dc143c);
-            border-radius: 2px;
-        }
-
-        .contactos-header p {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contactos-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .info-contacto {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border-left: 5px solid #c41e3a;
-        }
-
-        .info-contacto h3 {
-            color: #c41e3a;
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .contacto-lista {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contacto-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
-        }
-
-        .contacto-item:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
-        }
-
-        .contacto-icono {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.3rem;
-        }
-
-        .icono-direccion {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .icono-email {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            color: white;
-        }
-
-        .icono-telefono {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            color: white;
-        }
-
-        .icono-whatsapp {
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: white;
-        }
-
-        .icono-facebook {
-            background: linear-gradient(135deg, #1877f2, #0d5cb6);
-            color: white;
-        }
-
-        .contacto-info {
-            flex: 1;
-        }
-
-        .contacto-info h4 {
-            color: #333;
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-            font-weight: 600;
-        }
-
-        .contacto-info p {
-            color: #666;
-            margin: 0.2rem 0;
-            line-height: 1.5;
-        }
-
-        .contacto-link {
-            color: #c41e3a;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .contacto-link:hover {
-            color: #dc143c;
-            text-decoration: underline;
-        }
-
-        .horario-atencion {
-            background: linear-gradient(135deg, #c41e3a, #dc143c);
-            color: white;
+        
+        .admin-panel {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent-color);
             padding: 1.5rem;
-            border-radius: 15px;
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-
-        .horario-atencion h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .horario-atencion p {
-            margin: 0.3rem 0;
-            font-size: 1rem;
-        }
-
-        /* Mapa mejorado - menos espacio en blanco */
-        .mapa-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            height: fit-content;
-        }
-
-        .mapa-container h3 {
-            color: #c41e3a;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-        }
-
-        .mapa-frame {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            height: 450px; /* Más alto para menos espacio en blanco */
-        }
-
-        .mapa-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-
-        .mapa-info {
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-
-        .mapa-info p {
-            color: #666;
-            margin: 0.5rem 0;
-            font-size: 1rem;
-        }
-
-        /* Redes sociales mejoradas - sin email */
-        .redes-sociales {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
             margin-top: 2rem;
-            flex-wrap: wrap;
         }
-
-        .red-social {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 1.5rem;
-            background: white;
-            border-radius: 50px;
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border: 2px solid transparent;
+        
+        .admin-panel h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
         }
-
-        .red-social:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        
+        .hidden {
+            display: none;
         }
-
-        .red-social.whatsapp:hover {
-            background: #25d366;
-            color: white;
-            border-color: #25d366;
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
         }
-
-        .red-social.facebook:hover {
-            background: #1877f2;
-            color: white;
-            border-color: #1877f2;
-        }
-
-        /* BOTÓN ADMIN */
-        #boton-admin {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--secondary-color);
             border-radius: 50%;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            cursor: pointer;
-            z-index: 9999;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
         }
-
-        #boton-admin:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
-
-        #boton-admin small {
-            font-size: 0.6rem;
-            margin-top: 2px;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 968px) {
-            .contactos-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .contactos-header h2 {
-                font-size: 2.3rem;
-            }
-            
-            .info-contacto {
-                padding: 2rem;
-            }
-
-            .mapa-frame {
-                height: 400px;
-            }
-        }
-
+        
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-content {
+            .grid {
                 grid-template-columns: 1fr;
             }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--primary-color);
-                flex-direction: column;
-                padding: 1rem 0;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links a {
-                display: block;
-                padding: 0.8rem 1rem;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .logo-img {
-                width: 35px;
-                height: 35px;
-            }
             
-            .logo-text {
-                font-size: 1.1rem;
-            }
-
-            .slide img {
-                height: 300px;
-            }
-
-            .galeria-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-
-            #contactos {
-                padding: 3rem 1rem;
-            }
-            
-            .contactos-header h2 {
-                font-size: 2rem;
-            }
-            
-            .contacto-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.8rem;
-            }
-            
-            .contacto-icono {
-                align-self: center;
-            }
-            
-            .redes-sociales {
+            .nav-container {
                 flex-direction: column;
                 align-items: center;
             }
             
-            .red-social {
-                width: 100%;
-                max-width: 250px;
-                justify-content: center;
-            }
-
-            .mapa-frame {
-                height: 350px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo-text {
-                display: none;
-            }
-
-            .info-contacto {
-                padding: 1.5rem;
-            }
-            
-            .contactos-header h2 {
-                font-size: 1.8rem;
-            }
-            
-            .mapa-container {
-                padding: 1.5rem;
-            }
-
-            .mapa-frame {
-                height: 300px;
+            .nav-item {
+                margin: 0.3rem 0;
+                width: 80%;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
-    
     <header>
-        <nav>
-            <div class="logo">
-                <img src="Imagenes/escudo-escuela.jpg" alt="Escudo Unidad Educativa 10 de Febrero" class="logo-img">
-                <span class="logo-text">U.E. 10 de Febrero</span>
+        <div class="logo-container">
+            <div class="logo">UEF</div>
+            <div>
+                <h1>Unidad Educativa "10 de Febrero"</h1>
+                <p class="subtitle">Formando líderes para el futuro</p>
             </div>
-            <button class="hamburger" aria-label="Menú de navegación">☰</button>
-            <ul class="nav-links">
-                <li><a href="#inicio" class="active">Inicio</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#galeria">Galería</a></li>
-                <li><a href="#contactos">Contactos</a></li>
-            </ul>
-        </nav>
+        </div>
     </header>
-
-    <main id="main-content">
-        <section id="inicio" class="hero">
-            <div class="hero-content">
-                <h1>Unidad Educativa 10 de Febrero</h1>
-                <p>Con estudio, esfuerzo y esmero... Adelante 10 de Febrero</p>
-                <div class="hero-buttons">
-                    <a href="#nosotros" class="btn-hero">Conócenos</a>
-                    <a href="#galeria" class="btn-hero primary">Ver Galería</a>
+    
+    <nav>
+        <div class="nav-container">
+            <a href="#inicio" class="nav-item">Inicio</a>
+            <a href="#noticias" class="nav-item">Noticias</a>
+            <a href="#eventos" class="nav-item">Eventos</a>
+            <a href="#acerca" class="nav-item">Acerca de</a>
+            <a href="#contacto" class="nav-item">Contacto</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="inicio" class="card">
+            <h2>Bienvenidos</h2>
+            <p>La Unidad Educativa "10 de Febrero" es una institución comprometida con la excelencia académica y la formación integral de nuestros estudiantes. Nuestro objetivo es proporcionar un ambiente de aprendizaje estimulante que fomente el crecimiento intelectual, emocional y social.</p>
+            <p>Contamos con un equipo docente altamente calificado y modernas instalaciones para garantizar la mejor educación para sus hijos.</p>
+        </section>
+        
+        <section id="noticias" class="card">
+            <h2>Noticias y Anuncios</h2>
+            <div id="news-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Cargando noticias...</p>
                 </div>
             </div>
         </section>
-
-        <section id="nosotros" class="about">
-            <h2>Sobre Nosotros</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Nuestra Historia</h3>
-                    <p id="texto-historia">La Unidad Educativa 10 de Febrero es una institución comprometida con la formación integral de nuestros estudiantes. Con años de experiencia en educación, nos enorgullece ser parte del desarrollo académico y personal de cada uno de nuestros alumnos.</p>
-                    <p id="texto-mision">Nuestra misión es proporcionar una educación de calidad que forme ciudadanos responsables, críticos y comprometidos con su comunidad y país.</p>
-                </div>
-                <div class="about-text">
-                    <h3>Nuestra Visión</h3>
-                    <p id="texto-vision">Ser una institución educativa líder reconocida por su excelencia académica, formación en valores y compromiso con el desarrollo integral de nuestros estudiantes.</p>
-                    <p>Buscamos crear un ambiente de aprendizaje innovador que prepare a nuestros estudiantes para los desafíos del siglo XXI.</p>
-                </div>
-            </div>
-
-            <div class="stats">
-                <div class="stat-box">
-                    <span class="stat-number" id="estudiantes">500+</span>
-                    <span class="stat-label">Estudiantes</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number" id="docentes">40+</span>
-                    <span class="stat-label">Docentes</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number" id="experiencia">25+</span>
-                    <span class="stat-label">Años de Experiencia</span>
+        
+        <section id="eventos" class="card">
+            <h2>Próximos Eventos</h2>
+            <div id="events-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Cargando eventos...</p>
                 </div>
             </div>
         </section>
-
-        <section id="servicios">
-            <h2>Nuestros Servicios</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>📚 Educación Inicial</h3>
-                    <p>Programa educativo diseñado para niños en edad preescolar, enfocado en el desarrollo de habilidades básicas y socialización.</p>
+        
+        <section id="acerca" class="card">
+            <h2>Acerca de Nosotros</h2>
+            <p>Fundada en 1985, la Unidad Educativa "10 de Febrero" ha sido un pilar en la comunidad educativa por más de tres décadas. Nuestra misión es formar ciudadanos responsables, críticos y creativos, capaces de contribuir positivamente a la sociedad.</p>
+            <p>Ofrecemos educación desde inicial hasta bachillerato, con énfasis en valores, tecnología y pensamiento crítico.</p>
+        </section>
+        
+        <section id="contacto" class="card">
+            <h2>Contacto</h2>
+            <p>Estamos ubicados en Av. Principal #123, Ciudad.</p>
+            <p>Teléfono: (123) 456-7890</p>
+            <p>Email: info@ue10febrero.edu</p>
+            <p>Horario de atención: Lunes a Viernes de 7:00 am a 4:00 pm</p>
+        </section>
+        
+        <!-- Panel de Administración -->
+        <section class="admin-panel">
+            <h3>Panel de Administración</h3>
+            <p>Utilice esta sección para agregar o modificar contenido que será visible para todos los visitantes.</p>
+            
+            <div class="form-group">
+                <label for="admin-key">Clave de administración:</label>
+                <input type="password" id="admin-key" placeholder="Ingrese la clave de administración">
+                <button id="admin-login" class="btn" style="margin-top: 0.5rem;">Acceder</button>
+            </div>
+            
+            <div id="admin-interface" class="hidden">
+                <div class="form-group">
+                    <h4>Agregar Noticia</h4>
+                    <input type="text" id="news-title" placeholder="Título de la noticia">
+                    <textarea id="news-content" placeholder="Contenido de la noticia"></textarea>
+                    <button id="add-news" class="btn btn-success">Agregar Noticia</button>
                 </div>
-                <div class="card">
-                    <h3>📖 Educación Primaria</h3>
-                    <p>Formación académica sólida con énfasis en lectura, matemáticas, ciencias y desarrollo de habilidades socioemocionales.</p>
+                
+                <div class="form-group">
+                    <h4>Agregar Evento</h4>
+                    <input type="text" id="event-title" placeholder="Título del evento">
+                    <input type="date" id="event-date">
+                    <textarea id="event-description" placeholder="Descripción del evento"></textarea>
+                    <button id="add-event" class="btn btn-success">Agregar Evento</button>
                 </div>
-                <div class="card">
-                    <h3>🎓 Educación Secundaria</h3>
-                    <p>Preparación integral para la vida universitaria y profesional con énfasis en pensamiento crítico y liderazgo.</p>
+                
+                <div class="form-group">
+                    <h4>Gestión de Contenido</h4>
+                    <button id="clear-data" class="btn btn-warning">Eliminar Todo el Contenido</button>
+                    <p><small>Nota: Esta acción eliminará todas las noticias y eventos.</small></p>
                 </div>
-                <div class="card">
-                    <h3>💻 Tecnología</h3>
-                    <p>Laboratorios de computación equipados con tecnología moderna para desarrollar competencias digitales.</p>
-                </div>
-                <div class="card">
-                    <h3>🎨 Actividades Extracurriculares</h3>
-                    <p>Deportes, arte, música y clubes que complementan la formación académica de nuestros estudiantes.</p>
-                </div>
-                <div class="card">
-                    <h3>👨‍👩‍👧 Apoyo Familiar</h3>
-                    <p>Programas de orientación y talleres para padres, fortaleciendo la comunidad educativa.</p>
-                </div>
+                
+                <div id="admin-message" class="alert hidden"></div>
             </div>
         </section>
-
-        <!-- SLIDER SECTION -->
-        <section class="slider-section">
-            <div class="slider-container">
-                <h2 class="slider-title">Eventos y Actividades</h2>
-                <div class="slider">
-                    <div class="slides">
-                        <!-- Las imágenes del slider se cargarán dinámicamente -->
-                    </div>
-                    <div class="slider-nav">
-                        <button class="slider-btn prev">❮</button>
-                        <button class="slider-btn next">❯</button>
-                    </div>
-                    <div class="slider-dots">
-                        <!-- Los dots se generarán dinámicamente -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- GALERÍA SECTION -->
-        <section id="galeria">
-            <h2>Galería de Imágenes</h2>
-            <div class="galeria-container">
-                <!-- Las imágenes se cargarán dinámicamente aquí -->
-            </div>
-        </section>
-
-        <!-- SECCIÓN CONTACTOS MEJORADA -->
-        <section id="contactos">
-            <div class="contactos-header">
-                <h2>📞 Contáctanos</h2>
-                <p>Estamos aquí para responder todas tus preguntas y brindarte la información que necesites</p>
-            </div>
-
-            <div class="contactos-grid">
-                <!-- Información de Contacto -->
-                <div class="info-contacto">
-                    <h3>📍 Información de Contacto</h3>
-                    <div class="contacto-lista">
-                        <div class="contacto-item">
-                            <div class="contacto-icono icono-direccion">
-                                📍
-                            </div>
-                            <div class="contacto-info">
-                                <h4>Dirección</h4>
-                                <p id="texto-direccion">Av. Principal #123, Ciudad</p>
-                                <p>Departamento, Bolivia</p>
-                            </div>
-                        </div>
-
-                        <div class="contacto-item">
-                            <div class="contacto-icono icono-email">
-                                ✉️
-                            </div>
-                            <div class="contacto-info">
-                                <h4>Correo Electrónico</h4>
-                                <p id="texto-email">ue10defebrero@educacion.bo</p>
-                                <p>informacion.ue10febrero@gmail.com</p>
-                            </div>
-                        </div>
-
-                        <div class="contacto-item">
-                            <div class="contacto-icono icono-telefono">
-                                📞
-                            </div>
-                            <div class="contacto-info">
-                                <h4>Teléfonos</h4>
-                                <p id="texto-telefono">+591 4 123 4567</p>
-                                <p>+591 4 765 4321</p>
-                            </div>
-                        </div>
-
-                        <div class="contacto-item">
-                            <div class="contacto-icono icono-whatsapp">
-                                💬
-                            </div>
-                            <div class="contacto-info">
-                                <h4>WhatsApp</h4>
-                                <p id="texto-whatsapp">+591 7123 4567</p>
-                                <a href="https://wa.me/59171234567" class="contacto-link" target="_blank" id="link-whatsapp">
-                                    💬 Escribir por WhatsApp
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="contacto-item">
-                            <div class="contacto-icono icono-facebook">
-                                👍
-                            </div>
-                            <div class="contacto-info">
-                                <h4>Facebook</h4>
-                                <p>Unidad Educativa 10 de Febrero</p>
-                                <a href="https://facebook.com/unidadeducativa10defebrero" class="contacto-link" target="_blank" id="link-facebook">
-                                    👍 Seguir en Facebook
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="horario-atencion">
-                        <h4>🕒 Horario de Atención</h4>
-                        <p><strong>Lunes a Viernes:</strong> 7:30 AM - 4:30 PM</p>
-                        <p><strong>Sábados:</strong> 8:00 AM - 12:00 PM</p>
-                        <p><strong>Domingos:</strong> Cerrado</p>
-                    </div>
-                </div>
-
-                <!-- Mapa -->
-                <div class="mapa-container">
-                    <h3>🗺️ Nuestra Ubicación</h3>
-                    <div class="mapa-frame">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.454292553921!2d-66.1651236846903!3d-17.39290478807437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e373e0d9e4ab27%3A0xa2719a6c5c7d5b5c!2sLa%20Paz%2C%20Bolivia!5e0!3m2!1ses!2ses!4v1641234567890!5m2!1ses!2ses" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                    <div class="mapa-info">
-                        <p><strong>📍 Dirección exacta:</strong> <span id="texto-direccion-mapa">Av. Principal #123, Ciudad</span></p>
-                        <p><strong>🚗 Estacionamiento:</strong> Disponible frente al colegio</p>
-                        <p><strong>🚌 Transporte público:</strong> Líneas 123, 456, 789</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botones de acción rápida - SIN EMAIL -->
-            <div class="redes-sociales">
-                <a href="https://wa.me/59171234567" class="red-social whatsapp" target="_blank" id="boton-whatsapp">
-                    <span>💬</span>
-                    <span>WhatsApp</span>
-                </a>
-                <a href="https://facebook.com/unidadeducativa10defebrero" class="red-social facebook" target="_blank" id="boton-facebook">
-                    <span>👍</span>
-                    <span>Facebook</span>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer style="background: var(--primary-color); color: white; text-align: center; padding: 2rem; margin-top: 4rem;">
-        <p>&copy; 2025 Unidad Educativa 10 de Febrero. Todos los derechos reservados.</p>
-        <p>Formando el futuro de Bolivia</p>
+    </div>
+    
+    <footer>
+        <p>Unidad Educativa "10 de Febrero" &copy; 2023 - Todos los derechos reservados</p>
+        <p>Sitio web desarrollado con ❤️ para la comunidad educativa</p>
     </footer>
 
-    <!-- ==================== SISTEMA DE ADMINISTRACIÓN ==================== -->
-    <section id="editor-directora" style="display: none; background: white; padding: 2rem; margin: 2rem; border: 2px solid #c41e3a; border-radius: 10px; max-width: 1000px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; max-height: 90vh; overflow-y: auto; width: 90%;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <h2 style="color: #c41e3a; margin: 0;">🎛️ Sistema de Gestión - Directora</h2>
-            <button onclick="ocultarEditor()" style="background: #666; color: white; border: none; border-radius: 5px; padding: 0.5rem 1rem; cursor: pointer;">✕ Cerrar</button>
-        </div>
-
-        <!-- INDICADOR DE ALMACENAMIENTO -->
-        <div id="almacenamiento-info" style="background: #e3f2fd; padding: 0.75rem; border-radius: 5px; margin-bottom: 1rem; border-left: 4px solid #2196f3;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <strong>💾 Almacenamiento Usado:</strong>
-                <span id="porcentaje-almacenamiento" style="font-weight: bold;">0%</span>
-            </div>
-            <div style="background: #ddd; border-radius: 10px; height: 10px;">
-                <div id="barra-almacenamiento" style="background: #4caf50; height: 100%; border-radius: 10px; width: 0%; transition: width 0.3s;"></div>
-            </div>
-            <div style="font-size: 0.8rem; color: #666; margin-top: 0.25rem;">
-                <span id="espacio-usado">0 KB</span> de <span id="espacio-total">5 MB</span> disponibles
-            </div>
-            <div id="alerta-almacenamiento" style="display: none; background: #ffebee; color: #c62828; padding: 0.5rem; border-radius: 3px; margin-top: 0.5rem; font-size: 0.8rem;">
-                ⚠️ El almacenamiento está casi lleno. Considere eliminar contenido antiguo.
-            </div>
-        </div>
-
-        <!-- PESTAÑAS -->
-        <div style="display: flex; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #ddd; flex-wrap: wrap;">
-            <button class="tab-btn active" onclick="mostrarPestana('textos')">📝 Textos</button>
-            <button class="tab-btn" onclick="mostrarPestana('slider')">🖼️ Slider</button>
-            <button class="tab-btn" onclick="mostrarPestana('galeria')">🖼️ Galería</button>
-            <button class="tab-btn" onclick="mostrarPestana('respaldo')">💾 Respaldo</button>
-        </div>
-
-        <!-- PESTAÑA TEXTOS -->
-        <div id="pestana-textos" class="pestana">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <div>
-                    <h4>📊 Estadísticas</h4>
-                    <input type="text" id="edit-estudiantes" placeholder="600+ Estudiantes" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="text" id="edit-docentes" placeholder="45+ Docentes" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="text" id="edit-experiencia" placeholder="30+ Años" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                </div>
-
-                <div>
-                    <h4>📞 Información de Contacto</h4>
-                    <input type="text" id="edit-direccion" placeholder="Dirección" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="text" id="edit-telefono" placeholder="Teléfono" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="text" id="edit-email" placeholder="Email" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="text" id="edit-whatsapp" placeholder="WhatsApp" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="text" id="edit-facebook" placeholder="Enlace Facebook" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                </div>
-            </div>
-
-            <div style="margin-top: 1rem;">
-                <h4>🎯 Misión y Visión</h4>
-                <textarea id="edit-mision" placeholder="Escriba la misión aquí..." style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 100px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-                <textarea id="edit-vision" placeholder="Escriba la visión aquí..." style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 100px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-            </div>
-        </div>
-
-        <!-- PESTAÑA SLIDER -->
-        <div id="pestana-slider" class="pestana" style="display: none;">
-            <div style="background: #e8f5e8; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-                <h4>🖼️ Gestión del Slider Principal</h4>
-                <p style="font-size: 0.9rem; margin: 0.5rem 0;">
-                    Administre las imágenes del slider principal de la página. Formatos: JPG, PNG (Máx. 2MB)
-                </p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <div>
-                    <h5>Agregar Nueva Imagen al Slider</h5>
-                    
-                    <input type="text" id="titulo-slider" placeholder="Título de la imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <textarea id="descripcion-slider" placeholder="Descripción de la imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 80px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-                    
-                    <input type="file" id="upload-slider" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    
-                    <button onclick="subirImagenSlider()" style="background: #28a745; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem;">
-                        📤 Agregar al Slider
-                    </button>
-                    
-                    <div id="preview-slider" style="margin-top: 1rem; text-align: center; display: none;">
-                        <img id="img-preview-slider" style="max-width: 200px; max-height: 150px; border: 2px solid #ddd; border-radius: 5px;">
-                        <p style="font-size: 0.8rem; margin: 0.5rem 0;">Vista previa</p>
-                    </div>
-                </div>
-                
-                <div>
-                    <h5>Imágenes en el Slider</h5>
-                    <div id="lista-slider" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
-                        <p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en el slider</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PESTAÑA GALERÍA -->
-        <div id="pestana-galeria" class="pestana" style="display: none;">
-            <div style="background: #e3f2fd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-                <h4>🖼️ Gestión de la Galería</h4>
-                <p style="font-size: 0.9rem; margin: 0.5rem 0;">
-                    Administre las imágenes de la galería. Formatos: JPG, PNG (Máx. 2MB)
-                </p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <div>
-                    <h5>Agregar Nueva Imagen a la Galería</h5>
-                    
-                    <input type="text" id="titulo-galeria" placeholder="Título de la imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <textarea id="descripcion-galeria" placeholder="Descripción de la imagen" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 80px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-                    
-                    <input type="file" id="upload-galeria" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    
-                    <button onclick="subirImagenGaleria()" style="background: #ff6b6b; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem;">
-                        📤 Agregar a Galería
-                    </button>
-                    
-                    <div id="preview-galeria" style="margin-top: 1rem; text-align: center; display: none;">
-                        <img id="img-preview-galeria" style="max-width: 200px; max-height: 150px; border: 2px solid #ddd; border-radius: 5px;">
-                        <p style="font-size: 0.8rem; margin: 0.5rem 0;">Vista previa</p>
-                    </div>
-                </div>
-                
-                <div>
-                    <h5>Imágenes en la Galería</h5>
-                    <div id="lista-galeria" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem;">
-                        <p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en la galería</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PESTAÑA RESPALDO -->
-        <div id="pestana-respaldo" class="pestana" style="display: none;">
-            <div style="background: #fff3cd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-                <h4>🛡️ Sistema de Respaldo</h4>
-                <p style="font-size: 0.9rem; margin: 0.5rem 0;">
-                    Guarde y restaure versiones anteriores por si comete algún error.
-                </p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <div>
-                    <h5>💾 Guardar Respaldo</h5>
-                    <input type="text" id="nombre-respaldo" placeholder="Nombre del respaldo" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                    <button onclick="crearRespaldo()" style="background: #17a2b8; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%;">
-                        💾 Crear Respaldo
-                    </button>
-                </div>
-                
-                <div>
-                    <h5>🔄 Restaurar Respaldo</h5>
-                    <select id="select-respaldo" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-                        <option value="">Seleccione respaldo</option>
-                    </select>
-                    <button onclick="restaurarRespaldo()" style="background: #dc3545; color: white; border: none; padding: 0.8rem 1rem; border-radius: 5px; cursor: pointer; width: 100%;">
-                        🔄 Restaurar
-                    </button>
-                </div>
-            </div>
-
-            <div id="lista-respaldos" style="margin-top: 1rem;">
-                <h5>📦 Respaldos Guardados:</h5>
-                <div id="contenedor-respaldos" style="max-height: 200px; overflow-y: auto;">
-                </div>
-            </div>
-        </div>
-
-        <!-- BOTONES PRINCIPALES -->
-        <div style="display: flex; gap: 1rem; margin-top: 1rem; justify-content: center; flex-wrap: wrap;">
-            <button onclick="aplicarCambios()" style="background: #c41e3a; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;">
-                💾 Aplicar Cambios
-            </button>
-            
-            <button onclick="previsualizarCambios()" style="background: #28a745; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;">
-                👁️ Previsualizar
-            </button>
-            
-            <button onclick="limpiarAlmacenamiento()" style="background: #ff9800; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;">
-                🧹 Limpiar Antiguo
-            </button>
-        </div>
-
-        <div id="mensaje-estado" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
-    </section>
-
-    <button id="boton-admin" style="display: none;">
-        ⚙️<br><small>Admin</small>
-    </button>
-
-    <!-- ==================== SISTEMA DE SEGURIDAD Y FUNCIONALIDAD ==================== -->
     <script>
-    // ==================== DATOS POR DEFECTO ====================
-    const DATOS_POR_DEFECTO = {
-        config: {
-            estudiantes: "500+",
-            docentes: "40+",
-            experiencia: "25+",
-            direccion: "Av. Principal #123, Ciudad",
-            telefono: "+591 4 123 4567",
-            email: "ue10defebrero@educacion.bo",
-            whatsapp: "+591 7123 4567",
-            facebook: "https://facebook.com/unidadeducativa10defebrero",
-            mision: "Nuestra misión es proporcionar una educación de calidad que forme ciudadanos responsables, críticos y comprometidos con su comunidad y país.",
-            vision: "Ser una institución educativa líder reconocida por su excelencia académica, formación en valores y compromiso con el desarrollo integral de nuestros estudiantes."
-        },
-        slider: [],
-        galeria: []
-    };
-
-    // ==================== INICIALIZACIÓN DE DATOS ====================
-    function inicializarDatos() {
-        console.log("🔧 Inicializando datos...");
+        // Configuración de JSONBin.io
+        const JSONBIN_BASE_URL = 'https://api.jsonbin.io/v3/b';
+        const BIN_ID = '663a9e62e41b4d34e4f8c4a5'; // ID del bin que crearemos
+        const MASTER_KEY = '$2a$10$6HhMg/3KROXYe8e6p2qQ.O6t7eR5YQ6n5t8rR2vYV9sKfL1mN8pW2'; // Clave maestra para escritura
         
-        // Verificar si ya existen datos en localStorage
-        const configExistente = localStorage.getItem('config-ue10febrero');
-        const sliderExistente = localStorage.getItem('slider-ue10febrero');
-        const galeriaExistente = localStorage.getItem('galeria-ue10febrero');
+        // Estado de la aplicación
+        let appData = {
+            news: [],
+            events: []
+        };
         
-        // Si no existen datos, inicializar con valores por defecto
-        if (!configExistente) {
-            console.log("📝 Configuración no encontrada, inicializando...");
-            localStorage.setItem('config-ue10febrero', JSON.stringify(DATOS_POR_DEFECTO.config));
-        } else {
-            console.log("✅ Configuración encontrada:", JSON.parse(configExistente));
-        }
+        // Elementos del DOM
+        const newsContainer = document.getElementById('news-container');
+        const eventsContainer = document.getElementById('events-container');
+        const adminLoginBtn = document.getElementById('admin-login');
+        const adminInterface = document.getElementById('admin-interface');
+        const addNewsBtn = document.getElementById('add-news');
+        const addEventBtn = document.getElementById('add-event');
+        const clearDataBtn = document.getElementById('clear-data');
+        const adminMessage = document.getElementById('admin-message');
         
-        if (!sliderExistente) {
-            console.log("🖼️ Slider no encontrado, inicializando...");
-            localStorage.setItem('slider-ue10febrero', JSON.stringify(DATOS_POR_DEFECTO.slider));
-        } else {
-            console.log("✅ Slider encontrado con", JSON.parse(sliderExistente).length, "imágenes");
-        }
+        // Clave de administración (puedes cambiarla)
+        const ADMIN_PASSWORD = "admin123";
         
-        if (!galeriaExistente) {
-            console.log("🖼️ Galería no encontrada, inicializando...");
-            localStorage.setItem('galeria-ue10febrero', JSON.stringify(DATOS_POR_DEFECTO.galeria));
-        } else {
-            console.log("✅ Galería encontrada con", JSON.parse(galeriaExistente).length, "imágenes");
-        }
-        
-        console.log("✅ Datos inicializados correctamente");
-    }
-
-    // ==================== SISTEMA DE SEGURIDAD MEJORADO ====================
-    const CLAVE_CIFRADA = [97, 100, 109, 105, 110, 49, 48, 102, 101, 98, 114, 101, 114, 111, 50, 48, 50, 53];
-
-    function verificarAccesoSeguro() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const claveURL = urlParams.get('clave');
-        const hashURL = window.location.hash.replace('#', '');
-        const sesionActiva = localStorage.getItem('sesionAdminActiva');
-        
-        // Convertir array ASCII a string
-        const PALABRA_SECRETA = CLAVE_CIFRADA.map(code => String.fromCharCode(code)).join('');
-        
-        const accesoPermitido = 
-            claveURL === PALABRA_SECRETA ||
-            hashURL === PALABRA_SECRETA || 
-            sesionActiva === 'true';
-        
-        if (!accesoPermitido) {
-            console.log("❌ Acceso denegado al panel de administración");
-            document.getElementById('boton-admin')?.remove();
-            document.getElementById('editor-directora')?.remove();
-            return false;
-        }
-        
-        console.log("✅ Acceso permitido al panel de administración");
-        localStorage.setItem('sesionAdminActiva', 'true');
-        setTimeout(() => {
-            localStorage.removeItem('sesionAdminActiva');
-        }, 4 * 60 * 60 * 1000);
-        
-        if (claveURL === PALABRA_SECRETA || hashURL === PALABRA_SECRETA) {
-            setTimeout(() => {
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }, 1000);
-        }
-        
-        mostrarInterfazAdministrativa();
-        return true;
-    }
-
-    function mostrarInterfazAdministrativa() {
-        const botonAdmin = document.getElementById('boton-admin');
-        if (botonAdmin) {
-            botonAdmin.style.display = 'flex';
-            botonAdmin.onclick = toggleEditor;
-            console.log("✅ Botón de administración activado");
-        }
-    }
-
-    function toggleEditor() {
-        const editor = document.getElementById('editor-directora');
-        if (editor) {
-            const mostrar = editor.style.display === 'none';
-            editor.style.display = mostrar ? 'block' : 'none';
-            
-            if (mostrar) {
-                console.log("📋 Cargando datos en el editor...");
-                cargarValoresActuales();
-                cargarListaSlider();
-                cargarListaGaleria();
-                cargarRespaldos();
-                actualizarIndicadorAlmacenamiento();
-            }
-        }
-    }
-
-    function ocultarEditor() {
-        document.getElementById('editor-directora').style.display = 'none';
-    }
-
-    // ==================== SISTEMA DE PESTAÑAS ====================
-    function mostrarPestana(nombrePestana) {
-        document.querySelectorAll('.pestana').forEach(pestana => {
-            pestana.style.display = 'none';
-        });
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.remove('active');
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            setupEventListeners();
         });
         
-        document.getElementById(`pestana-${nombrePestana}`).style.display = 'block';
-        event.target.classList.add('active');
-    }
-
-    // ==================== CONTROL DE ALMACENAMIENTO ====================
-    const LIMITE_ALMACENAMIENTO = 5 * 1024 * 1024;
-
-    function calcularUsoAlmacenamiento() {
-        let totalBytes = 0;
-        
-        try {
-            const textos = localStorage.getItem('config-ue10febrero');
-            if (textos) totalBytes += new Blob([textos]).size;
-            
-            const slider = localStorage.getItem('slider-ue10febrero');
-            if (slider) {
-                const sliderData = JSON.parse(slider);
-                sliderData.forEach(img => {
-                    if (img.data) {
-                        const base64Data = img.data.split(',')[1];
-                        if (base64Data) {
-                            totalBytes += atob(base64Data).length;
-                        }
-                    }
-                });
-            }
-            
-            const galeria = localStorage.getItem('galeria-ue10febrero');
-            if (galeria) {
-                const galeriaData = JSON.parse(galeria);
-                galeriaData.forEach(img => {
-                    if (img.data) {
-                        const base64Data = img.data.split(',')[1];
-                        if (base64Data) {
-                            totalBytes += atob(base64Data).length;
-                        }
-                    }
-                });
-            }
-        } catch (error) {
-            console.error("❌ Error calculando almacenamiento:", error);
+        // Configurar event listeners
+        function setupEventListeners() {
+            adminLoginBtn.addEventListener('click', toggleAdminInterface);
+            addNewsBtn.addEventListener('click', addNews);
+            addEventBtn.addEventListener('click', addEvent);
+            clearDataBtn.addEventListener('click', clearAllData);
         }
         
-        return totalBytes;
-    }
-
-    function actualizarIndicadorAlmacenamiento() {
-        try {
-            const bytesUsados = calcularUsoAlmacenamiento();
-            const porcentaje = (bytesUsados / LIMITE_ALMACENAMIENTO) * 100;
-            const mbUsados = (bytesUsados / (1024 * 1024)).toFixed(2);
-            
-            document.getElementById('porcentaje-almacenamiento').textContent = porcentaje.toFixed(1) + '%';
-            document.getElementById('barra-almacenamiento').style.width = porcentaje + '%';
-            document.getElementById('espacio-usado').textContent = mbUsados + ' MB';
-            
-            const barra = document.getElementById('barra-almacenamiento');
-            const alerta = document.getElementById('alerta-almacenamiento');
-            
-            if (porcentaje < 70) {
-                barra.style.background = '#4caf50';
-                alerta.style.display = 'none';
-            } else if (porcentaje < 90) {
-                barra.style.background = '#ff9800';
-                alerta.style.display = 'block';
-            } else {
-                barra.style.background = '#f44336';
-                alerta.style.display = 'block';
-                alerta.innerHTML = '❌ ALMACENAMIENTO LLENO. Elimine contenido antiguo.';
+        // Cargar datos desde JSONBin
+        async function loadData() {
+            try {
+                showLoading(newsContainer);
+                showLoading(eventsContainer);
+                
+                const response = await fetch(`${JSONBIN_BASE_URL}/${BIN_ID}/latest`, {
+                    method: 'GET',
+                    headers: {
+                        'X-Master-Key': MASTER_KEY,
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Error al cargar los datos');
+                }
+                
+                const data = await response.json();
+                appData = data.record || { news: [], events: [] };
+                
+                renderNews();
+                renderEvents();
+            } catch (error) {
+                console.error('Error cargando datos:', error);
+                // Si hay error, usar datos por defecto
+                appData = { news: [], events: [] };
+                renderNews();
+                renderEvents();
+                showMessage('Error al cargar los datos. Mostrando contenido local.', 'error');
             }
-        } catch (error) {
-            console.error("❌ Error actualizando indicador de almacenamiento:", error);
         }
-    }
-
-    function verificarAlmacenamientoAntesDeSubir(archivo) {
-        try {
-            const bytesActuales = calcularUsoAlmacenamiento();
-            const bytesArchivo = archivo.size;
-            const totalDespues = bytesActuales + bytesArchivo;
-            
-            if (totalDespues > LIMITE_ALMACENAMIENTO) {
-                const espacioNecesario = (bytesArchivo / (1024 * 1024)).toFixed(2);
-                const espacioDisponible = ((LIMITE_ALMACENAMIENTO - bytesActuales) / (1024 * 1024)).toFixed(2);
-                mostrarMensaje(`❌ No hay espacio suficiente. Necesita ${espacioNecesario} MB, pero solo hay ${espacioDisponible} MB disponibles.`, 'error');
+        
+        // Guardar datos en JSONBin
+        async function saveData() {
+            try {
+                const response = await fetch(`${JSONBIN_BASE_URL}/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': MASTER_KEY,
+                    },
+                    body: JSON.stringify(appData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Error al guardar los datos');
+                }
+                
+                return true;
+            } catch (error) {
+                console.error('Error guardando datos:', error);
                 return false;
             }
-            return true;
-        } catch (error) {
-            console.error("❌ Error verificando almacenamiento:", error);
-            return false;
         }
-    }
-
-    function limpiarAlmacenamiento() {
-        if (confirm('¿Eliminar todo el contenido para liberar espacio?')) {
-            try {
-                localStorage.removeItem('slider-ue10febrero');
-                localStorage.removeItem('galeria-ue10febrero');
-                
-                actualizarIndicadorAlmacenamiento();
-                cargarListaSlider();
-                cargarListaGaleria();
-                actualizarSliderEnPagina();
-                actualizarGaleriaEnPagina();
-                
-                mostrarMensaje('✅ Contenido eliminado', 'success');
-            } catch (error) {
-                console.error("❌ Error limpiando almacenamiento:", error);
-                mostrarMensaje('❌ Error al limpiar el almacenamiento', 'error');
-            }
-        }
-    }
-
-    // ==================== SISTEMA DE TEXTOS CORREGIDO ====================
-    function cargarValoresActuales() {
-        try {
-            const config = JSON.parse(localStorage.getItem('config-ue10febrero') || '{}');
-            console.log("📖 Cargando configuración:", config);
-            
-            document.getElementById('edit-estudiantes').value = config.estudiantes || '500+';
-            document.getElementById('edit-docentes').value = config.docentes || '40+';
-            document.getElementById('edit-experiencia').value = config.experiencia || '25+';
-            document.getElementById('edit-direccion').value = config.direccion || 'Av. Principal #123, Ciudad';
-            document.getElementById('edit-telefono').value = config.telefono || '+591 4 123 4567';
-            document.getElementById('edit-email').value = config.email || 'ue10defebrero@educacion.bo';
-            document.getElementById('edit-whatsapp').value = config.whatsapp || '+591 7123 4567';
-            document.getElementById('edit-facebook').value = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
-            document.getElementById('edit-mision').value = config.mision || '';
-            document.getElementById('edit-vision').value = config.vision || '';
-            
-            // Actualizar la página con los valores guardados
-            actualizarPaginaConConfig(config);
-        } catch (error) {
-            console.error("❌ Error cargando valores actuales:", error);
-        }
-    }
-
-    function aplicarCambios() {
-        try {
-            const config = {
-                estudiantes: document.getElementById('edit-estudiantes').value,
-                docentes: document.getElementById('edit-docentes').value,
-                experiencia: document.getElementById('edit-experiencia').value,
-                direccion: document.getElementById('edit-direccion').value,
-                telefono: document.getElementById('edit-telefono').value,
-                email: document.getElementById('edit-email').value,
-                whatsapp: document.getElementById('edit-whatsapp').value,
-                facebook: document.getElementById('edit-facebook').value,
-                mision: document.getElementById('edit-mision').value,
-                vision: document.getElementById('edit-vision').value
-            };
-            
-            console.log("💾 Guardando configuración:", config);
-            localStorage.setItem('config-ue10febrero', JSON.stringify(config));
-            actualizarPaginaConConfig(config);
-            mostrarMensaje('✅ Cambios aplicados correctamente', 'success');
-        } catch (error) {
-            console.error("❌ Error aplicando cambios:", error);
-            mostrarMensaje('❌ Error al aplicar cambios', 'error');
-        }
-    }
-
-    function actualizarPaginaConConfig(config) {
-        console.log("🔄 Actualizando página con configuración:", config);
         
-        try {
-            // Actualizar estadísticas
-            const estudiantesElem = document.getElementById('estudiantes');
-            const docentesElem = document.getElementById('docentes');
-            const experienciaElem = document.getElementById('experiencia');
+        // Mostrar noticias
+        function renderNews() {
+            newsContainer.innerHTML = '';
             
-            if (estudiantesElem) estudiantesElem.textContent = config.estudiantes || '500+';
-            if (docentesElem) docentesElem.textContent = config.docentes || '40+';
-            if (experienciaElem) experienciaElem.textContent = config.experiencia || '25+';
-            
-            // Actualizar información de contacto
-            document.getElementById('texto-direccion').textContent = config.direccion || 'Av. Principal #123, Ciudad';
-            document.getElementById('texto-email').textContent = config.email || 'ue10defebrero@educacion.bo';
-            document.getElementById('texto-telefono').textContent = config.telefono || '+591 4 123 4567';
-            document.getElementById('texto-whatsapp').textContent = config.whatsapp || '+591 7123 4567';
-            document.getElementById('texto-direccion-mapa').textContent = config.direccion || 'Av. Principal #123, Ciudad';
-            
-            // Actualizar textos de misión y visión
-            const misionElem = document.getElementById('texto-mision');
-            const visionElem = document.getElementById('texto-vision');
-            
-            if (misionElem && config.mision) misionElem.textContent = config.mision;
-            if (visionElem && config.vision) visionElem.textContent = config.vision;
-            
-            // Actualizar enlaces
-            const linkWhatsapp = document.getElementById('link-whatsapp');
-            const botonWhatsapp = document.getElementById('boton-whatsapp');
-            const whatsappNum = config.whatsapp?.replace(/\D/g, '') || '59171234567';
-            
-            if (linkWhatsapp) linkWhatsapp.href = `https://wa.me/${whatsappNum}`;
-            if (botonWhatsapp) botonWhatsapp.href = `https://wa.me/${whatsappNum}`;
-            
-            const linkFacebook = document.getElementById('link-facebook');
-            const botonFacebook = document.getElementById('boton-facebook');
-            const facebookUrl = config.facebook || 'https://facebook.com/unidadeducativa10defebrero';
-            
-            if (linkFacebook) linkFacebook.href = facebookUrl;
-            if (botonFacebook) botonFacebook.href = facebookUrl;
-            
-            console.log("✅ Página actualizada correctamente");
-        } catch (error) {
-            console.error("❌ Error actualizando página:", error);
-        }
-    }
-
-    function previsualizarCambios() {
-        alert('👁️ Los cambios se aplicarán inmediatamente al hacer clic en "Aplicar Cambios"');
-    }
-
-    // ==================== SISTEMA DE SLIDER CORREGIDO ====================
-    document.getElementById('upload-slider')?.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            if (file.size > 2 * 1024 * 1024) {
-                alert('❌ La imagen es muy grande. Máximo 2MB.');
-                this.value = '';
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('img-preview-slider').src = e.target.result;
-                document.getElementById('preview-slider').style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-
-    function subirImagenSlider() {
-        try {
-            const titulo = document.getElementById('titulo-slider').value;
-            const descripcion = document.getElementById('descripcion-slider').value;
-            const archivo = document.getElementById('upload-slider').files[0];
-            
-            if (!titulo || !archivo) {
-                mostrarMensaje('❌ Complete título y seleccione una imagen', 'error');
+            if (appData.news.length === 0) {
+                newsContainer.innerHTML = '<p>No hay noticias disponibles en este momento.</p>';
                 return;
             }
             
-            if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
-                
-                slider.push({
-                    data: e.target.result,
-                    titulo: titulo,
-                    descripcion: descripcion,
-                    fechaSubida: new Date().toLocaleString()
-                });
-                
-                localStorage.setItem('slider-ue10febrero', JSON.stringify(slider));
-                
-                mostrarMensaje('✅ Imagen agregada al slider', 'success');
-                document.getElementById('titulo-slider').value = '';
-                document.getElementById('descripcion-slider').value = '';
-                document.getElementById('upload-slider').value = '';
-                document.getElementById('preview-slider').style.display = 'none';
-                
-                actualizarIndicadorAlmacenamiento();
-                cargarListaSlider();
-                actualizarSliderEnPagina();
-            };
-            reader.readAsDataURL(archivo);
-        } catch (error) {
-            console.error("❌ Error subiendo imagen al slider:", error);
-            mostrarMensaje('❌ Error al subir la imagen', 'error');
-        }
-    }
-
-    function cargarListaSlider() {
-        try {
-            const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
-            const lista = document.getElementById('lista-slider');
-            
-            if (slider.length === 0) {
-                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en el slider</p>';
-                return;
-            }
-            
-            let html = '';
-            slider.forEach((img, index) => {
-                html += `
-                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
-                        <div style="display: flex; align-items: start; gap: 0.5rem;">
-                            <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: bold; font-size: 0.9rem;">${img.titulo}</div>
-                                <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
-                                    <small style="color: #999;">${img.fechaSubida}</small>
-                                    <button onclick="eliminarImagenSlider(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            appData.news.forEach((newsItem, index) => {
+                const newsElement = document.createElement('div');
+                newsElement.className = 'card';
+                newsElement.innerHTML = `
+                    <h3>${newsItem.title}</h3>
+                    <p>${newsItem.content}</p>
+                    <p><small>Publicado: ${new Date(newsItem.timestamp).toLocaleDateString()}</small></p>
                 `;
+                newsContainer.appendChild(newsElement);
             });
-            lista.innerHTML = html;
-        } catch (error) {
-            console.error("❌ Error cargando lista del slider:", error);
         }
-    }
-
-    function eliminarImagenSlider(index) {
-        if (confirm('¿Eliminar esta imagen del slider?')) {
-            try {
-                const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
-                slider.splice(index, 1);
-                localStorage.setItem('slider-ue10febrero', JSON.stringify(slider));
-                cargarListaSlider();
-                actualizarSliderEnPagina();
-                actualizarIndicadorAlmacenamiento();
-                mostrarMensaje('✅ Imagen eliminada del slider', 'success');
-            } catch (error) {
-                console.error("❌ Error eliminando imagen del slider:", error);
-                mostrarMensaje('❌ Error al eliminar la imagen', 'error');
-            }
-        }
-    }
-
-    function actualizarSliderEnPagina() {
-        try {
-            const slider = JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]');
-            const slidesContainer = document.querySelector('.slides');
-            const dotsContainer = document.querySelector('.slider-dots');
+        
+        // Mostrar eventos
+        function renderEvents() {
+            eventsContainer.innerHTML = '';
             
-            console.log("🔄 Actualizando slider con", slider.length, "imágenes");
-            
-            if (slider.length === 0) {
-                // Mostrar slider vacío
-                slidesContainer.innerHTML = `
-                    <div class="slide">
-                        <div style="background: #f8f9fa; height: 500px; display: flex; align-items: center; justify-content: center; color: #666;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
-                                <h3>Slider vacío</h3>
-                                <p>Agregue imágenes desde el panel de administración</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                dotsContainer.innerHTML = '<span class="dot active"></span>';
+            if (appData.events.length === 0) {
+                eventsContainer.innerHTML = '<p>No hay eventos programados en este momento.</p>';
                 return;
             }
             
-            let slidesHTML = '';
-            let dotsHTML = '';
+            const eventsGrid = document.createElement('div');
+            eventsGrid.className = 'grid';
             
-            slider.forEach((img, index) => {
-                slidesHTML += `
-                    <div class="slide">
-                        <img src="${img.data}" alt="${img.titulo}">
-                        <div class="slide-content">
-                            <h3>${img.titulo}</h3>
-                            <p>${img.descripcion}</p>
-                        </div>
-                    </div>
+            appData.events.forEach((event, index) => {
+                const eventElement = document.createElement('div');
+                eventElement.className = 'event-card';
+                eventElement.innerHTML = `
+                    <div class="event-title">${event.title}</div>
+                    <div class="event-date">${new Date(event.date).toLocaleDateString()}</div>
+                    <div class="event-description">${event.description}</div>
                 `;
-                
-                dotsHTML += `<span class="dot ${index === 0 ? 'active' : ''}" data-index="${index}"></span>`;
+                eventsGrid.appendChild(eventElement);
             });
             
-            slidesContainer.innerHTML = slidesHTML;
-            dotsContainer.innerHTML = dotsHTML;
-            
-            // Reiniciar el slider
-            currentSlide = 0;
-            showSlide(0);
-            
-            // Reasignar eventos a los dots
-            document.querySelectorAll('.dot').forEach((dot) => {
-                dot.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    showSlide(index);
-                });
-            });
-            
-            console.log("✅ Slider actualizado correctamente");
-        } catch (error) {
-            console.error("❌ Error actualizando slider:", error);
+            eventsContainer.appendChild(eventsGrid);
         }
-    }
-
-    // ==================== SISTEMA DE GALERÍA ====================
-    document.getElementById('upload-galeria')?.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            if (file.size > 2 * 1024 * 1024) {
-                alert('❌ La imagen es muy grande. Máximo 2MB.');
-                this.value = '';
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('img-preview-galeria').src = e.target.result;
-                document.getElementById('preview-galeria').style.display = 'block';
-            }
-            reader.readAsDataURL(file);
+        
+        // Mostrar estado de carga
+        function showLoading(container) {
+            container.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Cargando...</p>
+                </div>
+            `;
         }
-    });
-
-    function subirImagenGaleria() {
-        try {
-            const titulo = document.getElementById('titulo-galeria').value;
-            const descripcion = document.getElementById('descripcion-galeria').value;
-            const archivo = document.getElementById('upload-galeria').files[0];
-            
-            if (!titulo || !archivo) {
-                mostrarMensaje('❌ Complete título y seleccione una imagen', 'error');
-                return;
-            }
-            
-            if (!verificarAlmacenamientoAntesDeSubir(archivo)) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
-                
-                galeria.push({
-                    data: e.target.result,
-                    titulo: titulo,
-                    descripcion: descripcion,
-                    fechaSubida: new Date().toLocaleString()
-                });
-                
-                localStorage.setItem('galeria-ue10febrero', JSON.stringify(galeria));
-                
-                mostrarMensaje('✅ Imagen agregada a la galería', 'success');
-                document.getElementById('titulo-galeria').value = '';
-                document.getElementById('descripcion-galeria').value = '';
-                document.getElementById('upload-galeria').value = '';
-                document.getElementById('preview-galeria').style.display = 'none';
-                
-                actualizarIndicadorAlmacenamiento();
-                cargarListaGaleria();
-                actualizarGaleriaEnPagina();
-            };
-            reader.readAsDataURL(archivo);
-        } catch (error) {
-            console.error("❌ Error subiendo imagen a la galería:", error);
-            mostrarMensaje('❌ Error al subir la imagen', 'error');
-        }
-    }
-
-    function cargarListaGaleria() {
-        try {
-            const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
-            const lista = document.getElementById('lista-galeria');
-            
-            if (galeria.length === 0) {
-                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No hay imágenes en la galería</p>';
-                return;
-            }
-            
-            let html = '';
-            galeria.forEach((img, index) => {
-                html += `
-                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
-                        <div style="display: flex; align-items: start; gap: 0.5rem;">
-                            <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: bold; font-size: 0.9rem;">${img.titulo}</div>
-                                <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
-                                    <small style="color: #999;">${img.fechaSubida}</small>
-                                    <button onclick="eliminarImagenGaleria(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.2rem 0.5rem; font-size: 0.7rem; cursor: pointer;">🗑️</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            lista.innerHTML = html;
-        } catch (error) {
-            console.error("❌ Error cargando lista de galería:", error);
-        }
-    }
-
-    function eliminarImagenGaleria(index) {
-        if (confirm('¿Eliminar esta imagen de la galería?')) {
-            try {
-                const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
-                galeria.splice(index, 1);
-                localStorage.setItem('galeria-ue10febrero', JSON.stringify(galeria));
-                cargarListaGaleria();
-                actualizarGaleriaEnPagina();
-                actualizarIndicadorAlmacenamiento();
-                mostrarMensaje('✅ Imagen eliminada de la galería', 'success');
-            } catch (error) {
-                console.error("❌ Error eliminando imagen de la galería:", error);
-                mostrarMensaje('❌ Error al eliminar la imagen', 'error');
-            }
-        }
-    }
-
-    function actualizarGaleriaEnPagina() {
-        try {
-            const galeria = JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]');
-            const galeriaContainer = document.querySelector('.galeria-container');
-            
-            console.log("🔄 Actualizando galería con", galeria.length, "imágenes");
-            
-            if (galeria.length === 0) {
-                galeriaContainer.innerHTML = `
-                    <div style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
-                        <h3 style="color: #c41e3a; margin-bottom: 1rem;">Galería vacía</h3>
-                        <p>Agregue imágenes desde el panel de administración</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            let html = '';
-            galeria.forEach(img => {
-                html += `
-                    <div class="galeria-item">
-                        <img src="${img.data}" alt="${img.titulo}">
-                        <div class="galeria-overlay">
-                            <h3>${img.titulo}</h3>
-                            <p>${img.descripcion}</p>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            galeriaContainer.innerHTML = html;
-            console.log("✅ Galería actualizada correctamente");
-        } catch (error) {
-            console.error("❌ Error actualizando galería:", error);
-        }
-    }
-
-    // ==================== SISTEMA DE RESPALDO ====================
-    function crearRespaldo() {
-        try {
-            const nombre = document.getElementById('nombre-respaldo').value || `Respaldo-${new Date().toLocaleDateString()}`;
-            const config = {
-                textos: JSON.parse(localStorage.getItem('config-ue10febrero') || '{}'),
-                slider: JSON.parse(localStorage.getItem('slider-ue10febrero') || '[]'),
-                galeria: JSON.parse(localStorage.getItem('galeria-ue10febrero') || '[]'),
-                fecha: new Date().toLocaleString()
-            };
-            
-            let respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
-            respaldos.push({nombre, config});
-            localStorage.setItem('respaldos-ue10febrero', JSON.stringify(respaldos));
-            
-            mostrarMensaje(`✅ Respaldo "${nombre}" creado`, 'success');
-            document.getElementById('nombre-respaldo').value = '';
-            cargarRespaldos();
-        } catch (error) {
-            console.error("❌ Error creando respaldo:", error);
-            mostrarMensaje('❌ Error al crear respaldo', 'error');
-        }
-    }
-
-    function cargarRespaldos() {
-        try {
-            const respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
-            const select = document.getElementById('select-respaldo');
-            const contenedor = document.getElementById('contenedor-respaldos');
-            
-            select.innerHTML = '<option value="">Seleccione respaldo</option>';
-            contenedor.innerHTML = '';
-            
-            respaldos.forEach((respaldo, index) => {
-                select.innerHTML += `<option value="${index}">${respaldo.nombre}</option>`;
-                contenedor.innerHTML += `
-                    <div style="padding: 0.5rem; background: #f8f9fa; margin: 0.25rem 0; border-radius: 3px;">
-                        <strong>${respaldo.nombre}</strong><br>
-                        <small>${respaldo.config.fecha}</small>
-                    </div>
-                `;
-            });
-        } catch (error) {
-            console.error("❌ Error cargando respaldos:", error);
-        }
-    }
-
-    function restaurarRespaldo() {
-        try {
-            const index = document.getElementById('select-respaldo').value;
-            if (index === '') {
-                mostrarMensaje('❌ Seleccione un respaldo', 'error');
-                return;
-            }
-            
-            const respaldos = JSON.parse(localStorage.getItem('respaldos-ue10febrero') || '[]');
-            const respaldo = respaldos[index];
-            
-            if (confirm(`¿Restaurar respaldo "${respaldo.nombre}"? Se perderán los datos actuales.`)) {
-                // Restaurar configuración
-                localStorage.setItem('config-ue10febrero', JSON.stringify(respaldo.config.textos || {}));
-                localStorage.setItem('slider-ue10febrero', JSON.stringify(respaldo.config.slider || []));
-                localStorage.setItem('galeria-ue10febrero', JSON.stringify(respaldo.config.galeria || []));
-                
-                // Actualizar interfaz
-                cargarValoresActuales();
-                cargarListaSlider();
-                cargarListaGaleria();
-                actualizarSliderEnPagina();
-                actualizarGaleriaEnPagina();
-                actualizarIndicadorAlmacenamiento();
-                
-                mostrarMensaje(`✅ Respaldo "${respaldo.nombre}" restaurado`, 'success');
-            }
-        } catch (error) {
-            console.error("❌ Error restaurando respaldo:", error);
-            mostrarMensaje('❌ Error al restaurar respaldo', 'error');
-        }
-    }
-
-    // ==================== FUNCIONES UTILITARIAS ====================
-    function mostrarMensaje(mensaje, tipo) {
-        try {
-            const div = document.getElementById('mensaje-estado');
-            div.textContent = mensaje;
-            div.style.display = 'block';
-            div.style.background = tipo === 'success' ? '#d4edda' : '#f8d7da';
-            div.style.color = tipo === 'success' ? '#155724' : '#721c24';
-            div.style.border = tipo === 'success' ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
+        
+        // Mostrar mensaje
+        function showMessage(message, type = 'success') {
+            adminMessage.textContent = message;
+            adminMessage.className = `alert alert-${type}`;
+            adminMessage.classList.remove('hidden');
             
             setTimeout(() => {
-                div.style.display = 'none';
+                adminMessage.classList.add('hidden');
             }, 5000);
-        } catch (error) {
-            console.error("❌ Error mostrando mensaje:", error);
         }
-    }
-
-    // ==================== SLIDER FUNCIONAL ====================
-    let currentSlide = 0;
-
-    function showSlide(index) {
-        try {
-            const slides = document.querySelector('.slides');
-            const slidesCount = document.querySelectorAll('.slide').length;
-            const dots = document.querySelectorAll('.dot');
+        
+        // Alternar interfaz de administración
+        function toggleAdminInterface() {
+            const adminKey = document.getElementById('admin-key').value;
             
-            if (index >= slidesCount) currentSlide = 0;
-            else if (index < 0) currentSlide = slidesCount - 1;
-            else currentSlide = index;
-            
-            if (slides) {
-                slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            if (adminKey === ADMIN_PASSWORD) {
+                adminInterface.classList.remove('hidden');
+                adminLoginBtn.textContent = 'Cerrar Sesión';
+                adminLoginBtn.removeEventListener('click', toggleAdminInterface);
+                adminLoginBtn.addEventListener('click', closeAdminInterface);
+                showMessage('Sesión de administrador iniciada correctamente.', 'success');
+            } else {
+                showMessage('Clave de administración incorrecta.', 'error');
             }
-            
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
-            });
-        } catch (error) {
-            console.error("❌ Error mostrando slide:", error);
         }
-    }
-
-    // ==================== NAVEGACIÓN MEJORADA ====================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Cerrar menú hamburguesa en móviles
-                document.querySelector('.nav-links').classList.remove('active');
+        
+        // Cerrar interfaz de administración
+        function closeAdminInterface() {
+            adminInterface.classList.add('hidden');
+            adminLoginBtn.textContent = 'Acceder';
+            adminLoginBtn.removeEventListener('click', closeAdminInterface);
+            adminLoginBtn.addEventListener('click', toggleAdminInterface);
+            document.getElementById('admin-key').value = '';
+        }
+        
+        // Agregar noticia
+        async function addNews() {
+            const title = document.getElementById('news-title').value.trim();
+            const content = document.getElementById('news-content').value.trim();
+            
+            if (!title || !content) {
+                showMessage('Por favor, complete todos los campos.', 'error');
+                return;
             }
-        });
-    });
-
-    // Menú hamburguesa corregido
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-    }
-
-    // ==================== INICIALIZACIÓN COMPLETA ====================
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log("🚀 Iniciando aplicación...");
-        
-        // Inicializar datos por defecto
-        inicializarDatos();
-        
-        // Verificar acceso seguro
-        verificarAccesoSeguro();
-        
-        // Cargar datos guardados
-        cargarValoresActuales();
-        
-        // Actualizar slider y galería en la página
-        actualizarSliderEnPagina();
-        actualizarGaleriaEnPagina();
-        
-        // Iniciar slider
-        showSlide(0);
-        
-        // Auto-avance cada 8 segundos
-        setInterval(() => {
-            if (document.querySelectorAll('.slide').length > 1) {
-                showSlide(currentSlide + 1);
+            
+            const newNews = {
+                id: Date.now(),
+                title: title,
+                content: content,
+                timestamp: new Date().toISOString()
+            };
+            
+            appData.news.unshift(newNews);
+            
+            const saved = await saveData();
+            
+            if (saved) {
+                renderNews();
+                document.getElementById('news-title').value = '';
+                document.getElementById('news-content').value = '';
+                showMessage('Noticia agregada correctamente.', 'success');
+            } else {
+                showMessage('Error al guardar la noticia.', 'error');
+                // Revertir cambios locales si no se pudo guardar
+                appData.news.shift();
             }
-        }, 8000);
+        }
         
-        console.log("✅ Aplicación iniciada correctamente");
-    });
+        // Agregar evento
+        async function addEvent() {
+            const title = document.getElementById('event-title').value.trim();
+            const date = document.getElementById('event-date').value;
+            const description = document.getElementById('event-description').value.trim();
+            
+            if (!title || !date || !description) {
+                showMessage('Por favor, complete todos los campos.', 'error');
+                return;
+            }
+            
+            const newEvent = {
+                id: Date.now(),
+                title: title,
+                date: date,
+                description: description
+            };
+            
+            appData.events.push(newEvent);
+            
+            // Ordenar eventos por fecha
+            appData.events.sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            const saved = await saveData();
+            
+            if (saved) {
+                renderEvents();
+                document.getElementById('event-title').value = '';
+                document.getElementById('event-date').value = '';
+                document.getElementById('event-description').value = '';
+                showMessage('Evento agregado correctamente.', 'success');
+            } else {
+                showMessage('Error al guardar el evento.', 'error');
+                // Revertir cambios locales si no se pudo guardar
+                appData.events.pop();
+            }
+        }
+        
+        // Eliminar todos los datos
+        async function clearAllData() {
+            if (confirm('¿Está seguro de que desea eliminar todas las noticias y eventos? Esta acción no se puede deshacer.')) {
+                appData.news = [];
+                appData.events = [];
+                
+                const saved = await saveData();
+                
+                if (saved) {
+                    renderNews();
+                    renderEvents();
+                    showMessage('Todos los datos han sido eliminados.', 'success');
+                } else {
+                    showMessage('Error al eliminar los datos.', 'error');
+                }
+            }
+        }
     </script>
 </body>
 </html>
