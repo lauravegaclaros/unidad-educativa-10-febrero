@@ -1,0 +1,10 @@
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDcLiYGNCNPBkoLHNHthWjzHZoUPwcVrdA",
+  authDomain: "ue-10-febrero.firebaseapp.com",
+  databaseURL: "https://ue-10-febrero-default-rtdb.firebaseio.com",
+  projectId: "ue-10-febrero",
+  storageBucket: "ue-10-febrero.firebasestorage.app",
+  messagingSenderId: "913808068044",
+  appId: "1:913808068044:web:a70e7dc8e4dfc309fe6169"
+};

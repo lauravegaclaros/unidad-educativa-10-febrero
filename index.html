@@ -3,666 +3,1181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unidad Educativa "10 de Febrero"</title>
+    <meta name="description" content="Unidad Educativa 10 de Febrero - Con estudio, esfuerzo y esmero">
+    <title>Unidad Educativa 10 de Febrero</title>
+    
+    <!-- Firebase SDK - SOLO Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
     <style>
-        :root {
-            --primary-color: #1a5276;
-            --secondary-color: #3498db;
-            --accent-color: #f39c12;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --success-color: #27ae60;
-            --warning-color: #e74c3c;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
+        :root {
+            --primary-color: #c41e3a;
+            --primary-dark: #b91c2e;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+        }
+
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: var(--text-color);
+            scroll-behavior: smooth;
         }
-        
+
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(rgba(196, 30, 58, 0.9), rgba(196, 30, 58, 0.9));
             color: white;
-            padding: 1.5rem 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .logo {
-            width: 80px;
-            height: 80px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 1rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
+
         nav {
-            background-color: var(--dark-color);
-            padding: 0.8rem 0;
-        }
-        
-        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            padding: 0 2rem;
         }
-        
-        .nav-item {
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1.2rem;
-            margin: 0 0.5rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            transition: opacity 0.3s;
+            padding: 0.5rem 0;
+            font-weight: 500;
         }
-        
-        .nav-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+
+        .nav-links a:hover {
+            opacity: 0.8;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
-        
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), #667eea;
+            color: white;
+            padding: 160px 2rem 100px;
+            text-align: center;
+            margin-top: 60px;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
             margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
         }
-        
-        .card h2 {
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-hero {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-hero:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .about {
+            background: var(--light-bg);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .about-text h3 {
             color: var(--primary-color);
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--light-color);
         }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-            text-decoration: none;
+
+        .about-text p {
+            margin-bottom: 1rem;
+            text-align: justify;
         }
-        
-        .btn:hover {
-            background-color: var(--primary-color);
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
-        .btn-warning {
-            background-color: var(--warning-color);
+
+        .stat-box {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
-        
-        .btn-warning:hover {
-            background-color: #c0392b;
-        }
-        
-        .btn-success {
-            background-color: var(--success-color);
-        }
-        
-        .btn-success:hover {
-            background-color: #219653;
-        }
-        
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-        
-        label {
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
         }
-        
-        input, textarea, select {
+
+        .slider-section {
+            background: var(--light-bg);
+            padding: 4rem 0;
+        }
+
+        .slider-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.8s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
             width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
+            height: 500px;
+            object-fit: cover;
         }
-        
-        textarea {
-            min-height: 120px;
-            resize: vertical;
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 2rem;
         }
-        
-        .alert {
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1.5rem;
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 1rem;
+            z-index: 10;
         }
-        
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+
+        .slider-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+
+        .slider-btn:hover {
+            background: white;
+            transform: scale(1.1);
         }
-        
-        .grid {
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary-color);
+        }
+
+        .galeria-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
-        }
-        
-        .event-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 1.2rem;
-            transition: transform 0.3s;
-        }
-        
-        .event-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .event-title {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .event-date {
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        .event-description {
-            color: #666;
-        }
-        
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-        
-        .admin-panel {
-            background-color: #f8f9fa;
-            border-left: 4px solid var(--accent-color);
-            padding: 1.5rem;
             margin-top: 2rem;
         }
-        
-        .admin-panel h3 {
-            color: var(--accent-color);
-            margin-bottom: 1rem;
+
+        .galeria-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
         }
-        
-        .hidden {
-            display: none;
+
+        .galeria-item:hover {
+            transform: scale(1.03);
         }
-        
-        .loading {
-            text-align: center;
-            padding: 2rem;
+
+        .galeria-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
         }
-        
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: var(--secondary-color);
+
+        .galeria-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .galeria-item:hover .galeria-overlay {
+            transform: translateY(0);
+        }
+
+        #contactos {
+            background: var(--light-bg);
+            padding: 5rem 2rem;
+        }
+
+        .contactos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-contacto {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .contacto-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contacto-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .contacto-icono {
+            font-size: 1.5rem;
+        }
+
+        #boton-admin {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
         }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+
+        .loading-indicator {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            z-index: 10001;
         }
-        
+
+        .loading-indicator.active {
+            display: block;
+        }
+
+        .tab-btn {
+            background: #f8f9fa;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: white;
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
         @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-container {
+            .hero h1 { font-size: 2rem; }
+            .about-content, .contactos-grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: 1fr; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
                 flex-direction: column;
-                align-items: center;
+                padding: 1rem 0;
             }
-            
-            .nav-item {
-                margin: 0.3rem 0;
-                width: 80%;
-                text-align: center;
-            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <div class="logo">UEF</div>
-            <div>
-                <h1>Unidad Educativa "10 de Febrero"</h1>
-                <p class="subtitle">Formando líderes para el futuro</p>
-            </div>
-        </div>
-    </header>
-    
-    <nav>
-        <div class="nav-container">
-            <a href="#inicio" class="nav-item">Inicio</a>
-            <a href="#noticias" class="nav-item">Noticias</a>
-            <a href="#eventos" class="nav-item">Eventos</a>
-            <a href="#acerca" class="nav-item">Acerca de</a>
-            <a href="#contacto" class="nav-item">Contacto</a>
-        </div>
-    </nav>
-    
-    <div class="container">
-        <section id="inicio" class="card">
-            <h2>Bienvenidos</h2>
-            <p>La Unidad Educativa "10 de Febrero" es una institución comprometida con la excelencia académica y la formación integral de nuestros estudiantes. Nuestro objetivo es proporcionar un ambiente de aprendizaje estimulante que fomente el crecimiento intelectual, emocional y social.</p>
-            <p>Contamos con un equipo docente altamente calificado y modernas instalaciones para garantizar la mejor educación para sus hijos.</p>
-        </section>
-        
-        <section id="noticias" class="card">
-            <h2>Noticias y Anuncios</h2>
-            <div id="news-container">
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Cargando noticias...</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="eventos" class="card">
-            <h2>Próximos Eventos</h2>
-            <div id="events-container">
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Cargando eventos...</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="acerca" class="card">
-            <h2>Acerca de Nosotros</h2>
-            <p>Fundada en 1985, la Unidad Educativa "10 de Febrero" ha sido un pilar en la comunidad educativa por más de tres décadas. Nuestra misión es formar ciudadanos responsables, críticos y creativos, capaces de contribuir positivamente a la sociedad.</p>
-            <p>Ofrecemos educación desde inicial hasta bachillerato, con énfasis en valores, tecnología y pensamiento crítico.</p>
-        </section>
-        
-        <section id="contacto" class="card">
-            <h2>Contacto</h2>
-            <p>Estamos ubicados en Av. Principal #123, Ciudad.</p>
-            <p>Teléfono: (123) 456-7890</p>
-            <p>Email: info@ue10febrero.edu</p>
-            <p>Horario de atención: Lunes a Viernes de 7:00 am a 4:00 pm</p>
-        </section>
-        
-        <!-- Panel de Administración -->
-        <section class="admin-panel">
-            <h3>Panel de Administración</h3>
-            <p>Utilice esta sección para agregar o modificar contenido que será visible para todos los visitantes.</p>
-            
-            <div class="form-group">
-                <label for="admin-key">Clave de administración:</label>
-                <input type="password" id="admin-key" placeholder="Ingrese la clave de administración">
-                <button id="admin-login" class="btn" style="margin-top: 0.5rem;">Acceder</button>
-            </div>
-            
-            <div id="admin-interface" class="hidden">
-                <div class="form-group">
-                    <h4>Agregar Noticia</h4>
-                    <input type="text" id="news-title" placeholder="Título de la noticia">
-                    <textarea id="news-content" placeholder="Contenido de la noticia"></textarea>
-                    <button id="add-news" class="btn btn-success">Agregar Noticia</button>
-                </div>
-                
-                <div class="form-group">
-                    <h4>Agregar Evento</h4>
-                    <input type="text" id="event-title" placeholder="Título del evento">
-                    <input type="date" id="event-date">
-                    <textarea id="event-description" placeholder="Descripción del evento"></textarea>
-                    <button id="add-event" class="btn btn-success">Agregar Evento</button>
-                </div>
-                
-                <div class="form-group">
-                    <h4>Gestión de Contenido</h4>
-                    <button id="clear-data" class="btn btn-warning">Eliminar Todo el Contenido</button>
-                    <p><small>Nota: Esta acción eliminará todas las noticias y eventos.</small></p>
-                </div>
-                
-                <div id="admin-message" class="alert hidden"></div>
-            </div>
-        </section>
+    <div class="loading-indicator" id="loading-indicator">
+        <div style="font-size: 2rem; margin-bottom: 1rem;">⏳</div>
+        <div>Cargando...</div>
     </div>
-    
-    <footer>
-        <p>Unidad Educativa "10 de Febrero" &copy; 2023 - Todos los derechos reservados</p>
-        <p>Sitio web desarrollado con ❤️ para la comunidad educativa</p>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <span class="logo-text">🏫 U.E. 10 de Febrero</span>
+            </div>
+            <button class="hamburger">☰</button>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contactos">Contactos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div>
+                <h1>Unidad Educativa 10 de Febrero</h1>
+                <p>Con estudio, esfuerzo y esmero... Adelante 10 de Febrero</p>
+                <div class="hero-buttons">
+                    <a href="#nosotros" class="btn-hero">Conócenos</a>
+                    <a href="#galeria" class="btn-hero">Ver Galería</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="about">
+            <h2>Sobre Nosotros</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Nuestra Misión</h3>
+                    <p id="texto-mision">Cargando...</p>
+                </div>
+                <div class="about-text">
+                    <h3>Nuestra Visión</h3>
+                    <p id="texto-vision">Cargando...</p>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-number" id="estudiantes">500+</span>
+                    <span class="stat-label">Estudiantes</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="docentes">40+</span>
+                    <span class="stat-label">Docentes</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="experiencia">25+</span>
+                    <span class="stat-label">Años</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="slider-section">
+            <div class="slider-container">
+                <h2>Eventos y Actividades</h2>
+                <div class="slider">
+                    <div class="slides">
+                        <div class="slide">
+                            <div style="background: #f8f9fa; height: 500px; display: flex; align-items: center; justify-content: center; color: #666;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 4rem;">🖼️</div>
+                                    <h3>Cargando slider...</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-nav">
+                        <button class="slider-btn prev">❮</button>
+                        <button class="slider-btn next">❯</button>
+                    </div>
+                    <div class="slider-dots">
+                        <span class="dot active"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria">
+            <h2>Galería de Imágenes</h2>
+            <div class="galeria-container">
+                <div style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">
+                    <div style="font-size: 4rem;">🖼️</div>
+                    <h3 style="color: #c41e3a;">Cargando galería...</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="contactos">
+            <h2>📞 Contáctanos</h2>
+            <div class="contactos-grid">
+                <div class="info-contacto">
+                    <h3>Información de Contacto</h3>
+                    <div class="contacto-lista">
+                        <div class="contacto-item">
+                            <div class="contacto-icono">📍</div>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p id="texto-direccion">Cargando...</p>
+                            </div>
+                        </div>
+                        <div class="contacto-item">
+                            <div class="contacto-icono">📧</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p id="texto-email">Cargando...</p>
+                            </div>
+                        </div>
+                        <div class="contacto-item">
+                            <div class="contacto-icono">📱</div>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p id="texto-telefono">Cargando...</p>
+                            </div>
+                        </div>
+                        <div class="contacto-item">
+                            <div class="contacto-icono">💬</div>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <p id="texto-whatsapp">Cargando...</p>
+                                <a href="#" id="link-whatsapp" target="_blank">Enviar mensaje</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-contacto">
+                    <h3>🕒 Horario de Atención</h3>
+                    <div style="padding: 2rem; text-align: center; background: var(--light-bg); border-radius: 10px;">
+                        <p><strong>Lunes a Viernes:</strong> 7:30 AM - 4:30 PM</p>
+                        <p><strong>Sábados:</strong> 8:00 AM - 12:00 PM</p>
+                        <p><strong>Domingos:</strong> Cerrado</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--primary-color); color: white; text-align: center; padding: 2rem;">
+        <p>&copy; 2025 Unidad Educativa 10 de Febrero</p>
     </footer>
 
+    <button id="boton-admin">⚙️</button>
+
+    <section id="editor-directora" style="display: none; background: white; padding: 2rem; border: 2px solid #c41e3a; border-radius: 10px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; max-height: 90vh; overflow-y: auto; width: 90%; max-width: 900px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+            <h2 style="color: #c41e3a;">🎛️ Panel de Administración</h2>
+            <button onclick="ocultarEditor()" style="background: #666; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">✕</button>
+        </div>
+
+        <div style="background: #e8f5e8; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+            <div id="estado-conexion">⏳ Conectando...</div>
+            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+                <strong>Límites:</strong> Máx. 20 imágenes en slider, 30 en galería (500KB cada una)
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #ddd;">
+            <button class="tab-btn active" onclick="mostrarPestana('textos')">📝 Textos</button>
+            <button class="tab-btn" onclick="mostrarPestana('slider')">🖼️ Slider</button>
+            <button class="tab-btn" onclick="mostrarPestana('galeria')">🖼️ Galería</button>
+        </div>
+
+        <div id="pestana-textos" class="pestana">
+            <h4>📊 Estadísticas</h4>
+            <input type="text" id="edit-estudiantes" placeholder="500+" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="text" id="edit-docentes" placeholder="40+" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="text" id="edit-experiencia" placeholder="25+" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            
+            <h4 style="margin-top: 1rem;">📞 Contacto</h4>
+            <input type="text" id="edit-direccion" placeholder="Dirección" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="text" id="edit-telefono" placeholder="Teléfono" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="text" id="edit-email" placeholder="Email" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="text" id="edit-whatsapp" placeholder="WhatsApp (+591...)" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            
+            <h4 style="margin-top: 1rem;">🎯 Misión y Visión</h4>
+            <textarea id="edit-mision" placeholder="Misión" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 100px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+            <textarea id="edit-vision" placeholder="Visión" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 100px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+            
+            <button onclick="guardarTextos()" style="background: #28a745; color: white; border: none; padding: 1rem 2rem; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 1rem;">
+                💾 Guardar Cambios
+            </button>
+        </div>
+
+        <div id="pestana-slider" class="pestana" style="display: none;">
+            <div style="background: #fff3cd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                ⚠️ Tamaño máximo: 500KB por imagen. Use <a href="https://tinypng.com" target="_blank">TinyPNG</a> para comprimir.
+            </div>
+            
+            <input type="text" id="titulo-slider" placeholder="Título" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <textarea id="descripcion-slider" placeholder="Descripción" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 60px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+            <input type="file" id="upload-slider" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <button onclick="subirImagenSlider()" style="background: #28a745; color: white; border: none; padding: 0.8rem; border-radius: 5px; cursor: pointer; width: 100%;">
+                📤 Agregar al Slider
+            </button>
+            
+            <h5 style="margin-top: 1.5rem;">Imágenes en el Slider:</h5>
+            <div id="lista-slider" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem; margin-top: 0.5rem;">
+                <p style="text-align: center; color: #666; padding: 1rem;">Cargando...</p>
+            </div>
+        </div>
+
+        <div id="pestana-galeria" class="pestana" style="display: none;">
+            <div style="background: #e3f2fd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                ⚠️ Tamaño máximo: 500KB por imagen. Comprima antes de subir.
+            </div>
+            
+            <input type="text" id="titulo-galeria" placeholder="Título" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <textarea id="descripcion-galeria" placeholder="Descripción" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 60px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+            <input type="file" id="upload-galeria" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <button onclick="subirImagenGaleria()" style="background: #ff6b6b; color: white; border: none; padding: 0.8rem; border-radius: 5px; cursor: pointer; width: 100%;">
+                📤 Agregar a Galería
+            </button>
+            
+            <h5 style="margin-top: 1.5rem;">Imágenes en la Galería:</h5>
+            <div id="lista-galeria" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem; margin-top: 0.5rem;">
+                <p style="text-align: center; color: #666; padding: 1rem;">Cargando...</p>
+            </div>
+        </div>
+
+        <div id="mensaje-estado" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
+    </section>
+
     <script>
-        // Configuración de JSONBin.io
-        const JSONBIN_BASE_URL = 'https://api.jsonbin.io/v3/b';
-        const BIN_ID = '663a9e62e41b4d34e4f8c4a5'; // ID del bin que crearemos
-        const MASTER_KEY = '$2a$10$6HhMg/3KROXYe8e6p2qQ.O6t7eR5YQ6n5t8rR2vYV9sKfL1mN8pW2'; // Clave maestra para escritura
+    // ==================== CONFIGURACIÓN FIREBASE ====================
+    const firebaseConfig = {
+    apiKey: "AIzaSyDcLiYGNCNPBkoLHNHthWjzHZoUPwcVrdA",
+    authDomain: "ue-10-febrero.firebaseapp.com",
+    databaseURL: "https://ue-10-febrero-default-rtdb.firebaseio.com",
+    projectId: "ue-10-febrero",
+    storageBucket: "ue-10-febrero.firebasestorage.app",
+    messagingSenderId: "913808068044",
+    appId: "1:913808068044:web:a70e7dc8e4dfc309fe6169"
+    };
+
+
+    let db;
+    try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.database();
+        console.log("✅ Firebase inicializado");
+    } catch (error) {
+        console.error("❌ Error Firebase:", error);
+        alert("Configure Firebase en el código");
+    }
+
+    // ==================== SEGURIDAD ====================
+    const CLAVE_CIFRADA = [97, 100, 109, 105, 110, 49, 48, 102, 101, 98, 114, 101, 114, 111, 50, 48, 50, 53];
+
+    function verificarAcceso() {
+        const params = new URLSearchParams(window.location.search);
+        const clave = params.get('clave') || window.location.hash.replace('#', '');
+        const sesion = sessionStorage.getItem('admin');
+        const claveReal = CLAVE_CIFRADA.map(c => String.fromCharCode(c)).join('');
         
-        // Estado de la aplicación
-        let appData = {
-            news: [],
-            events: []
-        };
+        if (clave === claveReal || sesion === 'true') {
+            sessionStorage.setItem('admin', 'true');
+            document.getElementById('boton-admin').style.display = 'flex';
+            window.history.replaceState({}, '', window.location.pathname);
+            return true;
+        }
+        return false;
+    }
+
+    function toggleEditor() {
+        const editor = document.getElementById('editor-directora');
+        editor.style.display = editor.style.display === 'none' ? 'block' : 'none';
+        if (editor.style.display === 'block') cargarDatosEditor();
+    }
+
+    function ocultarEditor() {
+        document.getElementById('editor-directora').style.display = 'none';
+    }
+
+    function mostrarPestana(nombre) {
+        document.querySelectorAll('.pestana').forEach(p => p.style.display = 'none');
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(`pestana-${nombre}`).style.display = 'block';
+        event.target.classList.add('active');
+    }
+
+    // ==================== CARGAR DATOS ====================
+    function cargarDatosPublicos() {
+        mostrarLoading(true);
         
-        // Elementos del DOM
-        const newsContainer = document.getElementById('news-container');
-        const eventsContainer = document.getElementById('events-container');
-        const adminLoginBtn = document.getElementById('admin-login');
-        const adminInterface = document.getElementById('admin-interface');
-        const addNewsBtn = document.getElementById('add-news');
-        const addEventBtn = document.getElementById('add-event');
-        const clearDataBtn = document.getElementById('clear-data');
-        const adminMessage = document.getElementById('admin-message');
-        
-        // Clave de administración (puedes cambiarla)
-        const ADMIN_PASSWORD = "admin123";
-        
-        // Inicializar la aplicación
-        document.addEventListener('DOMContentLoaded', function() {
-            loadData();
-            setupEventListeners();
+        db.ref('config').on('value', (snapshot) => {
+            const config = snapshot.val() || {};
+            document.getElementById('estudiantes').textContent = config.estudiantes || '500+';
+            document.getElementById('docentes').textContent = config.docentes || '40+';
+            document.getElementById('experiencia').textContent = config.experiencia || '25+';
+            document.getElementById('texto-direccion').textContent = config.direccion || 'Av. Principal, Ciudad';
+            document.getElementById('texto-email').textContent = config.email || 'contacto@ue10febrero.edu.bo';
+            document.getElementById('texto-telefono').textContent = config.telefono || '+591 4 123 4567';
+            document.getElementById('texto-whatsapp').textContent = config.whatsapp || '+591 7 123 4567';
+            document.getElementById('texto-mision').textContent = config.mision || 'Cargando misión...';
+            document.getElementById('texto-vision').textContent = config.vision || 'Cargando visión...';
+            
+            const whatsappNum = config.whatsapp?.replace(/\D/g, '') || '59171234567';
+            document.getElementById('link-whatsapp').href = `https://wa.me/${whatsappNum}`;
         });
-        
-        // Configurar event listeners
-        function setupEventListeners() {
-            adminLoginBtn.addEventListener('click', toggleAdminInterface);
-            addNewsBtn.addEventListener('click', addNews);
-            addEventBtn.addEventListener('click', addEvent);
-            clearDataBtn.addEventListener('click', clearAllData);
+
+        db.ref('slider').on('value', (snapshot) => {
+            const slider = snapshot.val() || [];
+            const sliderArray = Array.isArray(slider) ? slider : Object.values(slider).filter(Boolean);
+            actualizarSlider(sliderArray);
+        });
+
+        db.ref('galeria').on('value', (snapshot) => {
+            const galeria = snapshot.val() || [];
+            const galeriaArray = Array.isArray(galeria) ? galeria : Object.values(galeria).filter(Boolean);
+            actualizarGaleria(galeriaArray);
+            mostrarLoading(false);
+        });
+
+        actualizarEstadoConexion(true);
+    }
+
+    function cargarDatosEditor() {
+        db.ref('config').once('value', (snapshot) => {
+            const config = snapshot.val() || {};
+            document.getElementById('edit-estudiantes').value = config.estudiantes || '';
+            document.getElementById('edit-docentes').value = config.docentes || '';
+            document.getElementById('edit-experiencia').value = config.experiencia || '';
+            document.getElementById('edit-direccion').value = config.direccion || '';
+            document.getElementById('edit-telefono').value = config.telefono || '';
+            document.getElementById('edit-email').value = config.email || '';
+            document.getElementById('edit-whatsapp').value = config.whatsapp || '';
+            document.getElementById('edit-mision').value = config.mision || '';
+            document.getElementById('edit-vision').value = config.vision || '';
+        });
+
+        cargarListaSlider();
+        cargarListaGaleria();
+    }
+
+    // ==================== GUARDAR TEXTOS ====================
+    function guardarTextos() {
+        const config = {
+            estudiantes: document.getElementById('edit-estudiantes').value,
+            docentes: document.getElementById('edit-docentes').value,
+            experiencia: document.getElementById('edit-experiencia').value,
+            direccion: document.getElementById('edit-direccion').value,
+            telefono: document.getElementById('edit-telefono').value,
+            email: document.getElementById('edit-email').value,
+            whatsapp: document.getElementById('edit-whatsapp').value,
+            mision: document.getElementById('edit-mision').value,
+            vision: document.getElementById('edit-vision').value
+        };
+
+        db.ref('config').set(config)
+            .then(() => mostrarMensaje('✅ Cambios guardados correctamente', 'success'))
+            .catch(() => mostrarMensaje('❌ Error al guardar', 'error'));
+    }
+
+    // ==================== SLIDER ====================
+    document.getElementById('upload-slider')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.size > 500 * 1024) {
+            alert('❌ Imagen muy grande. Máximo 500KB.\n\nComprímala en: https://tinypng.com');
+            this.value = '';
         }
+    });
+
+    function subirImagenSlider() {
+        const titulo = document.getElementById('titulo-slider').value;
+        const descripcion = document.getElementById('descripcion-slider').value;
+        const archivo = document.getElementById('upload-slider').files[0];
         
-        // Cargar datos desde JSONBin
-        async function loadData() {
-            try {
-                showLoading(newsContainer);
-                showLoading(eventsContainer);
+        if (!titulo || !archivo) {
+            alert('❌ Complete título y seleccione imagen');
+            return;
+        }
+
+        if (archivo.size > 500 * 1024) {
+            alert('❌ Imagen muy grande. Máximo 500KB');
+            return;
+        }
+
+        mostrarLoading(true);
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            db.ref('slider').once('value', (snapshot) => {
+                const slider = snapshot.val() || [];
+                const sliderArray = Array.isArray(slider) ? slider : Object.values(slider).filter(Boolean);
                 
-                const response = await fetch(`${JSONBIN_BASE_URL}/${BIN_ID}/latest`, {
-                    method: 'GET',
-                    headers: {
-                        'X-Master-Key': MASTER_KEY,
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Error al cargar los datos');
+                if (sliderArray.length >= 20) {
+                    alert('❌ Límite de 20 imágenes alcanzado. Elimine algunas primero.');
+                    mostrarLoading(false);
+                    return;
                 }
                 
-                const data = await response.json();
-                appData = data.record || { news: [], events: [] };
-                
-                renderNews();
-                renderEvents();
-            } catch (error) {
-                console.error('Error cargando datos:', error);
-                // Si hay error, usar datos por defecto
-                appData = { news: [], events: [] };
-                renderNews();
-                renderEvents();
-                showMessage('Error al cargar los datos. Mostrando contenido local.', 'error');
-            }
-        }
-        
-        // Guardar datos en JSONBin
-        async function saveData() {
-            try {
-                const response = await fetch(`${JSONBIN_BASE_URL}/${BIN_ID}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': MASTER_KEY,
-                    },
-                    body: JSON.stringify(appData)
+                sliderArray.push({
+                    data: e.target.result,
+                    titulo: titulo,
+                    descripcion: descripcion,
+                    fecha: new Date().toISOString()
                 });
                 
-                if (!response.ok) {
-                    throw new Error('Error al guardar los datos');
-                }
-                
-                return true;
-            } catch (error) {
-                console.error('Error guardando datos:', error);
-                return false;
-            }
-        }
-        
-        // Mostrar noticias
-        function renderNews() {
-            newsContainer.innerHTML = '';
+                db.ref('slider').set(sliderArray)
+                    .then(() => {
+                        mostrarMensaje('✅ Imagen agregada al slider', 'success');
+                        document.getElementById('titulo-slider').value = '';
+                        document.getElementById('descripcion-slider').value = '';
+                        document.getElementById('upload-slider').value = '';
+                        cargarListaSlider();
+                        mostrarLoading(false);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert('❌ Error: Base de datos llena (32MB). Elimine imágenes antiguas.');
+                        mostrarLoading(false);
+                    });
+            });
+        };
+        reader.readAsDataURL(archivo);
+    }
+
+    function cargarListaSlider() {
+        db.ref('slider').once('value', (snapshot) => {
+            const slider = snapshot.val() || [];
+            const sliderArray = Array.isArray(slider) ? slider : Object.values(slider).filter(Boolean);
+            const lista = document.getElementById('lista-slider');
             
-            if (appData.news.length === 0) {
-                newsContainer.innerHTML = '<p>No hay noticias disponibles en este momento.</p>';
+            if (sliderArray.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 1rem;">No hay imágenes</p>';
                 return;
             }
             
-            appData.news.forEach((newsItem, index) => {
-                const newsElement = document.createElement('div');
-                newsElement.className = 'card';
-                newsElement.innerHTML = `
-                    <h3>${newsItem.title}</h3>
-                    <p>${newsItem.content}</p>
-                    <p><small>Publicado: ${new Date(newsItem.timestamp).toLocaleDateString()}</small></p>
+            let html = '';
+            sliderArray.forEach((img, index) => {
+                html += `
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                        <div style="display: flex; gap: 0.5rem; align-items: start;">
+                            <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
+                            <div style="flex: 1;">
+                                <strong style="font-size: 0.9rem;">${img.titulo}</strong>
+                                <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
+                                <button onclick="eliminarImagenSlider(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.3rem 0.6rem; font-size: 0.7rem; cursor: pointer; margin-top: 0.5rem;">🗑️ Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
                 `;
-                newsContainer.appendChild(newsElement);
+            });
+            lista.innerHTML = html;
+        });
+    }
+
+    function eliminarImagenSlider(index) {
+        if (confirm('¿Eliminar esta imagen del slider?')) {
+            db.ref('slider').once('value', (snapshot) => {
+                const slider = snapshot.val() || [];
+                const sliderArray = Array.isArray(slider) ? slider : Object.values(slider).filter(Boolean);
+                sliderArray.splice(index, 1);
+                
+                db.ref('slider').set(sliderArray)
+                    .then(() => {
+                        mostrarMensaje('✅ Imagen eliminada', 'success');
+                        cargarListaSlider();
+                    })
+                    .catch(() => alert('❌ Error al eliminar'));
             });
         }
+    }
+
+    function actualizarSlider(slider) {
+        const slidesContainer = document.querySelector('.slides');
+        const dotsContainer = document.querySelector('.slider-dots');
         
-        // Mostrar eventos
-        function renderEvents() {
-            eventsContainer.innerHTML = '';
-            
-            if (appData.events.length === 0) {
-                eventsContainer.innerHTML = '<p>No hay eventos programados en este momento.</p>';
-                return;
-            }
-            
-            const eventsGrid = document.createElement('div');
-            eventsGrid.className = 'grid';
-            
-            appData.events.forEach((event, index) => {
-                const eventElement = document.createElement('div');
-                eventElement.className = 'event-card';
-                eventElement.innerHTML = `
-                    <div class="event-title">${event.title}</div>
-                    <div class="event-date">${new Date(event.date).toLocaleDateString()}</div>
-                    <div class="event-description">${event.description}</div>
-                `;
-                eventsGrid.appendChild(eventElement);
-            });
-            
-            eventsContainer.appendChild(eventsGrid);
-        }
-        
-        // Mostrar estado de carga
-        function showLoading(container) {
-            container.innerHTML = `
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Cargando...</p>
+        if (slider.length === 0) {
+            slidesContainer.innerHTML = `
+                <div class="slide">
+                    <div style="background: #f8f9fa; height: 500px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; color: #666;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
+                            <h3>Slider vacío</h3>
+                            <p>Agregue imágenes desde el panel</p>
+                        </div>
+                    </div>
                 </div>
             `;
+            dotsContainer.innerHTML = '<span class="dot active"></span>';
+            return;
         }
         
-        // Mostrar mensaje
-        function showMessage(message, type = 'success') {
-            adminMessage.textContent = message;
-            adminMessage.className = `alert alert-${type}`;
-            adminMessage.classList.remove('hidden');
-            
-            setTimeout(() => {
-                adminMessage.classList.add('hidden');
-            }, 5000);
-        }
+        let slidesHTML = '';
+        let dotsHTML = '';
         
-        // Alternar interfaz de administración
-        function toggleAdminInterface() {
-            const adminKey = document.getElementById('admin-key').value;
-            
-            if (adminKey === ADMIN_PASSWORD) {
-                adminInterface.classList.remove('hidden');
-                adminLoginBtn.textContent = 'Cerrar Sesión';
-                adminLoginBtn.removeEventListener('click', toggleAdminInterface);
-                adminLoginBtn.addEventListener('click', closeAdminInterface);
-                showMessage('Sesión de administrador iniciada correctamente.', 'success');
-            } else {
-                showMessage('Clave de administración incorrecta.', 'error');
-            }
-        }
+        slider.forEach((img, index) => {
+            slidesHTML += `
+                <div class="slide">
+                    <img src="${img.data}" alt="${img.titulo}">
+                    <div class="slide-content">
+                        <h3>${img.titulo}</h3>
+                        <p>${img.descripcion}</p>
+                    </div>
+                </div>
+            `;
+            dotsHTML += `<span class="dot ${index === 0 ? 'active' : ''}" onclick="showSlide(${index})"></span>`;
+        });
         
-        // Cerrar interfaz de administración
-        function closeAdminInterface() {
-            adminInterface.classList.add('hidden');
-            adminLoginBtn.textContent = 'Acceder';
-            adminLoginBtn.removeEventListener('click', closeAdminInterface);
-            adminLoginBtn.addEventListener('click', toggleAdminInterface);
-            document.getElementById('admin-key').value = '';
+        slidesContainer.innerHTML = slidesHTML;
+        dotsContainer.innerHTML = dotsHTML;
+        currentSlide = 0;
+        showSlide(0);
+    }
+
+    // ==================== GALERÍA ====================
+    document.getElementById('upload-galeria')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.size > 500 * 1024) {
+            alert('❌ Imagen muy grande. Máximo 500KB.\n\nComprímala en: https://tinypng.com');
+            this.value = '';
         }
+    });
+
+    function subirImagenGaleria() {
+        const titulo = document.getElementById('titulo-galeria').value;
+        const descripcion = document.getElementById('descripcion-galeria').value;
+        const archivo = document.getElementById('upload-galeria').files[0];
         
-        // Agregar noticia
-        async function addNews() {
-            const title = document.getElementById('news-title').value.trim();
-            const content = document.getElementById('news-content').value.trim();
-            
-            if (!title || !content) {
-                showMessage('Por favor, complete todos los campos.', 'error');
-                return;
-            }
-            
-            const newNews = {
-                id: Date.now(),
-                title: title,
-                content: content,
-                timestamp: new Date().toISOString()
-            };
-            
-            appData.news.unshift(newNews);
-            
-            const saved = await saveData();
-            
-            if (saved) {
-                renderNews();
-                document.getElementById('news-title').value = '';
-                document.getElementById('news-content').value = '';
-                showMessage('Noticia agregada correctamente.', 'success');
-            } else {
-                showMessage('Error al guardar la noticia.', 'error');
-                // Revertir cambios locales si no se pudo guardar
-                appData.news.shift();
-            }
+        if (!titulo || !archivo) {
+            alert('❌ Complete título y seleccione imagen');
+            return;
         }
-        
-        // Agregar evento
-        async function addEvent() {
-            const title = document.getElementById('event-title').value.trim();
-            const date = document.getElementById('event-date').value;
-            const description = document.getElementById('event-description').value.trim();
-            
-            if (!title || !date || !description) {
-                showMessage('Por favor, complete todos los campos.', 'error');
-                return;
-            }
-            
-            const newEvent = {
-                id: Date.now(),
-                title: title,
-                date: date,
-                description: description
-            };
-            
-            appData.events.push(newEvent);
-            
-            // Ordenar eventos por fecha
-            appData.events.sort((a, b) => new Date(a.date) - new Date(b.date));
-            
-            const saved = await saveData();
-            
-            if (saved) {
-                renderEvents();
-                document.getElementById('event-title').value = '';
-                document.getElementById('event-date').value = '';
-                document.getElementById('event-description').value = '';
-                showMessage('Evento agregado correctamente.', 'success');
-            } else {
-                showMessage('Error al guardar el evento.', 'error');
-                // Revertir cambios locales si no se pudo guardar
-                appData.events.pop();
-            }
+
+        if (archivo.size > 500 * 1024) {
+            alert('❌ Imagen muy grande. Máximo 500KB');
+            return;
         }
-        
-        // Eliminar todos los datos
-        async function clearAllData() {
-            if (confirm('¿Está seguro de que desea eliminar todas las noticias y eventos? Esta acción no se puede deshacer.')) {
-                appData.news = [];
-                appData.events = [];
+
+        mostrarLoading(true);
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            db.ref('galeria').once('value', (snapshot) => {
+                const galeria = snapshot.val() || [];
+                const galeriaArray = Array.isArray(galeria) ? galeria : Object.values(galeria).filter(Boolean);
                 
-                const saved = await saveData();
-                
-                if (saved) {
-                    renderNews();
-                    renderEvents();
-                    showMessage('Todos los datos han sido eliminados.', 'success');
-                } else {
-                    showMessage('Error al eliminar los datos.', 'error');
+                if (galeriaArray.length >= 30) {
+                    alert('❌ Límite de 30 imágenes alcanzado');
+                    mostrarLoading(false);
+                    return;
                 }
+                
+                galeriaArray.push({
+                    data: e.target.result,
+                    titulo: titulo,
+                    descripcion: descripcion,
+                    fecha: new Date().toISOString()
+                });
+                
+                db.ref('galeria').set(galeriaArray)
+                    .then(() => {
+                        mostrarMensaje('✅ Imagen agregada a la galería', 'success');
+                        document.getElementById('titulo-galeria').value = '';
+                        document.getElementById('descripcion-galeria').value = '';
+                        document.getElementById('upload-galeria').value = '';
+                        cargarListaGaleria();
+                        mostrarLoading(false);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert('❌ Error: Base de datos llena');
+                        mostrarLoading(false);
+                    });
+            });
+        };
+        reader.readAsDataURL(archivo);
+    }
+
+    function cargarListaGaleria() {
+        db.ref('galeria').once('value', (snapshot) => {
+            const galeria = snapshot.val() || [];
+            const galeriaArray = Array.isArray(galeria) ? galeria : Object.values(galeria).filter(Boolean);
+            const lista = document.getElementById('lista-galeria');
+            
+            if (galeriaArray.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 1rem;">No hay imágenes</p>';
+                return;
             }
+            
+            let html = '';
+            galeriaArray.forEach((img, index) => {
+                html += `
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                        <div style="display: flex; gap: 0.5rem; align-items: start;">
+                            <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
+                            <div style="flex: 1;">
+                                <strong style="font-size: 0.9rem;">${img.titulo}</strong>
+                                <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
+                                <button onclick="eliminarImagenGaleria(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.3rem 0.6rem; font-size: 0.7rem; cursor: pointer; margin-top: 0.5rem;">🗑️ Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            lista.innerHTML = html;
+        });
+    }
+
+    function eliminarImagenGaleria(index) {
+        if (confirm('¿Eliminar esta imagen de la galería?')) {
+            db.ref('galeria').once('value', (snapshot) => {
+                const galeria = snapshot.val() || [];
+                const galeriaArray = Array.isArray(galeria) ? galeria : Object.values(galeria).filter(Boolean);
+                galeriaArray.splice(index, 1);
+                
+                db.ref('galeria').set(galeriaArray)
+                    .then(() => {
+                        mostrarMensaje('✅ Imagen eliminada', 'success');
+                        cargarListaGaleria();
+                    })
+                    .catch(() => alert('❌ Error al eliminar'));
+            });
         }
+    }
+
+    function actualizarGaleria(galeria) {
+        const container = document.querySelector('.galeria-container');
+        
+        if (galeria.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
+                    <h3 style="color: #c41e3a;">Galería vacía</h3>
+                    <p>Agregue imágenes desde el panel</p>
+                </div>
+            `;
+            return;
+        }
+        
+        let html = '';
+        galeria.forEach(img => {
+            html += `
+                <div class="galeria-item">
+                    <img src="${img.data}" alt="${img.titulo}">
+                    <div class="galeria-overlay">
+                        <h3>${img.titulo}</h3>
+                        <p>${img.descripcion}</p>
+                    </div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+    }
+
+    // ==================== SLIDER FUNCIONAL ====================
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        const slides = document.querySelector('.slides');
+        const slidesCount = document.querySelectorAll('.slide').length;
+        const dots = document.querySelectorAll('.dot');
+        
+        if (index >= slidesCount) currentSlide = 0;
+        else if (index < 0) currentSlide = slidesCount - 1;
+        else currentSlide = index;
+        
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentSlide);
+        });
+    }
+
+    document.querySelector('.prev')?.addEventListener('click', () => showSlide(currentSlide - 1));
+    document.querySelector('.next')?.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    // ==================== UTILIDADES ====================
+    function mostrarMensaje(mensaje, tipo) {
+        const div = document.getElementById('mensaje-estado');
+        div.textContent = mensaje;
+        div.style.display = 'block';
+        div.style.background = tipo === 'success' ? '#d4edda' : '#f8d7da';
+        div.style.color = tipo === 'success' ? '#155724' : '#721c24';
+        div.style.border = `1px solid ${tipo === 'success' ? '#c3e6cb' : '#f5c6cb'}`;
+        
+        setTimeout(() => div.style.display = 'none', 5000);
+    }
+
+    function mostrarLoading(mostrar) {
+        document.getElementById('loading-indicator').classList.toggle('active', mostrar);
+    }
+
+    function actualizarEstadoConexion(conectado) {
+        const estado = document.getElementById('estado-conexion');
+        if (estado) {
+            estado.innerHTML = conectado 
+                ? '✅ Conectado - Cambios en tiempo real activos' 
+                : '❌ Desconectado';
+            estado.style.color = conectado ? '#155724' : '#721c24';
+        }
+    }
+
+    // ==================== NAVEGACIÓN ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector('.nav-links').classList.remove('active');
+            }
+        });
+    });
+
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburger?.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('active'));
+    });
+
+    document.getElementById('boton-admin')?.addEventListener('click', toggleEditor);
+
+    // ==================== MONITOREAR CONEXIÓN ====================
+    db.ref('.info/connected').on('value', (snapshot) => {
+        actualizarEstadoConexion(snapshot.val());
+    });
+
+    // ==================== INICIALIZACIÓN ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("🚀 Iniciando aplicación...");
+        
+        verificarAcceso();
+        cargarDatosPublicos();
+        
+        // Auto-avance del slider cada 8 segundos
+        setInterval(() => {
+            if (document.querySelectorAll('.slide').length > 1) {
+                showSlide(currentSlide + 1);
+            }
+        }, 8000);
+        
+        console.log("✅ Aplicación iniciada");
+    });
     </script>
 </body>
 </html>
