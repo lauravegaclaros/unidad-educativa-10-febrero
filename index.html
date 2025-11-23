@@ -1073,14 +1073,15 @@
     <script>
     // ==================== CONFIGURACIÓN FIREBASE ====================
     const firebaseConfig = {
-   apiKey: "AIzaSyDcLiYGNCNPBkoLHNHthWjzHZoUPwcVrdA",
-   authDomain: "ue-10-febrero.firebaseapp.com",
-   databaseURL: "https://ue-10-febrero-default-rtdb.firebaseio.com",
-   projectId: "ue-10-febrero",
-   storageBucket: "ue-10-febrero.firebasestorage.app",
-   messagingSenderId: "913808068044",
-   appId: "1:913808068044:web:a70e7dc8e4dfc309fe6169"
-     };
+    apiKey: "AIzaSyDcLiYGNCNPBkoLHNHthWjzHZoUPwcVrdA",
+    authDomain: "ue-10-febrero.firebaseapp.com",
+    databaseURL: "https://ue-10-febrero-default-rtdb.firebaseio.com",
+    projectId: "ue-10-febrero",
+    storageBucket: "ue-10-febrero.firebasestorage.app",
+    messagingSenderId: "913808068044",
+    appId: "1:913808068044:web:a70e7dc8e4dfc309fe6169"
+    };
+
 
     let db;
     try {
@@ -1126,6 +1127,35 @@
         event.target.classList.add('active');
     }
 
+    // ==================== ACTUALIZAR BOTONES SOCIALES ====================
+    function actualizarBotonesSociales(config) {
+        const btnWhatsapp = document.getElementById('btn-whatsapp');
+        const btnFacebook = document.getElementById('btn-facebook');
+        
+        if (btnWhatsapp && config.whatsapp) {
+            // Limpiar y formatear número de WhatsApp
+            let whatsappNum = config.whatsapp.replace(/\D/g, '');
+            
+            // Si no tiene código de país, agregar código de Bolivia por defecto
+            if (!whatsappNum.startsWith('591')) {
+                whatsappNum = '591' + whatsappNum;
+            }
+            
+            btnWhatsapp.href = `https://wa.me/${whatsappNum}`;
+            console.log('WhatsApp configurado:', btnWhatsapp.href);
+        }
+        
+        if (btnFacebook && config.facebook) {
+            // Asegurar que la URL de Facebook sea válida
+            let facebookUrl = config.facebook;
+            if (!facebookUrl.startsWith('http')) {
+                facebookUrl = 'https://' + facebookUrl;
+            }
+            btnFacebook.href = facebookUrl;
+            console.log('Facebook configurado:', btnFacebook.href);
+        }
+    }
+
     // ==================== CARGAR DATOS PÚBLICOS ====================
     function cargarDatosPublicos() {
         mostrarLoading(true);
@@ -1164,17 +1194,8 @@
                 document.getElementById('google-map').src = config.mapa;
             }
             
-            // Actualizar botones sociales
-            const whatsappNum = config.whatsapp?.replace(/\D/g, '') || '59171234567';
-            const btnWhatsapp = document.getElementById('btn-whatsapp');
-            const btnFacebook = document.getElementById('btn-facebook');
-            
-            if (btnWhatsapp) {
-                btnWhatsapp.href = `https://wa.me/${whatsappNum}`;
-            }
-            if (btnFacebook) {
-                btnFacebook.href = config.facebook || 'https://facebook.com';
-            }
+            // ACTUALIZAR BOTONES SOCIALES - LLAMAR A LA NUEVA FUNCIÓN
+            actualizarBotonesSociales(config);
         });
 
         // Cargar comunicados
@@ -1384,7 +1405,22 @@
         reader.readAsDataURL(archivo);
     }
 
-    // ==================== COMUNICADOS ====================
+    // ==================== FUNCIÓN DE FORMATEO DE FECHA MEJORADA ====================
+    function formatearFecha(fecha) {
+        try {
+            const date = new Date(fecha + 'T00:00:00');
+            if (isNaN(date.getTime())) {
+                return fecha; // Si la fecha es inválida, devolver la original
+            }
+            const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('es-ES', opciones);
+        } catch (error) {
+            console.error('Error formateando fecha:', error);
+            return fecha;
+        }
+    }
+
+    // ==================== COMUNICADOS CORREGIDO ====================
     function agregarComunicado() {
         const fecha = document.getElementById('fecha-comunicado').value;
         const titulo = document.getElementById('titulo-comunicado').value;
@@ -1398,17 +1434,23 @@
         mostrarLoading(true);
 
         db.ref('comunicados').once('value', (snapshot) => {
-            const comunicados = snapshot.val() || [];
-            const comunicadosArray = Array.isArray(comunicados) ? comunicados : Object.values(comunicados).filter(Boolean);
+            let comunicados = snapshot.val() || [];
             
-            comunicadosArray.push({ 
+            // Asegurar que sea un array
+            if (!Array.isArray(comunicados)) {
+                comunicados = Object.values(comunicados).filter(Boolean);
+            }
+            
+            const nuevoComunicado = { 
                 fecha: formatearFecha(fecha), 
-                titulo: titulo, 
-                texto: texto,
+                titulo: titulo.trim(), 
+                texto: texto.trim(),
                 timestamp: new Date().getTime()
-            });
+            };
             
-            db.ref('comunicados').set(comunicadosArray)
+            comunicados.push(nuevoComunicado);
+            
+            db.ref('comunicados').set(comunicados)
                 .then(() => {
                     mostrarMensaje('✅ Comunicado agregado correctamente', 'success');
                     document.getElementById('fecha-comunicado').value = '';
@@ -1423,12 +1465,6 @@
                     mostrarLoading(false);
                 });
         });
-    }
-
-    function formatearFecha(fecha) {
-        const date = new Date(fecha + 'T00:00:00');
-        const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
-        return date.toLocaleDateString('es-ES', opciones);
     }
 
     function cargarComunicadosAdmin() {
@@ -1477,7 +1513,7 @@
         }
     }
 
-    // ==================== EVENTOS ====================
+    // ==================== EVENTOS CORREGIDO ====================
     function agregarEvento() {
         const fecha = document.getElementById('fecha-evento').value;
         const titulo = document.getElementById('titulo-evento').value;
@@ -1488,21 +1524,39 @@
             return;
         }
 
+        mostrarLoading(true);
+
         db.ref('eventos').once('value', (snapshot) => {
-            const eventos = snapshot.val() || [];
-            const eventosArray = Array.isArray(eventos) ? eventos : Object.values(eventos).filter(Boolean);
+            let eventos = snapshot.val() || [];
             
-            eventosArray.push({ fecha, titulo, texto });
+            // Asegurar que sea un array
+            if (!Array.isArray(eventos)) {
+                eventos = Object.values(eventos).filter(Boolean);
+            }
             
-            db.ref('eventos').set(eventosArray)
+            const nuevoEvento = { 
+                fecha: formatearFecha(fecha), 
+                titulo: titulo.trim(), 
+                texto: texto.trim(),
+                timestamp: new Date().getTime()
+            };
+            
+            eventos.push(nuevoEvento);
+            
+            db.ref('eventos').set(eventos)
                 .then(() => {
-                    mostrarMensaje('✅ Evento agregado', 'success');
+                    mostrarMensaje('✅ Evento agregado correctamente', 'success');
                     document.getElementById('fecha-evento').value = '';
                     document.getElementById('titulo-evento').value = '';
                     document.getElementById('texto-evento').value = '';
                     cargarEventosAdmin();
+                    mostrarLoading(false);
                 })
-                .catch(() => mostrarMensaje('❌ Error al agregar', 'error'));
+                .catch((error) => {
+                    console.error('Error agregando evento:', error);
+                    mostrarMensaje('❌ Error al agregar evento', 'error');
+                    mostrarLoading(false);
+                });
         });
     }
 
