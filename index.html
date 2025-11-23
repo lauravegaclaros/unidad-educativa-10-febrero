@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Unidad Educativa 10 de Febrero - Con estudio, esfuerzo y esmero">
+    <meta name="description" content="Unidad Educativa 10 de Febrero - Educación Inicial y Primaria de calidad">
     <title>Unidad Educativa 10 de Febrero</title>
     
-    <!-- Firebase SDK - SOLO Realtime Database -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     
@@ -31,15 +31,16 @@
             scroll-behavior: smooth;
         }
 
+        /* HEADER */
         header {
-            background: linear-gradient(rgba(196, 30, 58, 0.9), rgba(196, 30, 58, 0.9));
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         nav {
@@ -54,7 +55,16 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 2px solid white;
+            background: white;
         }
 
         .logo-text {
@@ -89,34 +99,53 @@
             cursor: pointer;
         }
 
+        /* HERO */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), #667eea;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('') center/cover no-repeat;
             color: white;
             padding: 160px 2rem 100px;
             text-align: center;
-            margin-top: 60px;
-            min-height: 80vh;
+            margin-top: 70px;
+            min-height: 85vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
         }
 
         .hero p {
             font-size: 1.5rem;
             margin-bottom: 2rem;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
         }
 
         .hero-buttons {
             display: flex;
             gap: 1rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn-hero {
@@ -127,13 +156,17 @@
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            font-weight: 500;
         }
 
         .btn-hero:hover {
             background: white;
             color: var(--primary-color);
+            transform: translateY(-2px);
         }
 
+        /* SECTIONS */
         section {
             padding: 4rem 2rem;
             max-width: 1200px;
@@ -155,16 +188,25 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .about-text {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .about-text h3 {
             color: var(--primary-color);
             margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
         .about-text p {
-            margin-bottom: 1rem;
             text-align: justify;
+            line-height: 1.8;
         }
 
         .stats {
@@ -178,8 +220,13 @@
             text-align: center;
             padding: 2rem;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
         }
 
         .stat-number {
@@ -189,8 +236,85 @@
             display: block;
         }
 
-        .slider-section {
+        /* NIVELES EDUCATIVOS */
+        .niveles {
+            background: white;
+        }
+
+        .niveles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .nivel-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .nivel-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .nivel-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .nivel-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* COMUNICADOS Y EVENTOS */
+        .comunicados {
             background: var(--light-bg);
+        }
+
+        .comunicados-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .comunicado-card, .evento-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .comunicado-card h3, .evento-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .comunicado-item, .evento-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--light-bg);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .fecha {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        /* SLIDER */
+        .slider-section {
+            background: white;
             padding: 4rem 0;
         }
 
@@ -203,8 +327,8 @@
         .slider {
             position: relative;
             overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
         .slides {
@@ -228,7 +352,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             color: white;
             padding: 2rem;
         }
@@ -245,7 +369,7 @@
         }
 
         .slider-btn {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             border: none;
             width: 50px;
             height: 50px;
@@ -253,6 +377,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .slider-btn:hover {
@@ -273,13 +398,16 @@
             border-radius: 50%;
             background: #ccc;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
 
         .dot.active {
             background: var(--primary-color);
+            width: 30px;
+            border-radius: 6px;
         }
 
+        /* GALERÍA */
         .galeria-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -289,15 +417,15 @@
 
         .galeria-item {
             position: relative;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
             transition: transform 0.3s;
             cursor: pointer;
         }
 
         .galeria-item:hover {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         .galeria-item img {
@@ -311,7 +439,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
             color: white;
             padding: 1rem;
             transform: translateY(100%);
@@ -322,6 +450,7 @@
             transform: translateY(0);
         }
 
+        /* CONTACTOS */
         #contactos {
             background: var(--light-bg);
             padding: 5rem 2rem;
@@ -332,14 +461,23 @@
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 2rem auto;
         }
 
-        .info-contacto {
+        .info-contacto, .mapa-container {
             background: white;
             padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .info-contacto h3, .mapa-container h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
 
         .contacto-lista {
@@ -350,16 +488,92 @@
 
         .contacto-item {
             display: flex;
+            align-items: start;
             gap: 1rem;
             padding: 1rem;
-            background: #f8f9fa;
+            background: var(--light-bg);
             border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .contacto-item:hover {
+            transform: translateX(5px);
         }
 
         .contacto-icono {
             font-size: 1.5rem;
+            min-width: 40px;
         }
 
+        .horario-atencion {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .horario-atencion h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .mapa-frame {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            height: 400px;
+            margin-bottom: 1rem;
+        }
+
+        .mapa-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .social-btn.whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .social-btn.whatsapp:hover {
+            background: #1da851;
+            transform: translateY(-3px);
+        }
+
+        .social-btn.facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        .social-btn.facebook:hover {
+            background: #0d5cb6;
+            transform: translateY(-3px);
+        }
+
+        /* ADMIN BUTTON */
         #boton-admin {
             position: fixed;
             bottom: 20px;
@@ -370,13 +584,19 @@
             background: var(--primary-color);
             color: white;
             border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             cursor: pointer;
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        #boton-admin:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.4);
         }
 
         .loading-indicator {
@@ -387,9 +607,10 @@
             transform: translate(-50%, -50%);
             background: rgba(0,0,0,0.9);
             color: white;
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 2rem 3rem;
+            border-radius: 15px;
             z-index: 10001;
+            text-align: center;
         }
 
         .loading-indicator.active {
@@ -397,22 +618,39 @@
         }
 
         .tab-btn {
-            background: #f8f9fa;
+            background: var(--light-bg);
             border: none;
             padding: 0.8rem 1.5rem;
             cursor: pointer;
             transition: all 0.3s;
+            border-radius: 10px 10px 0 0;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            background: #e9ecef;
         }
 
         .tab-btn.active {
             background: white;
-            border-bottom: 3px solid var(--primary-color);
             color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
         }
 
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .about-content, .contactos-grid { grid-template-columns: 1fr; }
+            .hero p { font-size: 1.1rem; }
+            .about-content, .contactos-grid, .niveles-grid, .comunicados-grid { 
+                grid-template-columns: 1fr; 
+            }
             .stats { grid-template-columns: 1fr; }
             .nav-links {
                 display: none;
@@ -423,41 +661,59 @@
                 background: var(--primary-color);
                 flex-direction: column;
                 padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
             }
             .nav-links.active { display: flex; }
+            .nav-links li { width: 100%; text-align: center; }
+            .nav-links a { display: block; padding: 1rem; }
             .hamburger { display: block; }
+            .slide img { height: 300px; }
+            .galeria-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text { font-size: 1rem; }
+            h2 { font-size: 1.8rem; }
+            .nivel-card { padding: 2rem; }
+            .social-btn { padding: 0.8rem 1.5rem; }
         }
     </style>
 </head>
 <body>
     <div class="loading-indicator" id="loading-indicator">
-        <div style="font-size: 2rem; margin-bottom: 1rem;">⏳</div>
-        <div>Cargando...</div>
+        <div style="font-size: 3rem; margin-bottom: 1rem;">⏳</div>
+        <div style="font-size: 1.2rem;">Cargando...</div>
     </div>
 
     <header>
         <nav>
             <div class="logo">
-                <span class="logo-text">🏫 U.E. 10 de Febrero</span>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23c41e3a'/%3E%3Ctext x='50' y='65' font-size='40' fill='white' text-anchor='middle' font-family='Arial' font-weight='bold'%3E10%3C/text%3E%3C/svg%3E" alt="Logo UE 10 de Febrero" class="logo-img" id="logo-img">
+                <span class="logo-text">U.E. 10 de Febrero</span>
             </div>
-            <button class="hamburger">☰</button>
+            <button class="hamburger" aria-label="Menú">☰</button>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#niveles">Niveles</a></li>
+                <li><a href="#comunicados">Noticias</a></li>
                 <li><a href="#galeria">Galería</a></li>
-                <li><a href="#contactos">Contactos</a></li>
+                <li><a href="#contactos">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section id="inicio" class="hero">
-            <div>
+            <div class="hero-content">
                 <h1>Unidad Educativa 10 de Febrero</h1>
                 <p>Con estudio, esfuerzo y esmero... Adelante 10 de Febrero</p>
                 <div class="hero-buttons">
                     <a href="#nosotros" class="btn-hero">Conócenos</a>
-                    <a href="#galeria" class="btn-hero">Ver Galería</a>
+                    <a href="#niveles" class="btn-hero">Niveles Educativos</a>
+                    <a href="#contactos" class="btn-hero">Contacto</a>
                 </div>
             </div>
         </section>
@@ -465,14 +721,14 @@
         <section id="nosotros" class="about">
             <h2>Sobre Nosotros</h2>
             <div class="about-content">
-                <div class="about-text">
-                    <h3>Nuestra Misión</h3>
-                    <p id="texto-mision">Cargando...</p>
-                </div>
-                <div class="about-text">
-                    <h3>Nuestra Visión</h3>
-                    <p id="texto-vision">Cargando...</p>
-                </div>
+                <article class="about-text">
+                    <h3>📖 Nuestra Misión</h3>
+                    <p id="texto-mision">Formar estudiantes con excelencia académica, valores sólidos y compromiso social, brindando una educación integral que desarrolle sus capacidades intelectuales, emocionales y sociales.</p>
+                </article>
+                <article class="about-text">
+                    <h3>🎯 Nuestra Visión</h3>
+                    <p id="texto-vision">Ser una institución educativa líder, reconocida por su calidad académica, innovación pedagógica y formación en valores, preparando ciudadanos comprometidos con el desarrollo de Bolivia.</p>
+                </article>
             </div>
 
             <div class="stats">
@@ -486,28 +742,66 @@
                 </div>
                 <div class="stat-box">
                     <span class="stat-number" id="experiencia">25+</span>
-                    <span class="stat-label">Años</span>
+                    <span class="stat-label">Años de Trayectoria</span>
                 </div>
+            </div>
+        </section>
+
+        <section id="niveles" class="niveles">
+            <h2>Niveles Educativos</h2>
+            <div class="niveles-grid">
+                <article class="nivel-card">
+                    <h3>🎨 Educación Inicial</h3>
+                    <p id="texto-inicial">Brindamos atención educativa a niños y niñas de 3 a 5 años, desarrollando sus habilidades motoras, cognitivas, sociales y emocionales a través del juego y actividades lúdicas. Contamos con ambientes seguros, acogedores y estimulantes que favorecen el aprendizaje integral.</p>
+                </article>
+                <article class="nivel-card">
+                    <h3>📚 Educación Primaria</h3>
+                    <p id="texto-primaria">Formación académica sólida de 1° a 6° grado, con énfasis en lectoescritura, matemáticas, ciencias y valores. Utilizamos metodologías activas y participativas que promueven el pensamiento crítico, la creatividad y el trabajo en equipo, preparando a nuestros estudiantes para los desafíos del siglo XXI.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="comunicados" class="comunicados">
+            <h2>Comunicados y Eventos</h2>
+            <div class="comunicados-grid">
+                <article class="comunicado-card">
+                    <h3>📢 Comunicados Importantes</h3>
+                    <div id="lista-comunicados">
+                        <div class="comunicado-item">
+                            <p class="fecha">📅 Cargando comunicados...</p>
+                            <p>Los comunicados aparecerán aquí</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="evento-card">
+                    <h3>🎉 Próximos Eventos</h3>
+                    <div id="lista-eventos">
+                        <div class="evento-item">
+                            <p class="fecha">📅 Cargando eventos...</p>
+                            <p>Los eventos aparecerán aquí</p>
+                        </div>
+                    </div>
+                </article>
             </div>
         </section>
 
         <section class="slider-section">
             <div class="slider-container">
-                <h2>Eventos y Actividades</h2>
+                <h2>Galería de Actividades</h2>
                 <div class="slider">
                     <div class="slides">
                         <div class="slide">
-                            <div style="background: #f8f9fa; height: 500px; display: flex; align-items: center; justify-content: center; color: #666;">
-                                <div style="text-align: center;">
-                                    <div style="font-size: 4rem;">🖼️</div>
-                                    <h3>Cargando slider...</h3>
+                            <div style="background: linear-gradient(135deg, #667eea, #764ba2); height: 500px; display: flex; align-items: center; justify-content: center;">
+                                <div style="text-align: center; color: white;">
+                                    <div style="font-size: 5rem; margin-bottom: 1rem;">🖼️</div>
+                                    <h3 style="font-size: 2rem; color: white;">Cargando slider...</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="slider-nav">
-                        <button class="slider-btn prev">❮</button>
-                        <button class="slider-btn next">❯</button>
+                        <button class="slider-btn prev" aria-label="Anterior">❮</button>
+                        <button class="slider-btn next" aria-label="Siguiente">❯</button>
                     </div>
                     <div class="slider-dots">
                         <span class="dot active"></span>
@@ -519,18 +813,19 @@
         <section id="galeria">
             <h2>Galería de Imágenes</h2>
             <div class="galeria-container">
-                <div style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">
-                    <div style="font-size: 4rem;">🖼️</div>
-                    <h3 style="color: #c41e3a;">Cargando galería...</h3>
+                <div style="text-align: center; color: #666; padding: 3rem; grid-column: 1 / -1;">
+                    <div style="font-size: 5rem; margin-bottom: 1rem;">📸</div>
+                    <h3 style="color: #c41e3a; font-size: 2rem;">Cargando galería...</h3>
                 </div>
             </div>
         </section>
 
         <section id="contactos">
             <h2>📞 Contáctanos</h2>
+            
             <div class="contactos-grid">
-                <div class="info-contacto">
-                    <h3>Información de Contacto</h3>
+                <article class="info-contacto">
+                    <h3>📍 Información de Contacto</h3>
                     <div class="contacto-lista">
                         <div class="contacto-item">
                             <div class="contacto-icono">📍</div>
@@ -542,7 +837,7 @@
                         <div class="contacto-item">
                             <div class="contacto-icono">📧</div>
                             <div>
-                                <h4>Email</h4>
+                                <h4>Correo Electrónico</h4>
                                 <p id="texto-email">Cargando...</p>
                             </div>
                         </div>
@@ -558,107 +853,226 @@
                             <div>
                                 <h4>WhatsApp</h4>
                                 <p id="texto-whatsapp">Cargando...</p>
-                                <a href="#" id="link-whatsapp" target="_blank">Enviar mensaje</a>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="info-contacto">
-                    <h3>🕒 Horario de Atención</h3>
-                    <div style="padding: 2rem; text-align: center; background: var(--light-bg); border-radius: 10px;">
+                    <div class="horario-atencion">
+                        <h4>🕒 Horario de Atención</h4>
                         <p><strong>Lunes a Viernes:</strong> 7:30 AM - 4:30 PM</p>
                         <p><strong>Sábados:</strong> 8:00 AM - 12:00 PM</p>
                         <p><strong>Domingos:</strong> Cerrado</p>
                     </div>
-                </div>
+                </article>
+
+                <article class="mapa-container">
+                    <h3>🗺️ Nuestra Ubicación</h3>
+                    <div class="mapa-frame">
+                        <iframe 
+                            id="google-map"
+                            src=""
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Ubicación de la Unidad Educativa 10 de Febrero">
+                        </iframe>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <p><strong>📍</strong> <span id="texto-direccion-mapa">Cargando dirección...</span></p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="social-buttons">
+                <a href="#" class="social-btn whatsapp" id="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                    <span style="font-size: 1.8rem;">💬</span>
+                    <span>Escribir por WhatsApp</span>
+                </a>
+                <a href="#" class="social-btn facebook" id="btn-facebook" target="_blank" rel="noopener noreferrer">
+                    <span style="font-size: 1.8rem;">👍</span>
+                    <span>Visitar Facebook</span>
+                </a>
             </div>
         </section>
     </main>
 
-    <footer style="background: var(--primary-color); color: white; text-align: center; padding: 2rem;">
+    <footer>
         <p>&copy; 2025 Unidad Educativa 10 de Febrero</p>
+        <p>Formando el futuro de Bolivia 🇧🇴</p>
     </footer>
 
-    <button id="boton-admin">⚙️</button>
+    <button id="boton-admin" aria-label="Panel de administración">⚙️</button>
 
-    <section id="editor-directora" style="display: none; background: white; padding: 2rem; border: 2px solid #c41e3a; border-radius: 10px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; max-height: 90vh; overflow-y: auto; width: 90%; max-width: 900px;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-            <h2 style="color: #c41e3a;">🎛️ Panel de Administración</h2>
-            <button onclick="ocultarEditor()" style="background: #666; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">✕</button>
+    <!-- PANEL DE ADMINISTRACIÓN -->
+    <section id="editor-directora" style="display: none; background: white; padding: 2rem; border: 3px solid var(--primary-color); border-radius: 20px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; max-height: 90vh; overflow-y: auto; width: 90%; max-width: 1000px; box-shadow: 0 10px 50px rgba(0,0,0,0.3);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 1rem;">
+            <h2 style="color: var(--primary-color); margin: 0; font-size: 1.8rem;">🎛️ Panel de Administración</h2>
+            <button onclick="ocultarEditor()" style="background: #666; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold;">✕ Cerrar</button>
         </div>
 
-        <div style="background: #e8f5e8; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-            <div id="estado-conexion">⏳ Conectando...</div>
-            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
-                <strong>Límites:</strong> Máx. 20 imágenes en slider, 30 en galería (500KB cada una)
+        <div style="background: #e8f5e8; padding: 1.2rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid #28a745;">
+            <div id="estado-conexion" style="font-weight: 600;">⏳ Conectando a Firebase...</div>
+            <div style="margin-top: 0.8rem; font-size: 0.9rem; color: #555;">
+                <strong>⚠️ Límites:</strong> Máx. 20 imágenes en slider, 30 en galería (500KB cada una)
             </div>
         </div>
 
-        <div style="display: flex; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #ddd;">
-            <button class="tab-btn active" onclick="mostrarPestana('textos')">📝 Textos</button>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #ddd; flex-wrap: wrap;">
+            <button class="tab-btn active" onclick="mostrarPestana('config')">⚙️ Configuración</button>
+            <button class="tab-btn" onclick="mostrarPestana('textos')">📝 Textos</button>
+            <button class="tab-btn" onclick="mostrarPestana('comunicados')">📢 Comunicados</button>
             <button class="tab-btn" onclick="mostrarPestana('slider')">🖼️ Slider</button>
-            <button class="tab-btn" onclick="mostrarPestana('galeria')">🖼️ Galería</button>
+            <button class="tab-btn" onclick="mostrarPestana('galeria')">📸 Galería</button>
         </div>
 
-        <div id="pestana-textos" class="pestana">
-            <h4>📊 Estadísticas</h4>
-            <input type="text" id="edit-estudiantes" placeholder="500+" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-            <input type="text" id="edit-docentes" placeholder="40+" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-            <input type="text" id="edit-experiencia" placeholder="25+" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+        <!-- PESTAÑA CONFIGURACIÓN -->
+        <div id="pestana-config" class="pestana">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">⚙️ Configuración General</h3>
             
-            <h4 style="margin-top: 1rem;">📞 Contacto</h4>
-            <input type="text" id="edit-direccion" placeholder="Dirección" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-            <input type="text" id="edit-telefono" placeholder="Teléfono" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-            <input type="text" id="edit-email" placeholder="Email" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-            <input type="text" id="edit-whatsapp" placeholder="WhatsApp (+591...)" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+            <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #ffc107;">
+                <strong>📌 Logo de la Institución</strong>
+                <p style="margin: 0.5rem 0; font-size: 0.9rem;">Suba el logo oficial (PNG/JPG, máx. 200KB, preferible fondo transparente)</p>
+            </div>
             
-            <h4 style="margin-top: 1rem;">🎯 Misión y Visión</h4>
-            <textarea id="edit-mision" placeholder="Misión" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 100px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-            <textarea id="edit-vision" placeholder="Visión" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 100px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+            <input type="file" id="upload-logo" accept="image/*" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;">
+            <button onclick="subirLogo()" style="background: #28a745; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 1rem; font-size: 1.1rem; font-weight: 600;">
+                📤 Cambiar Logo
+            </button>
             
-            <button onclick="guardarTextos()" style="background: #28a745; color: white; border: none; padding: 1rem 2rem; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 1rem;">
-                💾 Guardar Cambios
+            <hr style="margin: 2rem 0; border: none; border-top: 2px solid #ddd;">
+            
+            <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #2196f3;">
+                <strong>🖼️ Imagen de Fondo (Frontis)</strong>
+                <p style="margin: 0.5rem 0; font-size: 0.9rem;">Imagen del frontis de la escuela para la sección de inicio (máx. 500KB)</p>
+            </div>
+            
+            <input type="file" id="upload-frontis" accept="image/*" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;">
+            <button onclick="subirFrontis()" style="background: #2196f3; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 1rem; font-size: 1.1rem; font-weight: 600;">
+                📤 Cambiar Imagen de Fondo
+            </button>
+
+            <hr style="margin: 2rem 0; border: none; border-top: 2px solid #ddd;">
+
+            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">🗺️ Configuración de Google Maps</h4>
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">URL del mapa embebido:</label>
+            <input type="text" id="edit-mapa" placeholder="https://www.google.com/maps/embed?pb=..." style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;">
+            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">
+                ℹ️ Instrucciones: Vaya a <a href="https://www.google.com/maps" target="_blank" style="color: #2196f3;">Google Maps</a>, busque su escuela, haga clic en "Compartir" → "Insertar un mapa" → Copie la URL del iframe.
+            </p>
+        </div>
+
+        <!-- PESTAÑA TEXTOS -->
+        <div id="pestana-textos" class="pestana" style="display: none;">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">📝 Editar Textos</h3>
+            
+            <h4 style="margin-top: 1.5rem; color: #333;">📊 Estadísticas</h4>
+            <input type="text" id="edit-estudiantes" placeholder="Ej: 600+" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <input type="text" id="edit-docentes" placeholder="Ej: 45+" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <input type="text" id="edit-experiencia" placeholder="Ej: 30+" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            
+            <h4 style="margin-top: 1.5rem; color: #333;">📞 Datos de Contacto</h4>
+            <input type="text" id="edit-direccion" placeholder="Dirección completa" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <input type="email" id="edit-email" placeholder="correo@escuela.edu.bo" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <input type="tel" id="edit-telefono" placeholder="+591 4 123 4567" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <input type="tel" id="edit-whatsapp" placeholder="+591 7 123 4567" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <input type="url" id="edit-facebook" placeholder="https://facebook.com/tu-pagina" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            
+            <h4 style="margin-top: 1.5rem; color: #333;">🎯 Misión y Visión</h4>
+            <textarea id="edit-mision" placeholder="Misión de la institución..." style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 120px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+            <textarea id="edit-vision" placeholder="Visión de la institución..." style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 120px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+
+            <h4 style="margin-top: 1.5rem; color: #333;">🎨 Niveles Educativos</h4>
+            <label style="display: block; margin-top: 1rem; font-weight: 600;">Educación Inicial:</label>
+            <textarea id="edit-inicial" placeholder="Descripción del nivel inicial..." style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 100px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+            
+            <label style="display: block; margin-top: 1rem; font-weight: 600;">Educación Primaria:</label>
+            <textarea id="edit-primaria" placeholder="Descripción del nivel primario..." style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 100px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+            
+            <button onclick="guardarTextos()" style="background: #28a745; color: white; border: none; padding: 1.2rem 2rem; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 1.5rem; font-size: 1.1rem; font-weight: 600;">
+                💾 Guardar Todos los Cambios
             </button>
         </div>
 
+        <!-- PESTAÑA COMUNICADOS Y EVENTOS -->
+        <div id="pestana-comunicados" class="pestana" style="display: none;">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">📢 Comunicados y Eventos</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h4 style="color: #333; margin-bottom: 1rem;">📢 Agregar Comunicado</h4>
+                    <input type="date" id="fecha-comunicado" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+                    <input type="text" id="titulo-comunicado" placeholder="Título del comunicado" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+                    <textarea id="texto-comunicado" placeholder="Contenido del comunicado..." style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 100px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+                    <button onclick="agregarComunicado()" style="background: #ff6b6b; color: white; border: none; padding: 0.8rem; border-radius: 8px; cursor: pointer; width: 100%;">
+                        ➕ Agregar Comunicado
+                    </button>
+                    
+                    <h5 style="margin-top: 1.5rem; color: #333;">Lista de Comunicados:</h5>
+                    <div id="lista-comunicados-admin" style="max-height: 300px; overflow-y: auto; border: 2px solid #ddd; border-radius: 8px; padding: 0.5rem; margin-top: 0.5rem;">
+                        <p style="text-align: center; color: #666; padding: 1rem;">Cargando...</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 style="color: #333; margin-bottom: 1rem;">🎉 Agregar Evento</h4>
+                    <input type="date" id="fecha-evento" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+                    <input type="text" id="titulo-evento" placeholder="Título del evento" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+                    <textarea id="texto-evento" placeholder="Descripción del evento..." style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 100px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+                    <button onclick="agregarEvento()" style="background: #667eea; color: white; border: none; padding: 0.8rem; border-radius: 8px; cursor: pointer; width: 100%;">
+                        ➕ Agregar Evento
+                    </button>
+                    
+                    <h5 style="margin-top: 1.5rem; color: #333;">Lista de Eventos:</h5>
+                    <div id="lista-eventos-admin" style="max-height: 300px; overflow-y: auto; border: 2px solid #ddd; border-radius: 8px; padding: 0.5rem; margin-top: 0.5rem;">
+                        <p style="text-align: center; color: #666; padding: 1rem;">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA SLIDER -->
         <div id="pestana-slider" class="pestana" style="display: none;">
-            <div style="background: #fff3cd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-                ⚠️ Tamaño máximo: 500KB por imagen. Use <a href="https://tinypng.com" target="_blank">TinyPNG</a> para comprimir.
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">🖼️ Gestión del Slider</h3>
+            
+            <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                ⚠️ <strong>Importante:</strong> Comprima sus imágenes en <a href="https://tinypng.com" target="_blank" style="color: #007bff;">TinyPNG.com</a> antes de subir (máx. 500KB)
             </div>
             
-            <input type="text" id="titulo-slider" placeholder="Título" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-            <textarea id="descripcion-slider" placeholder="Descripción" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 60px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-            <input type="file" id="upload-slider" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-            <button onclick="subirImagenSlider()" style="background: #28a745; color: white; border: none; padding: 0.8rem; border-radius: 5px; cursor: pointer; width: 100%;">
+            <input type="text" id="titulo-slider" placeholder="Título de la imagen" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <textarea id="descripcion-slider" placeholder="Descripción" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 80px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit;"></textarea>
+            <input type="file" id="upload-slider" accept="image/*" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <button onclick="subirImagenSlider()" style="background: #28a745; color: white; border: none; padding: 1rem; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.1rem; font-weight: 600;">
                 📤 Agregar al Slider
             </button>
             
-            <h5 style="margin-top: 1.5rem;">Imágenes en el Slider:</h5>
-            <div id="lista-slider" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem; margin-top: 0.5rem;">
-                <p style="text-align: center; color: #666; padding: 1rem;">Cargando...</p>
+            <h4 style="margin-top: 2rem; color: #333;">Imágenes en el Slider:</h4>
+            <div id="lista-slider" style="max-height: 400px; overflow-y: auto; border: 2px solid #ddd; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                <p style="text-align: center; color: #666; padding: 2rem;">Cargando...</p>
             </div>
         </div>
 
+        <!-- PESTAÑA GALERÍA -->
         <div id="pestana-galeria" class="pestana" style="display: none;">
-            <div style="background: #e3f2fd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
-                ⚠️ Tamaño máximo: 500KB por imagen. Comprima antes de subir.
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">📸 Gestión de la Galería</h3>
+            
+            <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                ⚠️ <strong>Importante:</strong> Comprima sus imágenes en <a href="https://tinypng.com" target="_blank" style="color: #007bff;">TinyPNG.com</a> antes de subir (máx. 500KB)
             </div>
             
-            <input type="text" id="titulo-galeria" placeholder="Título" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-            <textarea id="descripcion-galeria" placeholder="Descripción" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; height: 60px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-            <input type="file" id="upload-galeria" accept="image/*" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
-            <button onclick="subirImagenGaleria()" style="background: #ff6b6b; color: white; border: none; padding: 0.8rem; border-radius: 5px; cursor: pointer; width: 100%;">
-                📤 Agregar a Galería
+            <input type="text" id="titulo-galeria" placeholder="Título de la imagen" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <textarea id="descripcion-galeria" placeholder="Descripción" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 80px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit;"></textarea>
+            <input type="file" id="upload-galeria" accept="image/*" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+            <button onclick="subirImagenGaleria()" style="background: #ff6b6b; color: white; border: none; padding: 1rem; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.1rem; font-weight: 600;">
+                📤 Agregar a la Galería
             </button>
             
-            <h5 style="margin-top: 1.5rem;">Imágenes en la Galería:</h5>
-            <div id="lista-galeria" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 0.5rem; margin-top: 0.5rem;">
-                <p style="text-align: center; color: #666; padding: 1rem;">Cargando...</p>
+            <h4 style="margin-top: 2rem; color: #333;">Imágenes en la Galería:</h4>
+            <div id="lista-galeria" style="max-height: 400px; overflow-y: auto; border: 2px solid #ddd; border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                <p style="text-align: center; color: #666; padding: 2rem;">Cargando...</p>
             </div>
         </div>
 
-        <div id="mensaje-estado" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
+        <div id="mensaje-estado" style="margin-top: 1.5rem; padding: 1.2rem; border-radius: 8px; display: none; font-weight: 600;"></div>
     </section>
 
     <script>
@@ -671,7 +1085,7 @@
     storageBucket: "ue-10-febrero.firebasestorage.app",
     messagingSenderId: "913808068044",
     appId: "1:913808068044:web:a70e7dc8e4dfc309fe6169"
-    };
+};
 
 
     let db;
@@ -681,7 +1095,6 @@
         console.log("✅ Firebase inicializado");
     } catch (error) {
         console.error("❌ Error Firebase:", error);
-        alert("Configure Firebase en el código");
     }
 
     // ==================== SEGURIDAD ====================
@@ -719,32 +1132,104 @@
         event.target.classList.add('active');
     }
 
-    // ==================== CARGAR DATOS ====================
+    // ==================== CARGAR DATOS PÚBLICOS ====================
     function cargarDatosPublicos() {
         mostrarLoading(true);
         
+        // Cargar configuración
         db.ref('config').on('value', (snapshot) => {
             const config = snapshot.val() || {};
+            
+            // Actualizar textos
             document.getElementById('estudiantes').textContent = config.estudiantes || '500+';
             document.getElementById('docentes').textContent = config.docentes || '40+';
             document.getElementById('experiencia').textContent = config.experiencia || '25+';
-            document.getElementById('texto-direccion').textContent = config.direccion || 'Av. Principal, Ciudad';
-            document.getElementById('texto-email').textContent = config.email || 'contacto@ue10febrero.edu.bo';
-            document.getElementById('texto-telefono').textContent = config.telefono || '+591 4 123 4567';
-            document.getElementById('texto-whatsapp').textContent = config.whatsapp || '+591 7 123 4567';
-            document.getElementById('texto-mision').textContent = config.mision || 'Cargando misión...';
-            document.getElementById('texto-vision').textContent = config.vision || 'Cargando visión...';
+            document.getElementById('texto-direccion').textContent = config.direccion || '';
+            document.getElementById('texto-direccion-mapa').textContent = config.direccion || '';
+            document.getElementById('texto-email').textContent = config.email || '';
+            document.getElementById('texto-telefono').textContent = config.telefono || '';
+            document.getElementById('texto-whatsapp').textContent = config.whatsapp || '';
+            document.getElementById('texto-mision').textContent = config.mision || '';
+            document.getElementById('texto-vision').textContent = config.vision || '';
+            document.getElementById('texto-inicial').textContent = config.inicial || '';
+            document.getElementById('texto-primaria').textContent = config.primaria || '';
             
+            // Actualizar logo
+            if (config.logo) {
+                document.getElementById('logo-img').src = config.logo;
+            }
+            
+            // Actualizar frontis
+            if (config.frontis) {
+                const hero = document.querySelector('.hero');
+                hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${config.frontis}')`;
+            }
+            
+            // Actualizar mapa
+            if (config.mapa) {
+                document.getElementById('google-map').src = config.mapa;
+            }
+            
+            // Actualizar botones sociales
             const whatsappNum = config.whatsapp?.replace(/\D/g, '') || '59171234567';
-            document.getElementById('link-whatsapp').href = `https://wa.me/${whatsappNum}`;
+            document.getElementById('btn-whatsapp').href = `https://wa.me/${whatsappNum}`;
+            document.getElementById('btn-facebook').href = config.facebook || '#';
         });
 
+        // Cargar comunicados
+        db.ref('comunicados').on('value', (snapshot) => {
+            const comunicados = snapshot.val() || [];
+            const lista = document.getElementById('lista-comunicados');
+            
+            if (comunicados.length === 0) {
+                lista.innerHTML = '<div class="comunicado-item"><p>No hay comunicados publicados</p></div>';
+                return;
+            }
+            
+            let html = '';
+            comunicados.slice(-5).reverse().forEach(com => {
+                html += `
+                    <div class="comunicado-item">
+                        <p class="fecha">📅 ${com.fecha}</p>
+                        <h4 style="color: var(--primary-color); margin: 0.5rem 0;">${com.titulo}</h4>
+                        <p>${com.texto}</p>
+                    </div>
+                `;
+            });
+            lista.innerHTML = html;
+        });
+
+        // Cargar eventos
+        db.ref('eventos').on('value', (snapshot) => {
+            const eventos = snapshot.val() || [];
+            const lista = document.getElementById('lista-eventos');
+            
+            if (eventos.length === 0) {
+                lista.innerHTML = '<div class="evento-item"><p>No hay eventos próximos</p></div>';
+                return;
+            }
+            
+            let html = '';
+            eventos.slice(-5).reverse().forEach(evt => {
+                html += `
+                    <div class="evento-item">
+                        <p class="fecha">📅 ${evt.fecha}</p>
+                        <h4 style="color: var(--primary-color); margin: 0.5rem 0;">${evt.titulo}</h4>
+                        <p>${evt.texto}</p>
+                    </div>
+                `;
+            });
+            lista.innerHTML = html;
+        });
+
+        // Cargar slider
         db.ref('slider').on('value', (snapshot) => {
             const slider = snapshot.val() || [];
             const sliderArray = Array.isArray(slider) ? slider : Object.values(slider).filter(Boolean);
             actualizarSlider(sliderArray);
         });
 
+        // Cargar galería
         db.ref('galeria').on('value', (snapshot) => {
             const galeria = snapshot.val() || [];
             const galeriaArray = Array.isArray(galeria) ? galeria : Object.values(galeria).filter(Boolean);
@@ -755,6 +1240,7 @@
         actualizarEstadoConexion(true);
     }
 
+    // ==================== CARGAR DATOS EN EDITOR ====================
     function cargarDatosEditor() {
         db.ref('config').once('value', (snapshot) => {
             const config = snapshot.val() || {};
@@ -765,38 +1251,293 @@
             document.getElementById('edit-telefono').value = config.telefono || '';
             document.getElementById('edit-email').value = config.email || '';
             document.getElementById('edit-whatsapp').value = config.whatsapp || '';
+            document.getElementById('edit-facebook').value = config.facebook || '';
             document.getElementById('edit-mision').value = config.mision || '';
             document.getElementById('edit-vision').value = config.vision || '';
+            document.getElementById('edit-inicial').value = config.inicial || '';
+            document.getElementById('edit-primaria').value = config.primaria || '';
+            document.getElementById('edit-mapa').value = config.mapa || '';
         });
 
+        cargarComunicadosAdmin();
+        cargarEventosAdmin();
         cargarListaSlider();
         cargarListaGaleria();
     }
 
     // ==================== GUARDAR TEXTOS ====================
     function guardarTextos() {
-        const config = {
-            estudiantes: document.getElementById('edit-estudiantes').value,
-            docentes: document.getElementById('edit-docentes').value,
-            experiencia: document.getElementById('edit-experiencia').value,
-            direccion: document.getElementById('edit-direccion').value,
-            telefono: document.getElementById('edit-telefono').value,
-            email: document.getElementById('edit-email').value,
-            whatsapp: document.getElementById('edit-whatsapp').value,
-            mision: document.getElementById('edit-mision').value,
-            vision: document.getElementById('edit-vision').value
-        };
+        db.ref('config').once('value', (snapshot) => {
+            const configActual = snapshot.val() || {};
+            
+            const config = {
+                ...configActual,
+                estudiantes: document.getElementById('edit-estudiantes').value,
+                docentes: document.getElementById('edit-docentes').value,
+                experiencia: document.getElementById('edit-experiencia').value,
+                direccion: document.getElementById('edit-direccion').value,
+                telefono: document.getElementById('edit-telefono').value,
+                email: document.getElementById('edit-email').value,
+                whatsapp: document.getElementById('edit-whatsapp').value,
+                facebook: document.getElementById('edit-facebook').value,
+                mision: document.getElementById('edit-mision').value,
+                vision: document.getElementById('edit-vision').value,
+                inicial: document.getElementById('edit-inicial').value,
+                primaria: document.getElementById('edit-primaria').value,
+                mapa: document.getElementById('edit-mapa').value
+            };
 
-        db.ref('config').set(config)
-            .then(() => mostrarMensaje('✅ Cambios guardados correctamente', 'success'))
-            .catch(() => mostrarMensaje('❌ Error al guardar', 'error'));
+            db.ref('config').set(config)
+                .then(() => mostrarMensaje('✅ Cambios guardados correctamente', 'success'))
+                .catch(() => mostrarMensaje('❌ Error al guardar', 'error'));
+        });
+    }
+
+    // ==================== SUBIR LOGO ====================
+    document.getElementById('upload-logo')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.size > 200 * 1024) {
+            alert('❌ Logo muy grande. Máximo 200KB.');
+            this.value = '';
+        }
+    });
+
+    function subirLogo() {
+        const archivo = document.getElementById('upload-logo').files[0];
+        
+        if (!archivo) {
+            alert('❌ Seleccione un archivo');
+            return;
+        }
+
+        if (archivo.size > 200 * 1024) {
+            alert('❌ Logo muy grande. Máximo 200KB');
+            return;
+        }
+
+        mostrarLoading(true);
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            db.ref('config').once('value', (snapshot) => {
+                const config = snapshot.val() || {};
+                config.logo = e.target.result;
+                
+                db.ref('config').set(config)
+                    .then(() => {
+                        mostrarMensaje('✅ Logo actualizado', 'success');
+                        document.getElementById('upload-logo').value = '';
+                        mostrarLoading(false);
+                    })
+                    .catch(() => {
+                        mostrarMensaje('❌ Error al guardar logo', 'error');
+                        mostrarLoading(false);
+                    });
+            });
+        };
+        reader.readAsDataURL(archivo);
+    }
+
+    // ==================== SUBIR FRONTIS ====================
+    document.getElementById('upload-frontis')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.size > 500 * 1024) {
+            alert('❌ Imagen muy grande. Máximo 500KB.\nComprímala en: https://tinypng.com');
+            this.value = '';
+        }
+    });
+
+    function subirFrontis() {
+        const archivo = document.getElementById('upload-frontis').files[0];
+        
+        if (!archivo) {
+            alert('❌ Seleccione un archivo');
+            return;
+        }
+
+        if (archivo.size > 500 * 1024) {
+            alert('❌ Imagen muy grande. Máximo 500KB');
+            return;
+        }
+
+        mostrarLoading(true);
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            db.ref('config').once('value', (snapshot) => {
+                const config = snapshot.val() || {};
+                config.frontis = e.target.result;
+                
+                db.ref('config').set(config)
+                    .then(() => {
+                        mostrarMensaje('✅ Imagen de fondo actualizada', 'success');
+                        document.getElementById('upload-frontis').value = '';
+                        mostrarLoading(false);
+                    })
+                    .catch(() => {
+                        mostrarMensaje('❌ Error al guardar imagen', 'error');
+                        mostrarLoading(false);
+                    });
+            });
+        };
+        reader.readAsDataURL(archivo);
+    }
+
+    // ==================== COMUNICADOS ====================
+    function agregarComunicado() {
+        const fecha = document.getElementById('fecha-comunicado').value;
+        const titulo = document.getElementById('titulo-comunicado').value;
+        const texto = document.getElementById('texto-comunicado').value;
+        
+        if (!fecha || !titulo || !texto) {
+            alert('❌ Complete todos los campos');
+            return;
+        }
+
+        db.ref('comunicados').once('value', (snapshot) => {
+            const comunicados = snapshot.val() || [];
+            const comunicadosArray = Array.isArray(comunicados) ? comunicados : Object.values(comunicados).filter(Boolean);
+            
+            comunicadosArray.push({ fecha, titulo, texto });
+            
+            db.ref('comunicados').set(comunicadosArray)
+                .then(() => {
+                    mostrarMensaje('✅ Comunicado agregado', 'success');
+                    document.getElementById('fecha-comunicado').value = '';
+                    document.getElementById('titulo-comunicado').value = '';
+                    document.getElementById('texto-comunicado').value = '';
+                    cargarComunicadosAdmin();
+                })
+                .catch(() => mostrarMensaje('❌ Error al agregar', 'error'));
+        });
+    }
+
+    function cargarComunicadosAdmin() {
+        db.ref('comunicados').once('value', (snapshot) => {
+            const comunicados = snapshot.val() || [];
+            const lista = document.getElementById('lista-comunicados-admin');
+            
+            if (comunicados.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 1rem;">No hay comunicados</p>';
+                return;
+            }
+            
+            let html = '';
+            comunicados.forEach((com, index) => {
+                html += `
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div style="flex: 1;">
+                                <strong style="color: var(--primary-color);">${com.titulo}</strong>
+                                <p style="font-size: 0.85rem; color: #666; margin: 0.3rem 0;">${com.fecha}</p>
+                                <p style="font-size: 0.9rem; margin: 0.3rem 0;">${com.texto}</p>
+                            </div>
+                            <button onclick="eliminarComunicado(${index})" style="background: #dc3545; color: white; border: none; border-radius: 4px; padding: 0.4rem 0.8rem; cursor: pointer; margin-left: 0.5rem;">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+            lista.innerHTML = html;
+        });
+    }
+
+    function eliminarComunicado(index) {
+        if (confirm('¿Eliminar este comunicado?')) {
+            db.ref('comunicados').once('value', (snapshot) => {
+                const comunicados = snapshot.val() || [];
+                const comunicadosArray = Array.isArray(comunicados) ? comunicados : Object.values(comunicados).filter(Boolean);
+                comunicadosArray.splice(index, 1);
+                
+                db.ref('comunicados').set(comunicadosArray)
+                    .then(() => {
+                        mostrarMensaje('✅ Comunicado eliminado', 'success');
+                        cargarComunicadosAdmin();
+                    })
+                    .catch(() => mostrarMensaje('❌ Error al eliminar', 'error'));
+            });
+        }
+    }
+
+    // ==================== EVENTOS ====================
+    function agregarEvento() {
+        const fecha = document.getElementById('fecha-evento').value;
+        const titulo = document.getElementById('titulo-evento').value;
+        const texto = document.getElementById('texto-evento').value;
+        
+        if (!fecha || !titulo || !texto) {
+            alert('❌ Complete todos los campos');
+            return;
+        }
+
+        db.ref('eventos').once('value', (snapshot) => {
+            const eventos = snapshot.val() || [];
+            const eventosArray = Array.isArray(eventos) ? eventos : Object.values(eventos).filter(Boolean);
+            
+            eventosArray.push({ fecha, titulo, texto });
+            
+            db.ref('eventos').set(eventosArray)
+                .then(() => {
+                    mostrarMensaje('✅ Evento agregado', 'success');
+                    document.getElementById('fecha-evento').value = '';
+                    document.getElementById('titulo-evento').value = '';
+                    document.getElementById('texto-evento').value = '';
+                    cargarEventosAdmin();
+                })
+                .catch(() => mostrarMensaje('❌ Error al agregar', 'error'));
+        });
+    }
+
+    function cargarEventosAdmin() {
+        db.ref('eventos').once('value', (snapshot) => {
+            const eventos = snapshot.val() || [];
+            const lista = document.getElementById('lista-eventos-admin');
+            
+            if (eventos.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 1rem;">No hay eventos</p>';
+                return;
+            }
+            
+            let html = '';
+            eventos.forEach((evt, index) => {
+                html += `
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div style="flex: 1;">
+                                <strong style="color: var(--primary-color);">${evt.titulo}</strong>
+                                <p style="font-size: 0.85rem; color: #666; margin: 0.3rem 0;">${evt.fecha}</p>
+                                <p style="font-size: 0.9rem; margin: 0.3rem 0;">${evt.texto}</p>
+                            </div>
+                            <button onclick="eliminarEvento(${index})" style="background: #dc3545; color: white; border: none; border-radius: 4px; padding: 0.4rem 0.8rem; cursor: pointer; margin-left: 0.5rem;">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+            lista.innerHTML = html;
+        });
+    }
+
+    function eliminarEvento(index) {
+        if (confirm('¿Eliminar este evento?')) {
+            db.ref('eventos').once('value', (snapshot) => {
+                const eventos = snapshot.val() || [];
+                const eventosArray = Array.isArray(eventos) ? eventos : Object.values(eventos).filter(Boolean);
+                eventosArray.splice(index, 1);
+                
+                db.ref('eventos').set(eventosArray)
+                    .then(() => {
+                        mostrarMensaje('✅ Evento eliminado', 'success');
+                        cargarEventosAdmin();
+                    })
+                    .catch(() => mostrarMensaje('❌ Error al eliminar', 'error'));
+            });
+        }
     }
 
     // ==================== SLIDER ====================
     document.getElementById('upload-slider')?.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file && file.size > 500 * 1024) {
-            alert('❌ Imagen muy grande. Máximo 500KB.\n\nComprímala en: https://tinypng.com');
+            alert('❌ Imagen muy grande. Máximo 500KB.\nComprímala en: https://tinypng.com');
             this.value = '';
         }
     });
@@ -825,7 +1566,7 @@
                 const sliderArray = Array.isArray(slider) ? slider : Object.values(slider).filter(Boolean);
                 
                 if (sliderArray.length >= 20) {
-                    alert('❌ Límite de 20 imágenes alcanzado. Elimine algunas primero.');
+                    alert('❌ Límite de 20 imágenes alcanzado');
                     mostrarLoading(false);
                     return;
                 }
@@ -846,9 +1587,8 @@
                         cargarListaSlider();
                         mostrarLoading(false);
                     })
-                    .catch((error) => {
-                        console.error(error);
-                        alert('❌ Error: Base de datos llena (32MB). Elimine imágenes antiguas.');
+                    .catch(() => {
+                        alert('❌ Error: Base de datos llena');
                         mostrarLoading(false);
                     });
             });
@@ -870,13 +1610,13 @@
             let html = '';
             sliderArray.forEach((img, index) => {
                 html += `
-                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
-                        <div style="display: flex; gap: 0.5rem; align-items: start;">
-                            <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 0.75rem; background: white;">
+                        <div style="display: flex; gap: 1rem; align-items: start;">
+                            <img src="${img.data}" style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px;">
                             <div style="flex: 1;">
-                                <strong style="font-size: 0.9rem;">${img.titulo}</strong>
-                                <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
-                                <button onclick="eliminarImagenSlider(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.3rem 0.6rem; font-size: 0.7rem; cursor: pointer; margin-top: 0.5rem;">🗑️ Eliminar</button>
+                                <strong style="font-size: 1rem; color: #333;">${img.titulo}</strong>
+                                <p style="font-size: 0.85rem; color: #666; margin: 0.3rem 0;">${img.descripcion}</p>
+                                <button onclick="eliminarImagenSlider(${index})" style="background: #dc3545; color: white; border: none; border-radius: 5px; padding: 0.4rem 0.8rem; font-size: 0.85rem; cursor: pointer; margin-top: 0.5rem;">🗑️ Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -910,11 +1650,11 @@
         if (slider.length === 0) {
             slidesContainer.innerHTML = `
                 <div class="slide">
-                    <div style="background: #f8f9fa; height: 500px; display: flex; align-items: center; justify-content: center;">
-                        <div style="text-align: center; color: #666;">
-                            <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
-                            <h3>Slider vacío</h3>
-                            <p>Agregue imágenes desde el panel</p>
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); height: 500px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; color: white;">
+                            <div style="font-size: 5rem; margin-bottom: 1rem;">🖼️</div>
+                            <h3 style="font-size: 2rem; color: white;">Slider vacío</h3>
+                            <p style="color: white;">Agregue imágenes desde el panel</p>
                         </div>
                     </div>
                 </div>
@@ -949,7 +1689,7 @@
     document.getElementById('upload-galeria')?.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file && file.size > 500 * 1024) {
-            alert('❌ Imagen muy grande. Máximo 500KB.\n\nComprímala en: https://tinypng.com');
+            alert('❌ Imagen muy grande. Máximo 500KB.\nComprímala en: https://tinypng.com');
             this.value = '';
         }
     });
@@ -999,8 +1739,7 @@
                         cargarListaGaleria();
                         mostrarLoading(false);
                     })
-                    .catch((error) => {
-                        console.error(error);
+                    .catch(() => {
                         alert('❌ Error: Base de datos llena');
                         mostrarLoading(false);
                     });
@@ -1023,13 +1762,13 @@
             let html = '';
             galeriaArray.forEach((img, index) => {
                 html += `
-                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
-                        <div style="display: flex; gap: 0.5rem; align-items: start;">
-                            <img src="${img.data}" style="width: 60px; height: 45px; object-fit: cover; border-radius: 3px;">
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 0.75rem; background: white;">
+                        <div style="display: flex; gap: 1rem; align-items: start;">
+                            <img src="${img.data}" style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px;">
                             <div style="flex: 1;">
-                                <strong style="font-size: 0.9rem;">${img.titulo}</strong>
-                                <div style="font-size: 0.7rem; color: #666;">${img.descripcion}</div>
-                                <button onclick="eliminarImagenGaleria(${index})" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 0.3rem 0.6rem; font-size: 0.7rem; cursor: pointer; margin-top: 0.5rem;">🗑️ Eliminar</button>
+                                <strong style="font-size: 1rem; color: #333;">${img.titulo}</strong>
+                                <p style="font-size: 0.85rem; color: #666; margin: 0.3rem 0;">${img.descripcion}</p>
+                                <button onclick="eliminarImagenGaleria(${index})" style="background: #dc3545; color: white; border: none; border-radius: 5px; padding: 0.4rem 0.8rem; font-size: 0.85rem; cursor: pointer; margin-top: 0.5rem;">🗑️ Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -1061,9 +1800,9 @@
         
         if (galeria.length === 0) {
             container.innerHTML = `
-                <div style="text-align: center; color: #666; padding: 2rem; grid-column: 1 / -1;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">🖼️</div>
-                    <h3 style="color: #c41e3a;">Galería vacía</h3>
+                <div style="text-align: center; color: #666; padding: 3rem; grid-column: 1 / -1;">
+                    <div style="font-size: 5rem; margin-bottom: 1rem;">📸</div>
+                    <h3 style="color: #c41e3a; font-size: 2rem;">Galería vacía</h3>
                     <p>Agregue imágenes desde el panel</p>
                 </div>
             `;
@@ -1073,13 +1812,13 @@
         let html = '';
         galeria.forEach(img => {
             html += `
-                <div class="galeria-item">
+                <article class="galeria-item">
                     <img src="${img.data}" alt="${img.titulo}">
                     <div class="galeria-overlay">
                         <h3>${img.titulo}</h3>
                         <p>${img.descripcion}</p>
                     </div>
-                </div>
+                </article>
             `;
         });
         
@@ -1115,7 +1854,7 @@
         div.style.display = 'block';
         div.style.background = tipo === 'success' ? '#d4edda' : '#f8d7da';
         div.style.color = tipo === 'success' ? '#155724' : '#721c24';
-        div.style.border = `1px solid ${tipo === 'success' ? '#c3e6cb' : '#f5c6cb'}`;
+        div.style.border = `2px solid ${tipo === 'success' ? '#c3e6cb' : '#f5c6cb'}`;
         
         setTimeout(() => div.style.display = 'none', 5000);
     }
@@ -1128,8 +1867,8 @@
         const estado = document.getElementById('estado-conexion');
         if (estado) {
             estado.innerHTML = conectado 
-                ? '✅ Conectado - Cambios en tiempo real activos' 
-                : '❌ Desconectado';
+                ? '✅ Conectado a Firebase - Cambios en tiempo real activos' 
+                : '❌ Desconectado - Verifique su conexión';
             estado.style.color = conectado ? '#155724' : '#721c24';
         }
     }
@@ -1140,7 +1879,7 @@
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 document.querySelector('.nav-links').classList.remove('active');
             }
         });
@@ -1169,14 +1908,14 @@
         verificarAcceso();
         cargarDatosPublicos();
         
-        // Auto-avance del slider cada 8 segundos
+        // Auto-avance del slider cada 6 segundos
         setInterval(() => {
             if (document.querySelectorAll('.slide').length > 1) {
                 showSlide(currentSlide + 1);
             }
-        }, 8000);
+        }, 6000);
         
-        console.log("✅ Aplicación iniciada");
+        console.log("✅ Aplicación iniciada correctamente");
     });
     </script>
 </body>
