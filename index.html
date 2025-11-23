@@ -710,11 +710,6 @@
             <div class="hero-content">
                 <h1>Unidad Educativa 10 de Febrero</h1>
                 <p>Con estudio, esfuerzo y esmero... Adelante 10 de Febrero</p>
-                <div class="hero-buttons">
-                    <a href="#nosotros" class="btn-hero">Conócenos</a>
-                    <a href="#niveles" class="btn-hero">Niveles Educativos</a>
-                    <a href="#contactos" class="btn-hero">Contacto</a>
-                </div>
             </div>
         </section>
 
@@ -1078,15 +1073,14 @@
     <script>
     // ==================== CONFIGURACIÓN FIREBASE ====================
     const firebaseConfig = {
-    apiKey: "AIzaSyDcLiYGNCNPBkoLHNHthWjzHZoUPwcVrdA",
-    authDomain: "ue-10-febrero.firebaseapp.com",
-    databaseURL: "https://ue-10-febrero-default-rtdb.firebaseio.com",
-    projectId: "ue-10-febrero",
-    storageBucket: "ue-10-febrero.firebasestorage.app",
-    messagingSenderId: "913808068044",
-    appId: "1:913808068044:web:a70e7dc8e4dfc309fe6169"
-};
-
+   apiKey: "AIzaSyDcLiYGNCNPBkoLHNHthWjzHZoUPwcVrdA",
+   authDomain: "ue-10-febrero.firebaseapp.com",
+   databaseURL: "https://ue-10-febrero-default-rtdb.firebaseio.com",
+   projectId: "ue-10-febrero",
+   storageBucket: "ue-10-febrero.firebasestorage.app",
+   messagingSenderId: "913808068044",
+   appId: "1:913808068044:web:a70e7dc8e4dfc309fe6169"
+     };
 
     let db;
     try {
@@ -1172,8 +1166,15 @@
             
             // Actualizar botones sociales
             const whatsappNum = config.whatsapp?.replace(/\D/g, '') || '59171234567';
-            document.getElementById('btn-whatsapp').href = `https://wa.me/${whatsappNum}`;
-            document.getElementById('btn-facebook').href = config.facebook || '#';
+            const btnWhatsapp = document.getElementById('btn-whatsapp');
+            const btnFacebook = document.getElementById('btn-facebook');
+            
+            if (btnWhatsapp) {
+                btnWhatsapp.href = `https://wa.me/${whatsappNum}`;
+            }
+            if (btnFacebook) {
+                btnFacebook.href = config.facebook || 'https://facebook.com';
+            }
         });
 
         // Cargar comunicados
@@ -1394,22 +1395,40 @@
             return;
         }
 
+        mostrarLoading(true);
+
         db.ref('comunicados').once('value', (snapshot) => {
             const comunicados = snapshot.val() || [];
             const comunicadosArray = Array.isArray(comunicados) ? comunicados : Object.values(comunicados).filter(Boolean);
             
-            comunicadosArray.push({ fecha, titulo, texto });
+            comunicadosArray.push({ 
+                fecha: formatearFecha(fecha), 
+                titulo: titulo, 
+                texto: texto,
+                timestamp: new Date().getTime()
+            });
             
             db.ref('comunicados').set(comunicadosArray)
                 .then(() => {
-                    mostrarMensaje('✅ Comunicado agregado', 'success');
+                    mostrarMensaje('✅ Comunicado agregado correctamente', 'success');
                     document.getElementById('fecha-comunicado').value = '';
                     document.getElementById('titulo-comunicado').value = '';
                     document.getElementById('texto-comunicado').value = '';
                     cargarComunicadosAdmin();
+                    mostrarLoading(false);
                 })
-                .catch(() => mostrarMensaje('❌ Error al agregar', 'error'));
+                .catch((error) => {
+                    console.error('Error agregando comunicado:', error);
+                    mostrarMensaje('❌ Error al agregar comunicado', 'error');
+                    mostrarLoading(false);
+                });
         });
+    }
+
+    function formatearFecha(fecha) {
+        const date = new Date(fecha + 'T00:00:00');
+        const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('es-ES', opciones);
     }
 
     function cargarComunicadosAdmin() {
