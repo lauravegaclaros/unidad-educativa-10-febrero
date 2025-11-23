@@ -1073,15 +1073,14 @@
     <script>
     // ==================== CONFIGURACIÓN FIREBASE ====================
     const firebaseConfig = {
-    apiKey: "AIzaSyDcLiYGNCNPBkoLHNHthWjzHZoUPwcVrdA",
-    authDomain: "ue-10-febrero.firebaseapp.com",
-    databaseURL: "https://ue-10-febrero-default-rtdb.firebaseio.com",
-    projectId: "ue-10-febrero",
-    storageBucket: "ue-10-febrero.firebasestorage.app",
-    messagingSenderId: "913808068044",
-    appId: "1:913808068044:web:a70e7dc8e4dfc309fe6169"
+        apiKey: "AIzaSyDcLiYGNCNPBkoLHNHthWjzHZoUPwcVrdA",
+        authDomain: "ue-10-febrero.firebaseapp.com",
+        databaseURL: "https://ue-10-febrero-default-rtdb.firebaseio.com",
+        projectId: "ue-10-febrero",
+        storageBucket: "ue-10-febrero.firebasestorage.app",
+        messagingSenderId: "913808068044",
+        appId: "1:913808068044:web:a70e7dc8e4dfc309fe6169"
     };
-
 
     let db;
     try {
@@ -1143,6 +1142,12 @@
             
             btnWhatsapp.href = `https://wa.me/${whatsappNum}`;
             console.log('WhatsApp configurado:', btnWhatsapp.href);
+            
+            // Prevenir que el enlace de WhatsApp active la navegación suave
+            btnWhatsapp.addEventListener('click', function(e) {
+                // Permitir que el enlace se abra normalmente
+                console.log('Abriendo WhatsApp...');
+            });
         }
         
         if (btnFacebook && config.facebook) {
@@ -1153,6 +1158,12 @@
             }
             btnFacebook.href = facebookUrl;
             console.log('Facebook configurado:', btnFacebook.href);
+            
+            // Prevenir que el enlace de Facebook active la navegación suave
+            btnFacebook.addEventListener('click', function(e) {
+                // Permitir que el enlace se abra normalmente
+                console.log('Abriendo Facebook...');
+            });
         }
     }
 
@@ -1198,9 +1209,19 @@
             actualizarBotonesSociales(config);
         });
 
-        // Cargar comunicados
+        // Cargar comunicados - CORREGIDO
         db.ref('comunicados').on('value', (snapshot) => {
-            const comunicados = snapshot.val() || [];
+            const comunicadosData = snapshot.val();
+            let comunicados = [];
+            
+            // Manejar diferentes formatos de datos
+            if (Array.isArray(comunicadosData)) {
+                comunicados = comunicadosData;
+            } else if (comunicadosData && typeof comunicadosData === 'object') {
+                // Convertir objeto a array
+                comunicados = Object.values(comunicadosData).filter(item => item !== null);
+            }
+            
             const lista = document.getElementById('lista-comunicados');
             
             if (comunicados.length === 0) {
@@ -1209,7 +1230,11 @@
             }
             
             let html = '';
-            comunicados.slice(-5).reverse().forEach(com => {
+            // Ordenar por timestamp y tomar los últimos 5
+            comunicados
+                .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
+                .slice(0, 5)
+                .forEach(com => {
                 html += `
                     <div class="comunicado-item">
                         <p class="fecha">📅 ${com.fecha}</p>
@@ -1221,9 +1246,19 @@
             lista.innerHTML = html;
         });
 
-        // Cargar eventos
+        // Cargar eventos - CORREGIDO
         db.ref('eventos').on('value', (snapshot) => {
-            const eventos = snapshot.val() || [];
+            const eventosData = snapshot.val();
+            let eventos = [];
+            
+            // Manejar diferentes formatos de datos
+            if (Array.isArray(eventosData)) {
+                eventos = eventosData;
+            } else if (eventosData && typeof eventosData === 'object') {
+                // Convertir objeto a array
+                eventos = Object.values(eventosData).filter(item => item !== null);
+            }
+            
             const lista = document.getElementById('lista-eventos');
             
             if (eventos.length === 0) {
@@ -1232,7 +1267,11 @@
             }
             
             let html = '';
-            eventos.slice(-5).reverse().forEach(evt => {
+            // Ordenar por timestamp y tomar los últimos 5
+            eventos
+                .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
+                .slice(0, 5)
+                .forEach(evt => {
                 html += `
                     <div class="evento-item">
                         <p class="fecha">📅 ${evt.fecha}</p>
@@ -1423,8 +1462,8 @@
     // ==================== COMUNICADOS CORREGIDO ====================
     function agregarComunicado() {
         const fecha = document.getElementById('fecha-comunicado').value;
-        const titulo = document.getElementById('titulo-comunicado').value;
-        const texto = document.getElementById('texto-comunicado').value;
+        const titulo = document.getElementById('titulo-comunicado').value.trim();
+        const texto = document.getElementById('texto-comunicado').value.trim();
         
         if (!fecha || !titulo || !texto) {
             alert('❌ Complete todos los campos');
@@ -1434,17 +1473,21 @@
         mostrarLoading(true);
 
         db.ref('comunicados').once('value', (snapshot) => {
-            let comunicados = snapshot.val() || [];
+            const comunicadosData = snapshot.val();
+            let comunicados = [];
             
-            // Asegurar que sea un array
-            if (!Array.isArray(comunicados)) {
-                comunicados = Object.values(comunicados).filter(Boolean);
+            // Manejar diferentes formatos de datos existentes
+            if (Array.isArray(comunicadosData)) {
+                comunicados = comunicadosData;
+            } else if (comunicadosData && typeof comunicadosData === 'object') {
+                // Convertir objeto a array
+                comunicados = Object.values(comunicadosData).filter(item => item !== null);
             }
             
             const nuevoComunicado = { 
                 fecha: formatearFecha(fecha), 
-                titulo: titulo.trim(), 
-                texto: texto.trim(),
+                titulo: titulo, 
+                texto: texto,
                 timestamp: new Date().getTime()
             };
             
@@ -1469,7 +1512,15 @@
 
     function cargarComunicadosAdmin() {
         db.ref('comunicados').once('value', (snapshot) => {
-            const comunicados = snapshot.val() || [];
+            const comunicadosData = snapshot.val();
+            let comunicados = [];
+            
+            if (Array.isArray(comunicadosData)) {
+                comunicados = comunicadosData;
+            } else if (comunicadosData && typeof comunicadosData === 'object') {
+                comunicados = Object.values(comunicadosData).filter(item => item !== null);
+            }
+            
             const lista = document.getElementById('lista-comunicados-admin');
             
             if (comunicados.length === 0) {
@@ -1499,11 +1550,18 @@
     function eliminarComunicado(index) {
         if (confirm('¿Eliminar este comunicado?')) {
             db.ref('comunicados').once('value', (snapshot) => {
-                const comunicados = snapshot.val() || [];
-                const comunicadosArray = Array.isArray(comunicados) ? comunicados : Object.values(comunicados).filter(Boolean);
-                comunicadosArray.splice(index, 1);
+                const comunicadosData = snapshot.val();
+                let comunicados = [];
                 
-                db.ref('comunicados').set(comunicadosArray)
+                if (Array.isArray(comunicadosData)) {
+                    comunicados = comunicadosData;
+                } else if (comunicadosData && typeof comunicadosData === 'object') {
+                    comunicados = Object.values(comunicadosData).filter(item => item !== null);
+                }
+                
+                comunicados.splice(index, 1);
+                
+                db.ref('comunicados').set(comunicados)
                     .then(() => {
                         mostrarMensaje('✅ Comunicado eliminado', 'success');
                         cargarComunicadosAdmin();
@@ -1516,8 +1574,8 @@
     // ==================== EVENTOS CORREGIDO ====================
     function agregarEvento() {
         const fecha = document.getElementById('fecha-evento').value;
-        const titulo = document.getElementById('titulo-evento').value;
-        const texto = document.getElementById('texto-evento').value;
+        const titulo = document.getElementById('titulo-evento').value.trim();
+        const texto = document.getElementById('texto-evento').value.trim();
         
         if (!fecha || !titulo || !texto) {
             alert('❌ Complete todos los campos');
@@ -1527,17 +1585,21 @@
         mostrarLoading(true);
 
         db.ref('eventos').once('value', (snapshot) => {
-            let eventos = snapshot.val() || [];
+            const eventosData = snapshot.val();
+            let eventos = [];
             
-            // Asegurar que sea un array
-            if (!Array.isArray(eventos)) {
-                eventos = Object.values(eventos).filter(Boolean);
+            // Manejar diferentes formatos de datos existentes
+            if (Array.isArray(eventosData)) {
+                eventos = eventosData;
+            } else if (eventosData && typeof eventosData === 'object') {
+                // Convertir objeto a array
+                eventos = Object.values(eventosData).filter(item => item !== null);
             }
             
             const nuevoEvento = { 
                 fecha: formatearFecha(fecha), 
-                titulo: titulo.trim(), 
-                texto: texto.trim(),
+                titulo: titulo, 
+                texto: texto,
                 timestamp: new Date().getTime()
             };
             
@@ -1562,7 +1624,15 @@
 
     function cargarEventosAdmin() {
         db.ref('eventos').once('value', (snapshot) => {
-            const eventos = snapshot.val() || [];
+            const eventosData = snapshot.val();
+            let eventos = [];
+            
+            if (Array.isArray(eventosData)) {
+                eventos = eventosData;
+            } else if (eventosData && typeof eventosData === 'object') {
+                eventos = Object.values(eventosData).filter(item => item !== null);
+            }
+            
             const lista = document.getElementById('lista-eventos-admin');
             
             if (eventos.length === 0) {
@@ -1592,11 +1662,18 @@
     function eliminarEvento(index) {
         if (confirm('¿Eliminar este evento?')) {
             db.ref('eventos').once('value', (snapshot) => {
-                const eventos = snapshot.val() || [];
-                const eventosArray = Array.isArray(eventos) ? eventos : Object.values(eventos).filter(Boolean);
-                eventosArray.splice(index, 1);
+                const eventosData = snapshot.val();
+                let eventos = [];
                 
-                db.ref('eventos').set(eventosArray)
+                if (Array.isArray(eventosData)) {
+                    eventos = eventosData;
+                } else if (eventosData && typeof eventosData === 'object') {
+                    eventos = Object.values(eventosData).filter(item => item !== null);
+                }
+                
+                eventos.splice(index, 1);
+                
+                db.ref('eventos').set(eventos)
                     .then(() => {
                         mostrarMensaje('✅ Evento eliminado', 'success');
                         cargarEventosAdmin();
@@ -1946,15 +2023,20 @@
         }
     }
 
-    // ==================== NAVEGACIÓN ====================
+    // ==================== NAVEGACIÓN CORREGIDA ====================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                document.querySelector('.nav-links').classList.remove('active');
+            // Solo procesar enlaces que sean anclas internas (#)
+            if (this.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
             }
+            // Si es un enlace externo (como WhatsApp/Facebook), dejar que se abra normalmente
         });
     });
 
@@ -1964,7 +2046,12 @@
     hamburger?.addEventListener('click', () => navLinks.classList.toggle('active'));
 
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => navLinks.classList.remove('active'));
+        link.addEventListener('click', function() {
+            // Solo cerrar el menú si es un enlace interno
+            if (this.getAttribute('href').startsWith('#')) {
+                navLinks.classList.remove('active');
+            }
+        });
     });
 
     document.getElementById('boton-admin')?.addEventListener('click', toggleEditor);
