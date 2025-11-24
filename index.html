@@ -1,17 +1,4 @@
-<h2>Niveles Educativos</h2>
-            <div class="niveles-grid">
-                <article class="nivel-card">
-                    <h3>🎨 Educación Inicial</h3>
-                    <p id="texto-inicial">Brindamos atención educativa a niños y niñas de 3 a 5 años, desarrollando sus habilidades motoras, cognitivas, sociales y emocionales a través del juego y actividades lúdicas. Contamos con ambientes seguros, acogedores y estimulantes que favorecen el aprendizaje integral.</p>
-                </article>
-                <article class="nivel-card">
-                    <h3>📚 Educación Primaria</h3>
-                    <p id="texto-primaria">Formación académica sólida de 1° a 6° grado, con énfasis en lectoescritura, matemáticas, ciencias y valores. Utilizamos metodologías activas y participativas que promueven el pensamiento crítico, la creatividad y el trabajo en equipo, preparando a nuestros estudiantes para los desafíos del siglo XXI.</p>
-                </article>
-            </div>
-        </section>
-
-        <section class="slider-section"><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -283,6 +270,46 @@
         .nivel-card p {
             font-size: 1.1rem;
             line-height: 1.8;
+        }
+
+        /* COMUNICADOS Y EVENTOS */
+        .comunicados {
+            background: var(--light-bg);
+        }
+
+        .comunicados-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .comunicado-card, .evento-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .comunicado-card h3, .evento-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .comunicado-item, .evento-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--light-bg);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .fecha {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
         }
 
         /* SLIDER */
@@ -621,7 +648,7 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .hero p { font-size: 1.1rem; }
-            .about-content, .contactos-grid, .niveles-grid { 
+            .about-content, .contactos-grid, .niveles-grid, .comunicados-grid { 
                 grid-template-columns: 1fr; 
             }
             .stats { grid-template-columns: 1fr; }
@@ -671,6 +698,7 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#niveles">Niveles</a></li>
+                <li><a href="#comunicados">Noticias</a></li>
                 <li><a href="#galeria">Galería</a></li>
                 <li><a href="#contactos">Contacto</a></li>
             </ul>
@@ -715,6 +743,44 @@
         </section>
 
         <section id="niveles" class="niveles">
+            <h2>Niveles Educativos</h2>
+            <div class="niveles-grid">
+                <article class="nivel-card">
+                    <h3>🎨 Educación Inicial</h3>
+                    <p id="texto-inicial">Brindamos atención educativa a niños y niñas de 3 a 5 años, desarrollando sus habilidades motoras, cognitivas, sociales y emocionales a través del juego y actividades lúdicas. Contamos con ambientes seguros, acogedores y estimulantes que favorecen el aprendizaje integral.</p>
+                </article>
+                <article class="nivel-card">
+                    <h3>📚 Educación Primaria</h3>
+                    <p id="texto-primaria">Formación académica sólida de 1° a 6° grado, con énfasis en lectoescritura, matemáticas, ciencias y valores. Utilizamos metodologías activas y participativas que promueven el pensamiento crítico, la creatividad y el trabajo en equipo, preparando a nuestros estudiantes para los desafíos del siglo XXI.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="comunicados" class="comunicados">
+            <h2>Comunicados y Eventos</h2>
+            <div class="comunicados-grid">
+                <article class="comunicado-card">
+                    <h3>📢 Comunicados Importantes</h3>
+                    <div id="lista-comunicados">
+                        <div class="comunicado-item">
+                            <p class="fecha">📅 Cargando comunicados...</p>
+                            <p>Los comunicados aparecerán aquí</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="evento-card">
+                    <h3>🎉 Próximos Eventos</h3>
+                    <div id="lista-eventos">
+                        <div class="evento-item">
+                            <p class="fecha">📅 Cargando eventos...</p>
+                            <p>Los eventos aparecerán aquí</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="slider-section">
             <div class="slider-container">
                 <h2>Galería de Actividades</h2>
                 <div class="slider">
@@ -849,6 +915,7 @@
         <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #ddd; flex-wrap: wrap;">
             <button class="tab-btn active" onclick="mostrarPestana('config')">⚙️ Configuración</button>
             <button class="tab-btn" onclick="mostrarPestana('textos')">📝 Textos</button>
+            <button class="tab-btn" onclick="mostrarPestana('comunicados')">📢 Comunicados</button>
             <button class="tab-btn" onclick="mostrarPestana('slider')">🖼️ Slider</button>
             <button class="tab-btn" onclick="mostrarPestana('galeria')">📸 Galería</button>
         </div>
@@ -921,6 +988,43 @@
             </button>
         </div>
 
+        <!-- PESTAÑA COMUNICADOS Y EVENTOS -->
+        <div id="pestana-comunicados" class="pestana" style="display: none;">
+            <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">📢 Comunicados y Eventos</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h4 style="color: #333; margin-bottom: 1rem;">📢 Agregar Comunicado</h4>
+                    <input type="date" id="fecha-comunicado" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+                    <input type="text" id="titulo-comunicado" placeholder="Título del comunicado" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+                    <textarea id="texto-comunicado" placeholder="Contenido del comunicado..." style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 100px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+                    <button onclick="agregarComunicado()" style="background: #ff6b6b; color: white; border: none; padding: 0.8rem; border-radius: 8px; cursor: pointer; width: 100%;">
+                        ➕ Agregar Comunicado
+                    </button>
+                    
+                    <h5 style="margin-top: 1.5rem; color: #333;">Lista de Comunicados:</h5>
+                    <div id="lista-comunicados-admin" style="max-height: 300px; overflow-y: auto; border: 2px solid #ddd; border-radius: 8px; padding: 0.5rem; margin-top: 0.5rem;">
+                        <p style="text-align: center; color: #666; padding: 1rem;">Cargando...</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 style="color: #333; margin-bottom: 1rem;">🎉 Agregar Evento</h4>
+                    <input type="date" id="fecha-evento" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+                    <input type="text" id="titulo-evento" placeholder="Título del evento" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #ddd; border-radius: 8px;">
+                    <textarea id="texto-evento" placeholder="Descripción del evento..." style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; height: 100px; border: 2px solid #ddd; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+                    <button onclick="agregarEvento()" style="background: #667eea; color: white; border: none; padding: 0.8rem; border-radius: 8px; cursor: pointer; width: 100%;">
+                        ➕ Agregar Evento
+                    </button>
+                    
+                    <h5 style="margin-top: 1.5rem; color: #333;">Lista de Eventos:</h5>
+                    <div id="lista-eventos-admin" style="max-height: 300px; overflow-y: auto; border: 2px solid #ddd; border-radius: 8px; padding: 0.5rem; margin-top: 0.5rem;">
+                        <p style="text-align: center; color: #666; padding: 1rem;">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- PESTAÑA SLIDER -->
         <div id="pestana-slider" class="pestana" style="display: none;">
             <h3 style="color: var(--primary-color); margin-bottom: 1.5rem;">🖼️ Gestión del Slider</h3>
@@ -969,7 +1073,7 @@
     <script>
     // ==================== CONFIGURACIÓN FIREBASE ====================
     const firebaseConfig = {
-        apiKey: "AIzaSyDCLiYGNCNPBkoLHNHthWjzhZGUPwcVzdA",
+        apiKey: "AIzaSyDcLiYGNCNPBkoLHNHthWjzHZoUPwcVrdA",
         authDomain: "ue-10-febrero.firebaseapp.com",
         databaseURL: "https://ue-10-febrero-default-rtdb.firebaseio.com",
         projectId: "ue-10-febrero",
@@ -1022,6 +1126,47 @@
         event.target.classList.add('active');
     }
 
+    // ==================== ACTUALIZAR BOTONES SOCIALES ====================
+    function actualizarBotonesSociales(config) {
+        const btnWhatsapp = document.getElementById('btn-whatsapp');
+        const btnFacebook = document.getElementById('btn-facebook');
+        
+        if (btnWhatsapp && config.whatsapp) {
+            // Limpiar y formatear número de WhatsApp
+            let whatsappNum = config.whatsapp.replace(/\D/g, '');
+            
+            // Si no tiene código de país, agregar código de Bolivia por defecto
+            if (!whatsappNum.startsWith('591')) {
+                whatsappNum = '591' + whatsappNum;
+            }
+            
+            btnWhatsapp.href = `https://wa.me/${whatsappNum}`;
+            console.log('WhatsApp configurado:', btnWhatsapp.href);
+            
+            // Prevenir que el enlace de WhatsApp active la navegación suave
+            btnWhatsapp.addEventListener('click', function(e) {
+                // Permitir que el enlace se abra normalmente
+                console.log('Abriendo WhatsApp...');
+            });
+        }
+        
+        if (btnFacebook && config.facebook) {
+            // Asegurar que la URL de Facebook sea válida
+            let facebookUrl = config.facebook;
+            if (!facebookUrl.startsWith('http')) {
+                facebookUrl = 'https://' + facebookUrl;
+            }
+            btnFacebook.href = facebookUrl;
+            console.log('Facebook configurado:', btnFacebook.href);
+            
+            // Prevenir que el enlace de Facebook active la navegación suave
+            btnFacebook.addEventListener('click', function(e) {
+                // Permitir que el enlace se abra normalmente
+                console.log('Abriendo Facebook...');
+            });
+        }
+    }
+
     // ==================== CARGAR DATOS PÚBLICOS ====================
     function cargarDatosPublicos() {
         mostrarLoading(true);
@@ -1060,17 +1205,82 @@
                 document.getElementById('google-map').src = config.mapa;
             }
             
-            // Actualizar botones sociales
-            const whatsappNum = config.whatsapp?.replace(/\D/g, '') || '59171234567';
-            const btnWhatsapp = document.getElementById('btn-whatsapp');
-            const btnFacebook = document.getElementById('btn-facebook');
+            // ACTUALIZAR BOTONES SOCIALES - LLAMAR A LA NUEVA FUNCIÓN
+            actualizarBotonesSociales(config);
+        });
+
+        // Cargar comunicados - CORREGIDO
+        db.ref('comunicados').on('value', (snapshot) => {
+            const comunicadosData = snapshot.val();
+            let comunicados = [];
             
-            if (btnWhatsapp) {
-                btnWhatsapp.href = `https://wa.me/${whatsappNum}`;
+            // Manejar diferentes formatos de datos
+            if (Array.isArray(comunicadosData)) {
+                comunicados = comunicadosData;
+            } else if (comunicadosData && typeof comunicadosData === 'object') {
+                // Convertir objeto a array
+                comunicados = Object.values(comunicadosData).filter(item => item !== null);
             }
-            if (btnFacebook) {
-                btnFacebook.href = config.facebook || 'https://facebook.com';
+            
+            const lista = document.getElementById('lista-comunicados');
+            
+            if (comunicados.length === 0) {
+                lista.innerHTML = '<div class="comunicado-item"><p>No hay comunicados publicados</p></div>';
+                return;
             }
+            
+            let html = '';
+            // Ordenar por timestamp y tomar los últimos 5
+            comunicados
+                .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
+                .slice(0, 5)
+                .forEach(com => {
+                html += `
+                    <div class="comunicado-item">
+                        <p class="fecha">📅 ${com.fecha}</p>
+                        <h4 style="color: var(--primary-color); margin: 0.5rem 0;">${com.titulo}</h4>
+                        <p>${com.texto}</p>
+                    </div>
+                `;
+            });
+            lista.innerHTML = html;
+        });
+
+        // Cargar eventos - CORREGIDO
+        db.ref('eventos').on('value', (snapshot) => {
+            const eventosData = snapshot.val();
+            let eventos = [];
+            
+            // Manejar diferentes formatos de datos
+            if (Array.isArray(eventosData)) {
+                eventos = eventosData;
+            } else if (eventosData && typeof eventosData === 'object') {
+                // Convertir objeto a array
+                eventos = Object.values(eventosData).filter(item => item !== null);
+            }
+            
+            const lista = document.getElementById('lista-eventos');
+            
+            if (eventos.length === 0) {
+                lista.innerHTML = '<div class="evento-item"><p>No hay eventos próximos</p></div>';
+                return;
+            }
+            
+            let html = '';
+            // Ordenar por timestamp y tomar los últimos 5
+            eventos
+                .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
+                .slice(0, 5)
+                .forEach(evt => {
+                html += `
+                    <div class="evento-item">
+                        <p class="fecha">📅 ${evt.fecha}</p>
+                        <h4 style="color: var(--primary-color); margin: 0.5rem 0;">${evt.titulo}</h4>
+                        <p>${evt.texto}</p>
+                    </div>
+                `;
+            });
+            lista.innerHTML = html;
         });
 
         // Cargar slider
@@ -1110,6 +1320,8 @@
             document.getElementById('edit-mapa').value = config.mapa || '';
         });
 
+        cargarComunicadosAdmin();
+        cargarEventosAdmin();
         cargarListaSlider();
         cargarListaGaleria();
     }
@@ -1232,65 +1444,243 @@
         reader.readAsDataURL(archivo);
     }
 
-    // ==================== COMUNICADOS ====================
+    // ==================== FUNCIÓN DE FORMATEO DE FECHA MEJORADA ====================
+    function formatearFecha(fecha) {
+        try {
+            const date = new Date(fecha + 'T00:00:00');
+            if (isNaN(date.getTime())) {
+                return fecha; // Si la fecha es inválida, devolver la original
+            }
+            const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('es-ES', opciones);
+        } catch (error) {
+            console.error('Error formateando fecha:', error);
+            return fecha;
+        }
+    }
+
+    // ==================== COMUNICADOS CORREGIDO ====================
     function agregarComunicado() {
         const fecha = document.getElementById('fecha-comunicado').value;
-        const titulo = document.getElementById('titulo-comunicado').value;
-        const texto = document.getElementById('texto-comunicado').value;
+        const titulo = document.getElementById('titulo-comunicado').value.trim();
+        const texto = document.getElementById('texto-comunicado').value.trim();
         
         if (!fecha || !titulo || !texto) {
             alert('❌ Complete todos los campos');
             return;
         }
 
-        console.log('📢 Agregando comunicado:', { fecha, titulo, texto });
         mostrarLoading(true);
 
-        db.ref('comunicados').once('value')
-            .then((snapshot) => {
-                const comunicados = snapshot.val() || [];
-                const comunicadosArray = Array.isArray(comunicados) ? comunicados : Object.values(comunicados).filter(Boolean);
-                
-                console.log('📊 Comunicados actuales:', comunicadosArray.length);
-                
-                comunicadosArray.push({ 
-                    fecha: formatearFecha(fecha), 
-                    titulo: titulo, 
-                    texto: texto,
-                    timestamp: new Date().getTime()
+        db.ref('comunicados').once('value', (snapshot) => {
+            const comunicadosData = snapshot.val();
+            let comunicados = [];
+            
+            // Manejar diferentes formatos de datos existentes
+            if (Array.isArray(comunicadosData)) {
+                comunicados = comunicadosData;
+            } else if (comunicadosData && typeof comunicadosData === 'object') {
+                // Convertir objeto a array
+                comunicados = Object.values(comunicadosData).filter(item => item !== null);
+            }
+            
+            const nuevoComunicado = { 
+                fecha: formatearFecha(fecha), 
+                titulo: titulo, 
+                texto: texto,
+                timestamp: new Date().getTime()
+            };
+            
+            comunicados.push(nuevoComunicado);
+            
+            db.ref('comunicados').set(comunicados)
+                .then(() => {
+                    mostrarMensaje('✅ Comunicado agregado correctamente', 'success');
+                    document.getElementById('fecha-comunicado').value = '';
+                    document.getElementById('titulo-comunicado').value = '';
+                    document.getElementById('texto-comunicado').value = '';
+                    cargarComunicadosAdmin();
+                    mostrarLoading(false);
+                })
+                .catch((error) => {
+                    console.error('Error agregando comunicado:', error);
+                    mostrarMensaje('❌ Error al agregar comunicado', 'error');
+                    mostrarLoading(false);
                 });
-                
-                console.log('💾 Guardando comunicados:', comunicadosArray.length);
-                
-                return db.ref('comunicados').set(comunicadosArray);
-            })
-            .then(() => {
-                console.log('✅ Comunicado guardado exitosamente');
-                mostrarMensaje('✅ Comunicado agregado correctamente', 'success');
-                document.getElementById('fecha-comunicado').value = '';
-                document.getElementById('titulo-comunicado').value = '';
-                document.getElementById('texto-comunicado').value = '';
-                cargarComunicadosAdmin();
-                mostrarLoading(false);
-            })
-            .catch((error) => {
-                console.error('❌ Error agregando comunicado:', error);
-                console.error('❌ Código de error:', error.code);
-                console.error('❌ Mensaje:', error.message);
-                
-                if (error.code === 'PERMISSION_DENIED') {
-                    mostrarMensaje('❌ Error de permisos en Firebase. Verifique las reglas de seguridad.', 'error');
-                } else {
-                    mostrarMensaje('❌ Error al agregar comunicado: ' + error.message, 'error');
-                }
-                mostrarLoading(false);
-            });
+        });
     }
 
-    function formatearFecha(fecha) {
-        const date = new Date(fecha + 'T00:00:00');
-        const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
-        return date.toLocaleDateString('es-ES', opciones);
+    function cargarComunicadosAdmin() {
+        db.ref('comunicados').once('value', (snapshot) => {
+            const comunicadosData = snapshot.val();
+            let comunicados = [];
+            
+            if (Array.isArray(comunicadosData)) {
+                comunicados = comunicadosData;
+            } else if (comunicadosData && typeof comunicadosData === 'object') {
+                comunicados = Object.values(comunicadosData).filter(item => item !== null);
+            }
+            
+            const lista = document.getElementById('lista-comunicados-admin');
+            
+            if (comunicados.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 1rem;">No hay comunicados</p>';
+                return;
+            }
+            
+            let html = '';
+            comunicados.forEach((com, index) => {
+                html += `
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div style="flex: 1;">
+                                <strong style="color: var(--primary-color);">${com.titulo}</strong>
+                                <p style="font-size: 0.85rem; color: #666; margin: 0.3rem 0;">${com.fecha}</p>
+                                <p style="font-size: 0.9rem; margin: 0.3rem 0;">${com.texto}</p>
+                            </div>
+                            <button onclick="eliminarComunicado(${index})" style="background: #dc3545; color: white; border: none; border-radius: 4px; padding: 0.4rem 0.8rem; cursor: pointer; margin-left: 0.5rem;">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+            lista.innerHTML = html;
+        });
+    }
+
+    function eliminarComunicado(index) {
+        if (confirm('¿Eliminar este comunicado?')) {
+            db.ref('comunicados').once('value', (snapshot) => {
+                const comunicadosData = snapshot.val();
+                let comunicados = [];
+                
+                if (Array.isArray(comunicadosData)) {
+                    comunicados = comunicadosData;
+                } else if (comunicadosData && typeof comunicadosData === 'object') {
+                    comunicados = Object.values(comunicadosData).filter(item => item !== null);
+                }
+                
+                comunicados.splice(index, 1);
+                
+                db.ref('comunicados').set(comunicados)
+                    .then(() => {
+                        mostrarMensaje('✅ Comunicado eliminado', 'success');
+                        cargarComunicadosAdmin();
+                    })
+                    .catch(() => mostrarMensaje('❌ Error al eliminar', 'error'));
+            });
+        }
+    }
+
+    // ==================== EVENTOS CORREGIDO ====================
+    function agregarEvento() {
+        const fecha = document.getElementById('fecha-evento').value;
+        const titulo = document.getElementById('titulo-evento').value.trim();
+        const texto = document.getElementById('texto-evento').value.trim();
+        
+        if (!fecha || !titulo || !texto) {
+            alert('❌ Complete todos los campos');
+            return;
+        }
+
+        mostrarLoading(true);
+
+        db.ref('eventos').once('value', (snapshot) => {
+            const eventosData = snapshot.val();
+            let eventos = [];
+            
+            // Manejar diferentes formatos de datos existentes
+            if (Array.isArray(eventosData)) {
+                eventos = eventosData;
+            } else if (eventosData && typeof eventosData === 'object') {
+                // Convertir objeto a array
+                eventos = Object.values(eventosData).filter(item => item !== null);
+            }
+            
+            const nuevoEvento = { 
+                fecha: formatearFecha(fecha), 
+                titulo: titulo, 
+                texto: texto,
+                timestamp: new Date().getTime()
+            };
+            
+            eventos.push(nuevoEvento);
+            
+            db.ref('eventos').set(eventos)
+                .then(() => {
+                    mostrarMensaje('✅ Evento agregado correctamente', 'success');
+                    document.getElementById('fecha-evento').value = '';
+                    document.getElementById('titulo-evento').value = '';
+                    document.getElementById('texto-evento').value = '';
+                    cargarEventosAdmin();
+                    mostrarLoading(false);
+                })
+                .catch((error) => {
+                    console.error('Error agregando evento:', error);
+                    mostrarMensaje('❌ Error al agregar evento', 'error');
+                    mostrarLoading(false);
+                });
+        });
+    }
+
+    function cargarEventosAdmin() {
+        db.ref('eventos').once('value', (snapshot) => {
+            const eventosData = snapshot.val();
+            let eventos = [];
+            
+            if (Array.isArray(eventosData)) {
+                eventos = eventosData;
+            } else if (eventosData && typeof eventosData === 'object') {
+                eventos = Object.values(eventosData).filter(item => item !== null);
+            }
+            
+            const lista = document.getElementById('lista-eventos-admin');
+            
+            if (eventos.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #666; padding: 1rem;">No hay eventos</p>';
+                return;
+            }
+            
+            let html = '';
+            eventos.forEach((evt, index) => {
+                html += `
+                    <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 0.5rem; background: white;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div style="flex: 1;">
+                                <strong style="color: var(--primary-color);">${evt.titulo}</strong>
+                                <p style="font-size: 0.85rem; color: #666; margin: 0.3rem 0;">${evt.fecha}</p>
+                                <p style="font-size: 0.9rem; margin: 0.3rem 0;">${evt.texto}</p>
+                            </div>
+                            <button onclick="eliminarEvento(${index})" style="background: #dc3545; color: white; border: none; border-radius: 4px; padding: 0.4rem 0.8rem; cursor: pointer; margin-left: 0.5rem;">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+            lista.innerHTML = html;
+        });
+    }
+
+    function eliminarEvento(index) {
+        if (confirm('¿Eliminar este evento?')) {
+            db.ref('eventos').once('value', (snapshot) => {
+                const eventosData = snapshot.val();
+                let eventos = [];
+                
+                if (Array.isArray(eventosData)) {
+                    eventos = eventosData;
+                } else if (eventosData && typeof eventosData === 'object') {
+                    eventos = Object.values(eventosData).filter(item => item !== null);
+                }
+                
+                eventos.splice(index, 1);
+                
+                db.ref('eventos').set(eventos)
+                    .then(() => {
+                        mostrarMensaje('✅ Evento eliminado', 'success');
+                        cargarEventosAdmin();
+                    })
+                    .catch(() => mostrarMensaje('❌ Error al eliminar', 'error'));
+            });
+        }
     }
 
     // ==================== SLIDER ====================
@@ -1633,25 +2023,20 @@
         }
     }
 
-    // ==================== NAVEGACIÓN ====================
+    // ==================== NAVEGACIÓN CORREGIDA ====================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            
-            // Ignorar enlaces que no son anclas internas
-            if (!href || href === '#' || !href.startsWith('#')) {
-                return;
-            }
-            
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                const navLinks = document.querySelector('.nav-links');
-                if (navLinks) {
-                    navLinks.classList.remove('active');
+            // Solo procesar enlaces que sean anclas internas (#)
+            if (this.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelector('.nav-links').classList.remove('active');
                 }
             }
+            // Si es un enlace externo (como WhatsApp/Facebook), dejar que se abra normalmente
         });
     });
 
@@ -1661,7 +2046,12 @@
     hamburger?.addEventListener('click', () => navLinks.classList.toggle('active'));
 
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => navLinks.classList.remove('active'));
+        link.addEventListener('click', function() {
+            // Solo cerrar el menú si es un enlace interno
+            if (this.getAttribute('href').startsWith('#')) {
+                navLinks.classList.remove('active');
+            }
+        });
     });
 
     document.getElementById('boton-admin')?.addEventListener('click', toggleEditor);
