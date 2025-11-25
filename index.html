@@ -236,9 +236,15 @@
             display: block;
         }
 
-        /* NIVELES EDUCATIVOS */
+        /* NIVELES EDUCATIVOS - MODIFICADO */
         .niveles {
-            background: white;
+            background: linear-gradient(135deg, #c41e3a 0%, #b91c2e 100%);
+            color: white;
+        }
+
+        .niveles h2 {
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
         .niveles-grid {
@@ -249,27 +255,33 @@
         }
 
         .nivel-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: white;
+            color: var(--text-color);
             padding: 3rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: transform 0.3s;
+            border: 3px solid var(--primary-color);
         }
 
         .nivel-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
 
         .nivel-card h3 {
             font-size: 2rem;
             margin-bottom: 1rem;
-            color: white;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nivel-card p {
             font-size: 1.1rem;
             line-height: 1.8;
+            color: #555;
         }
 
         /* SLIDER */
@@ -631,12 +643,13 @@
             .galeria-container {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
+            .nivel-card { padding: 2rem; }
         }
 
         @media (max-width: 480px) {
             .logo-text { font-size: 1rem; }
             h2 { font-size: 1.8rem; }
-            .nivel-card { padding: 2rem; }
+            .nivel-card { padding: 1.5rem; }
             .social-btn { padding: 0.8rem 1.5rem; }
         }
     </style>
